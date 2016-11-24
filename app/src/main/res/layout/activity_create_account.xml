@@ -10,4 +10,104 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.virginiatech.piraj.hokievent.CreateAccountActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- TableLayout for organasing TextViews -->
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="2">
+
+            <!-- TODO Namefields are unnecessary aren't they? -->
+
+            <!-- First name & middle name -->
+            <TableRow>
+
+                <EditText
+                    android:id="@+id/firstName"
+                    android:hint="First name"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:id="@+id/middleName"
+                    android:hint="Middle name"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <!-- Last name -->
+            <TableRow>
+                <EditText
+                    android:id="@+id/lastName"
+                    android:hint="Last name"
+                    android:layout_weight="1"/>
+            </TableRow>
+
+            <!-- Contact info -->
+            <TableRow>
+
+                <EditText
+                    android:id="@+id/email"
+                    android:hint="Enter VT email"
+                    android:inputType="textEmailAddress"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:id="@+id/phonenumber"
+                    android:hint="Enter phone number"
+                    android:inputType="phone"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <TableRow>
+                <EditText
+                    android:id="@+id/confirmEmail"
+                    android:hint="Re-enter VT email"
+                    android:inputType="textEmailAddress"
+                    android:layout_weight="1"/>
+            </TableRow>
+
+            <!-- Password -->
+            <TableRow>
+                <EditText
+                    android:id="@+id/password"
+                    android:hint="New password"
+                    android:inputType="textPassword" />
+            </TableRow>
+            <TableRow>
+                <EditText
+                    android:id="@+id/confirmPassword"
+                    android:hint="New password"
+                    android:inputType="textPassword" />
+            </TableRow>
+
+        </TableLayout>
+
+        <Button
+            android:id="@+id/selectInterestsButton"
+            android:text="Select interests"
+            style="@style/ButtonBaseStyle"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center_horizontal|center_vertical"/>
+
+        <Button
+            android:id="@+id/signUpButton"
+            android:text="Sign up"
+            style="@style/ButtonBaseStyle"
+            android:layout_gravity="center_horizontal|center_vertical"/>
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:text="Cancel"
+            style="@style/ButtonBaseStyle"
+            android:layout_gravity="center_horizontal|center_vertical" />
+
+    </LinearLayout>
+
+
 </RelativeLayout>
