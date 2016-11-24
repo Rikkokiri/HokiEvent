@@ -10,4 +10,116 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.virginiatech.piraj.hokievent.InterestsActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose your interests"
+            android:textColor="#000"
+            android:textSize="18dp"
+            android:textAlignment="center"
+            android:layout_marginBottom="20dp"/>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="2">
+
+            <!-- TODO Should the texts for buttons be hardcoded or...? -->
+
+            <!-- Row 1 -->
+            <TableRow>
+
+                <Button
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <!-- Row 2 -->
+            <TableRow>
+
+                <Button
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <!-- Row 3 -->
+            <TableRow>
+
+                <Button
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <!-- Row 4 -->
+            <TableRow>
+
+                <Button
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <!-- Row 5 -->
+            <TableRow>
+
+                <Button
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <!-- Row 6 -->
+            <TableRow>
+
+                <Button
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <!-- Row 7 -->
+            <TableRow>
+
+                <Button
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+
+        </TableLayout>
+
+        <Button
+            android:id="@+id/doneSelecting"
+            android:text="DONE"
+            android:textStyle="bold"
+            style="@style/ButtonBaseStyle"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"/>
+
+
+    </LinearLayout>
+
 </RelativeLayout>
