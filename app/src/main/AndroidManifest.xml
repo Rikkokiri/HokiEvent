@@ -15,6 +15,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CreateEventActivity" />
+        <activity android:name=".CreateAccountActivity" />
+        <activity android:name=".EventDetailsActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".EditProfileActivity" />
+        <activity android:name=".InterestsActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".SearchResultsActivity" />
+        <activity android:name=".HomeActivity"></activity>
     </application>
 
 </manifest>
