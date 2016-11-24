@@ -13,6 +13,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText middleName;
     private EditText lastName;
 
+    private EditText phonenumber;
     private EditText email;
     private EditText confirmEmail;
 
@@ -34,6 +35,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         middleName = (EditText) findViewById(R.id.middleName);
         lastName = (EditText) findViewById(R.id.lastName);
 
+        phonenumber = (EditText) findViewById(R.id.phonenumber);
         email = (EditText) findViewById(R.id.email);
         confirmEmail = (EditText) findViewById(R.id.confirmEmail);
 

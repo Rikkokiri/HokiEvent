@@ -30,7 +30,8 @@
                     android:id="@+id/firstName"
                     android:hint="First name"
                     android:layout_weight="1"
-                    style="@style/TextfieldBaseStyle" />
+                    style="@style/TextfieldBaseStyle"
+                    android:layout_marginRight="10dp"/>
 
                 <EditText
                     android:id="@+id/middleName"
@@ -59,7 +60,8 @@
                     android:hint="Enter VT email"
                     android:inputType="textEmailAddress"
                     android:layout_weight="1"
-                    style="@style/TextfieldBaseStyle"/>
+                    style="@style/TextfieldBaseStyle"
+                    android:layout_marginRight="10dp"/>
 
                 <EditText
                     android:id="@+id/phonenumber"
@@ -82,6 +84,7 @@
 
             <!-- Password -->
             <TableRow>
+
                 <EditText
                     android:id="@+id/password"
                     android:hint="New password"
