@@ -9,16 +9,16 @@ import android.widget.EditText;
 public class CreateAccountActivity extends AppCompatActivity {
 
     // --- Textfields ---
-    private EditText firstName;
-    private EditText middleName;
-    private EditText lastName;
+    private EditText firstNameField;
+    private EditText middleNameField;
+    private EditText lastNameField;
 
-    private EditText phonenumber;
-    private EditText email;
-    private EditText confirmEmail;
+    private EditText phonenumberField;
+    private EditText emailField;
+    private EditText confirmEmailField;
 
-    private EditText password;
-    private EditText confirmPassword;
+    private EditText passwordField;
+    private EditText confirmPasswordField;
 
     // --- Buttons ---
     private Button selectInterestsButton;
@@ -31,17 +31,17 @@ public class CreateAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
 
         //  -*-*-*- Textfields  -*-*-*-
-        firstName = (EditText) findViewById(R.id.firstName);
-        middleName = (EditText) findViewById(R.id.middleName);
-        lastName = (EditText) findViewById(R.id.lastName);
+        firstNameField = (EditText) findViewById(R.id.firstName);
+        middleNameField = (EditText) findViewById(R.id.middleName);
+        lastNameField = (EditText) findViewById(R.id.lastName);
 
-        phonenumber = (EditText) findViewById(R.id.phonenumber);
-        email = (EditText) findViewById(R.id.email);
-        confirmEmail = (EditText) findViewById(R.id.confirmEmail);
+        phonenumberField = (EditText) findViewById(R.id.phonenumber);
+        emailField = (EditText) findViewById(R.id.email);
+        confirmEmailField = (EditText) findViewById(R.id.confirmEmail);
 
         //TODO How to deal with password fields?
-        password = (EditText) findViewById(R.id.password);
-        confirmPassword = (EditText) findViewById(R.id.confirmPassword);
+        passwordField = (EditText) findViewById(R.id.password);
+        confirmPasswordField = (EditText) findViewById(R.id.confirmPassword);
 
         // -*-*-*- Buttons & listeners for buttons  -*-*-*-
         selectInterestsButton = (Button) findViewById(R.id.selectInterestsButton);
