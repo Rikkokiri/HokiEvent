@@ -29,12 +29,15 @@
                 <EditText
                     android:id="@+id/firstName"
                     android:hint="First name"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    style="@style/TextfieldBaseStyle" />
 
                 <EditText
                     android:id="@+id/middleName"
                     android:hint="Middle name"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    style="@style/TextfieldBaseStyle" />
 
             </TableRow>
 
@@ -44,7 +47,8 @@
                 <EditText
                     android:id="@+id/lastName"
                     android:hint="Last name"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    style="@style/TextfieldBaseStyle"/>
             </TableRow>
 
             <!-- Contact info -->
@@ -54,13 +58,16 @@
                     android:id="@+id/email"
                     android:hint="Enter VT email"
                     android:inputType="textEmailAddress"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    style="@style/TextfieldBaseStyle"/>
 
                 <EditText
                     android:id="@+id/phonenumber"
                     android:hint="Enter phone number"
                     android:inputType="phone"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    style="@style/TextfieldBaseStyle"/>
 
             </TableRow>
 
@@ -69,7 +76,8 @@
                     android:id="@+id/confirmEmail"
                     android:hint="Re-enter VT email"
                     android:inputType="textEmailAddress"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    style="@style/TextfieldBaseStyle"/>
             </TableRow>
 
             <!-- Password -->
@@ -77,13 +85,15 @@
                 <EditText
                     android:id="@+id/password"
                     android:hint="New password"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    style="@style/TextfieldBaseStyle"/>
             </TableRow>
             <TableRow>
                 <EditText
                     android:id="@+id/confirmPassword"
                     android:hint="New password"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    style="@style/TextfieldBaseStyle"/>
             </TableRow>
 
         </TableLayout>
@@ -94,9 +104,10 @@
             android:id="@+id/selectInterestsButton"
             android:text="Select interests"
             style="@style/ButtonBaseStyle"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="5dp"
             android:layout_gravity="center_horizontal|center_vertical"/>
-
+s
         <Button
             android:id="@+id/signUpButton"
             android:text="Sign up"
