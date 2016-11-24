@@ -1,5 +1,6 @@
 package com.virginiatech.piraj.hokievent;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -82,14 +83,14 @@ public class CreateAccountActivity extends AppCompatActivity {
     };
 
     /**
-     * Listener for cancel button
+     * Listener for cancel button. Pressing the cancel button takes the user back to the login/sign up view
      */
     private View.OnClickListener cancelListener = new View.OnClickListener() {
         @Override
         public void onClick(View view){
-
-            //TODO Go back to log in/sign up screen
-
+            //Go back to log in/sign up screen
+            Intent returnToLogin = new Intent(view.getContext(), LoginActivity.class);
+            startActivity(returnToLogin);
         }
     };
 
