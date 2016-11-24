@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:dither="true"
+    android:shape="rectangle">
+
+    <solid android:color="#f60"/>
+
+    <!-- Size wouldn't need to be defined because it's defined in styles.xml -->
+    <size
+        android:width="300dp"
+        android:height="120dp" />
+</shape>

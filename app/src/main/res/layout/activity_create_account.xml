@@ -40,6 +40,7 @@
 
             <!-- Last name -->
             <TableRow>
+
                 <EditText
                     android:id="@+id/lastName"
                     android:hint="Last name"
@@ -87,24 +88,27 @@
 
         </TableLayout>
 
+        <!-- TODO User smarter way to position buttons -->
+
         <Button
             android:id="@+id/selectInterestsButton"
             android:text="Select interests"
             style="@style/ButtonBaseStyle"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginBottom="5dp"
             android:layout_gravity="center_horizontal|center_vertical"/>
 
         <Button
             android:id="@+id/signUpButton"
             android:text="Sign up"
             style="@style/ButtonBaseStyle"
+            android:layout_margin="5dp"
             android:layout_gravity="center_horizontal|center_vertical"/>
 
         <Button
             android:id="@+id/cancelButton"
             android:text="Cancel"
             style="@style/ButtonBaseStyle"
+            android:layout_margin="5dp"
             android:layout_gravity="center_horizontal|center_vertical" />
 
     </LinearLayout>
