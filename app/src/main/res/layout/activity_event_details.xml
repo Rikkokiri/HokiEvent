@@ -21,7 +21,7 @@
         <!-- Event name -->
         <TextView
             android:id="@+id/eventName"
-            android:text="Sample Event Name"
+            android:text="Fancy Party"
             style="@style/EventDetailsTitles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -38,7 +38,7 @@
         <TextView
             android:id="@+id/eventTime"
             style="@style/EventDetailsItems"
-            android:text="6:00 PM to 9:00 PM"
+            android:text="8:00 PM to 11:00 PM"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -46,6 +46,7 @@
         <TextView
             android:id="@+id/eventAddress"
             style="@style/EventDetailsItems"
+            android:text="10 Downing St, London SW1A 2AA, UK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -53,6 +54,7 @@
         <TextView
             android:text="Description"
             style="@style/EventDetailsTitles"
+            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
