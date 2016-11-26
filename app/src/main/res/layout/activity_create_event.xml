@@ -10,4 +10,56 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.virginiatech.piraj.hokievent.CreateEventActivity">
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <!-- Event name -->
+
+        <TableRow>
+            <TextView
+                android:text="Event name"/>
+        </TableRow>
+        <TableRow>
+            <EditText
+                android:id="@+id/eventName"
+                style="@style/TextfieldBaseStyle"
+                android:layout_weight="1"/>
+        </TableRow>
+
+        <!-- Date and time -->
+
+        <TableRow>
+            <TextView
+                android:text="Date"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:text="Time"
+                android:layout_weight="1"/>
+        </TableRow>
+        <TableRow>
+            <!-- TODO Use DatePicker and TimePicker? -->
+
+
+
+        </TableRow>
+
+    </TableLayout>
+
+    <!-- Location -->
+
+
+    <!-- Description -->
+
+
+    <!-- Tags -->
+    
+
+
+    <!-- Done button -->
+
 </RelativeLayout>
