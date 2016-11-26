@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- TODO Add icons -->
+    <!-- android:icon="@drawable/ic_action_navigation_menu" -->
+
+    <item android:id="@+id/action_home"
+        android:title="@string/nav_home"/>
+
+    <item android:id="@+id/action_create_event"
+        android:title="@string/nav_create_event"/>
+
+    <item android:id="@+id/action_search"
+        android:title="@string/nav_search"/>
+
+    <item android:id="@+id/action_profile"
+        android:title="@string/nav_profile"/>
+
+</menu>
