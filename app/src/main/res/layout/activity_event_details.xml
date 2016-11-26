@@ -10,4 +10,70 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.virginiatech.piraj.hokievent.EventDetailsActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- TODO: All the data will be pulled from server -->
+        <!-- TODO: Define styles -->
+
+        <!-- Event name -->
+        <TextView
+            android:id="@+id/eventName"
+            android:text="Sample Event Name"
+            style="@style/EventDetailsTitles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Event date -->
+        <TextView
+            android:id="@+id/eventDate"
+            style="@style/EventDetailsItems"
+            android:text="Friday, November 25th 2016"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Event time -->
+        <TextView
+            android:id="@+id/eventTime"
+            style="@style/EventDetailsItems"
+            android:text="6:00 PM to 9:00 PM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Event address -->
+        <TextView
+            android:id="@+id/eventAddress"
+            style="@style/EventDetailsItems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Title: "Description" -->
+        <TextView
+            android:text="Description"
+            style="@style/EventDetailsTitles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Event description -->
+        <TextView
+            android:id="@+id/eventDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Map -->
+
+
+        <!-- Number of people attending (?) -->
+
+
+        <!-- Tags -->
+
+
+        <!-- BUTTONS -->
+
+
+    </LinearLayout>
+
 </RelativeLayout>

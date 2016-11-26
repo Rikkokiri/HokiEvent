@@ -35,4 +35,20 @@
         <item name="android:textSize">18dp</item> <!-- TODO Adjust -->
     </style>
 
+    <!-- <> <> <> <> Styles for event details <> <> <> <> -->
+
+    <!-- Titles in EventDetails view -->
+    <style name="EventDetailsTitles">
+        <item name="android:textSize">22dp</item> <!-- TODO Adjust -->
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginBottom">5dp</item>
+
+    </style>
+
+    <!-- Event time, address etc. in EventDetails view -->
+    <style name="EventDetailsItems">
+        <item name="android:textSize">16dp</item> <!-- TODO Adjust -->
+        <item name="android:padding">2dp</item>
+    </style>
+
 </resources>
