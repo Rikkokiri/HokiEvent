@@ -10,4 +10,18 @@
     <string name="nav_search">Search</string>
     <string name="nav_profile">Profile</string>
 
+    <!-- Create Event view strings -->
+    <string name="createEventTitle">Create Event</string>
+    <string name="eventName">Event name</string>
+    <string name="startDate">Start date</string>
+    <string name="endDate">End date</string>
+    <string name="startTime">Start time</string>
+    <string name="endTime">End time</string>
+    <string name="location">Event location</string>
+    <string name="description">Description</string>
+    <string name="tags">Tags</string>
+    <string name="eventDoneButton">Done</string>
+
+
+
 </resources>

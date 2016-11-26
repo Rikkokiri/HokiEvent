@@ -46,7 +46,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
     }
 
-    
+
 
     /**
      * Show date in the eventDateField

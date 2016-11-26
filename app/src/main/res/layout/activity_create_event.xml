@@ -10,68 +10,133 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.virginiatech.piraj.hokievent.CreateEventActivity">
 
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:stretchColumns="2"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/tableLayout">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <!-- Event name -->
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="2"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/tableLayout">
 
-        <TableRow>
-            <TextView
-                android:text="Event name"/>
-        </TableRow>
-        <TableRow>
-            <EditText
-                android:id="@+id/eventName"
-                style="@style/TextfieldBaseStyle"
-                android:layout_weight="1"/>
-        </TableRow>
+            <!-- Event name -->
 
-        <!-- Date and time -->
+            <TableRow>
+                <TextView
+                    android:text="@string/eventName">
+                </TextView>
+            </TableRow>
 
-        <TableRow>
-            <TextView
-                android:text="Date"
-                android:layout_weight="1"/>
+            <TableRow>
+                <EditText
+                    android:id="@+id/eventName"
+                    style="@style/TextfieldBaseStyle"
+                    android:layout_weight="1"/>
+            </TableRow>
 
-            <TextView
-                android:text="Time"
-                android:layout_weight="1"/>
-        </TableRow>
-        <TableRow>
-            <!-- TODO Use DatePicker and TimePicker? -->
-            <EditText
-                android:id="@+id/eventDate"
-                android:layout_weight="1"
-                android:inputType="date" />
+            <!-- Date and time -->
 
-            <EditText
-                android:id="@+id/eventTime"
-                android:layout_weight="1"
-                android:inputType="time" />
+            <TableRow>
+                <TextView
+                    android:text="@string/startDate"
+                    android:layout_weight="1"/>
 
-        </TableRow>
+                <TextView
+                    android:text="@string/endDate"
+                    android:layout_weight="1"/>
+            </TableRow>
 
-    </TableLayout>
+            <TableRow>
+                <!-- TODO Use DatePicker and TimePicker? -->
+                <EditText
+                    android:id="@+id/startDate"
+                    android:layout_weight="1"
+                    android:inputType="date" />
+
+                <EditText
+                    android:id="@+id/endDate"
+                    android:layout_weight="1"
+                    android:inputType="date" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:text="@string/startTime"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:text="@string/endTime"
+                    android:layout_weight="1"/>
+            </TableRow>
+
+            <TableRow>
+                <EditText
+                    android:id="@+id/startTime"
+                    android:layout_weight="1"
+                    android:inputType="time" />
+
+                <EditText
+                    android:id="@+id/endTime"
+                    android:layout_weight="1"
+                    android:inputType="time" />
+
+            </TableRow>
+
+        </TableLayout>
 
 
-    <!-- Location -->
+        <!-- Location -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/location" />
 
+        <!-- TODO How to input this? -->
+        <EditText
+            android:id="@+id/eventLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextfieldBaseStyle"/>
 
-    <!-- Description -->
-    <EditText
-        android:id="@+id/eventDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <!-- Description -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description"/>
 
-    <!-- Tags -->
+        <EditText
+            android:id="@+id/eventDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextfieldBaseStyle"
+            android:lines="3"
+            android:scrollbars="vertical"/>
 
+        <!-- Tags -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tags"
+            />
 
+        <!-- TODO: How to input these? -->
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextfieldBaseStyle"/>
 
-    <!-- Done button -->
+        <!-- Done button -->
+        <Button
+            android:id="@+id/eventDoneButton"
+            style="@style/ButtonBaseStyle"
+            android:text="@string/eventDoneButton"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
