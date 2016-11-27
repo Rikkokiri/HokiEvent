@@ -17,8 +17,10 @@ public class CreateEventActivity extends AppCompatActivity {
     private DatePicker datePicker;
     private TimePicker timePicker;
     private Calendar calendar;
-    private EditText eventDateField;
-    private EditText eventTimeField;
+    private EditText startDateField;
+    private EditText endDateField;
+    private EditText startTimeField;
+    private EditText endTimeField;
     private int year;
     private int month;
     private int day;
@@ -35,8 +37,10 @@ public class CreateEventActivity extends AppCompatActivity {
         eventDescriptionField = (EditText) findViewById(R.id.eventDescription);
 
         // --- Time & date ---
-        eventDateField = (EditText) findViewById(R.id.eventDate);
-        eventTimeField = (EditText) findViewById(R.id.eventTime);
+        startDateField = (EditText) findViewById(R.id.startDate);
+        startDateField
+
+        endDateField = (EditText) findViewById(R.id.endDate);
 
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
@@ -44,19 +48,29 @@ public class CreateEventActivity extends AppCompatActivity {
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(year, month+1, day);
 
+        startTimeField = (EditText) findViewById(R.id.startTime);
+        startTimeField.setFocusable(false);
+        startTimeField.setClickable(true);
+
+        endTimeField = (EditText) findViewById(R.id.endTime);
+        endTimeField.setFocusable(false);
+        endTimeField.setClickable(true);
+
     }
 
 
 
     /**
-     * Show date in the eventDateField
+     * TODO ...
      *
      * @param year
      * @param month
      * @param day
      */
     private void showDate(int year, int month, int day) {
+        /* TODO
         eventDateField.setText(new StringBuilder().append(day).append("/")
                 .append(month).append("/").append(year));
+        */
     }
 }
