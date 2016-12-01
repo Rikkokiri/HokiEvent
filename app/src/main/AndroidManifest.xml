@@ -19,9 +19,15 @@
         </activity>
         <activity android:name=".CreateEventActivity"
             android:label="@string/createEventTitle"/>
-        <activity android:name=".CreateAccountActivity" />
+
+        <activity android:name=".CreateAccountActivity"
+            android:label="@string/createAccountTitle"/>
+
         <activity android:name=".EventDetailsActivity" />
-        <activity android:name=".ProfileActivity" />
+
+        <activity android:name=".ProfileActivity"
+            android:label="@string/profileViewTitle"/>
+
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".InterestsActivity" />
         <activity android:name=".SearchActivity" />

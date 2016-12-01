@@ -38,7 +38,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
         // --- Time & date ---
         startDateField = (EditText) findViewById(R.id.startDate);
-        startDateField
+
 
         endDateField = (EditText) findViewById(R.id.endDate);
 

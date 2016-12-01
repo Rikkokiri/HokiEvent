@@ -10,6 +10,9 @@
     <string name="nav_search">Search</string>
     <string name="nav_profile">Profile</string>
 
+    <!-- Create account view -->
+    <string name="createAccountTitle">Create Account</string>
+
     <!-- Create Event view strings -->
     <string name="createEventTitle">Create Event</string>
     <string name="eventName">Event name</string>
@@ -22,6 +25,11 @@
     <string name="tags">Tags</string>
     <string name="eventDoneButton">Done</string>
 
+    <!-- Profile view strings -->
+    <string name="profileViewTitle"></string>
+    <string name="profileInterestsTitle">Your Interests</string>
+    <string name="editProfileButton">Edit Profile</string>
+    <string name="logoutButton">Log out</string>
 
 
 </resources>
