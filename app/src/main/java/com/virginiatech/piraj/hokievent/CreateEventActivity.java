@@ -5,8 +5,10 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -31,6 +33,9 @@ public class CreateEventActivity extends AppCompatActivity {
 
     private EditText startTimeField;
     private EditText endTimeField;
+    private TimePickerDialog startTimePicker;
+    private TimePickerDialog endTimePicker;
+
     private int year;
     private int month;
     private int day;
@@ -45,15 +50,39 @@ public class CreateEventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_event);
 
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        calendar = Calendar.getInstance();
 
         //Initialize views
         findViewsById();
 
-        calendar = Calendar.getInstance();
+        buildDatepicking();
+        buildTimepicking();
+        
+    }
+
+    /**
+     *
+     */
+    private void findViewsById(){
+
+        eventNameField = (EditText) findViewById(R.id.eventName);
+        eventDescriptionField = (EditText) findViewById(R.id.eventDescription);
+
+        startDateField = (EditText) findViewById(R.id.startDate);
+        endDateField = (EditText) findViewById(R.id.endDate);
+
+        startTimeField = (EditText) findViewById(R.id.startTime);
+        endTimeField = (EditText) findViewById(R.id.endTime);
+    }
+
+    /**
+     *
+     */
+    private void buildDatepicking(){
+
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
-        showDate(year, month+1, day);
 
         // --- Time & date ---
         startTimeField.setFocusable(false);
@@ -77,29 +106,39 @@ public class CreateEventActivity extends AppCompatActivity {
         });
 
         // --- DatePickers ---
-        startDatePicker = new DatePickerDialog(this, StartDateListener, year, month, day);
-        endDatePicker = new DatePickerDialog(this, EndDateListener, year, month, day);
-
-
+        startDatePicker = new DatePickerDialog(this, startDateListener, year, month, day);
+        endDatePicker = new DatePickerDialog(this, endDateListener, year, month, day);
 
     }
 
-    private void findViewsById(){
+    private void buildTimepicking(){
 
-        eventNameField = (EditText) findViewById(R.id.eventName);
-        eventDescriptionField = (EditText) findViewById(R.id.eventDescription);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
 
-        startDateField = (EditText) findViewById(R.id.startDate);
-        endDateField = (EditText) findViewById(R.id.endDate);
+        startTimePicker = new TimePickerDialog(this, startTimeListener, hour, minute, DateFormat.is24HourFormat(this));
+        endTimePicker = new TimePickerDialog(this, endTimeListener, hour, minute, DateFormat.is24HourFormat(this));
 
-        startTimeField = (EditText) findViewById(R.id.startTime);
-        endTimeField = (EditText) findViewById(R.id.endTime);
+        startTimeField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startTimePicker.show();
+            }
+        });
+
+        endTimeField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                endTimePicker.show();
+            }
+        });
+
     }
 
     /**
-     * Listener for DatePickerDialog used to pick start date
+     * Listener for DatePickerDialog used to pick start date of the event
      */
-    private DatePickerDialog.OnDateSetListener StartDateListener = new DatePickerDialog.OnDateSetListener(){
+    private DatePickerDialog.OnDateSetListener startDateListener = new DatePickerDialog.OnDateSetListener(){
 
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -110,9 +149,9 @@ public class CreateEventActivity extends AppCompatActivity {
     };
 
     /**
-     *
+     * Listener for DatePickerDialog used to pick end date of the event
      */
-    private DatePickerDialog.OnDateSetListener EndDateListener = new DatePickerDialog.OnDateSetListener() {
+    private DatePickerDialog.OnDateSetListener endDateListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             Calendar newDate = Calendar.getInstance();
@@ -121,19 +160,28 @@ public class CreateEventActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * Listener for TimePickerDialog used to pick the start time of the event
+     */
+    private TimePickerDialog.OnTimeSetListener startTimeListener = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker timePicker, int hour, int minute) {
 
+            //TODO
+
+        }
+    };
 
     /**
-     * TODO ...
-     *
-     * @param year
-     * @param month
-     * @param day
+     * Listener for TimePickerDialog used to pick the end time of the event
      */
-    private void showDate(int year, int month, int day) {
-        /* TODO
-        eventDateField.setText(new StringBuilder().append(day).append("/")
-                .append(month).append("/").append(year));
-        */
-    }
+    private TimePickerDialog.OnTimeSetListener endTimeListener = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+
+            //TODO
+
+        }
+    };
+
 }
