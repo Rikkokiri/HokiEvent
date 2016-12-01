@@ -18,19 +18,19 @@
         <!-- Name -->
         <TextView
             android:id="@+id/userFullName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <!-- Phone number -->
         <TextView
             android:id="@+id/userPhonenumber"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <!-- Email address -->
         <TextView
             android:id="@+id/userEmail"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
 

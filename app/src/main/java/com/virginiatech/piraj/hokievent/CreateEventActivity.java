@@ -1,10 +1,16 @@
 package com.virginiatech.piraj.hokievent;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
+
+import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 public class CreateEventActivity extends AppCompatActivity {
@@ -17,13 +23,19 @@ public class CreateEventActivity extends AppCompatActivity {
     private DatePicker datePicker;
     private TimePicker timePicker;
     private Calendar calendar;
+
     private EditText startDateField;
     private EditText endDateField;
+    private DatePickerDialog startDatePicker;
+    private DatePickerDialog endDatePicker;
+
     private EditText startTimeField;
     private EditText endTimeField;
     private int year;
     private int month;
     private int day;
+
+    private SimpleDateFormat dateFormatter;
 
     //TODO Time?
 
@@ -32,15 +44,10 @@ public class CreateEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
 
-        eventNameField = (EditText) findViewById(R.id.eventName);
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
-        eventDescriptionField = (EditText) findViewById(R.id.eventDescription);
-
-        // --- Time & date ---
-        startDateField = (EditText) findViewById(R.id.startDate);
-
-
-        endDateField = (EditText) findViewById(R.id.endDate);
+        //Initialize views
+        findViewsById();
 
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
@@ -48,15 +55,71 @@ public class CreateEventActivity extends AppCompatActivity {
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(year, month+1, day);
 
-        startTimeField = (EditText) findViewById(R.id.startTime);
+        // --- Time & date ---
         startTimeField.setFocusable(false);
         startTimeField.setClickable(true);
 
-        endTimeField = (EditText) findViewById(R.id.endTime);
         endTimeField.setFocusable(false);
         endTimeField.setClickable(true);
 
+        startDateField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startDatePicker.show();
+            }
+        });
+
+        endTimeField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                endDatePicker.show();
+            }
+        });
+
+        // --- DatePickers ---
+        startDatePicker = new DatePickerDialog(this, StartDateListener, year, month, day);
+        endDatePicker = new DatePickerDialog(this, EndDateListener, year, month, day);
+
+
+
     }
+
+    private void findViewsById(){
+
+        eventNameField = (EditText) findViewById(R.id.eventName);
+        eventDescriptionField = (EditText) findViewById(R.id.eventDescription);
+
+        startDateField = (EditText) findViewById(R.id.startDate);
+        endDateField = (EditText) findViewById(R.id.endDate);
+
+        startTimeField = (EditText) findViewById(R.id.startTime);
+        endTimeField = (EditText) findViewById(R.id.endTime);
+    }
+
+    /**
+     * Listener for DatePickerDialog used to pick start date
+     */
+    private DatePickerDialog.OnDateSetListener StartDateListener = new DatePickerDialog.OnDateSetListener(){
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            Calendar newDate = Calendar.getInstance();
+            newDate.set(year, monthOfYear, dayOfMonth);
+            startDateField.setText(dateFormatter.format(newDate.getTime()));
+        }
+    };
+
+    /**
+     *
+     */
+    private DatePickerDialog.OnDateSetListener EndDateListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            Calendar newDate = Calendar.getInstance();
+            newDate.set(year, monthOfYear, dayOfMonth);
+            endTimeField.setText(dateFormatter.format(newDate.getTime()));
+        }
+    };
 
 
 
