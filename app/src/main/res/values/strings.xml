@@ -26,7 +26,7 @@
     <string name="eventDoneButton">Done</string>
 
     <!-- Profile view strings -->
-    <string name="profileViewTitle"></string>
+    <string name="profileViewTitle">Profile</string>
     <string name="profileInterestsTitle">Your Interests</string>
     <string name="editProfileButton">Edit Profile</string>
     <string name="logoutButton">Log out</string>

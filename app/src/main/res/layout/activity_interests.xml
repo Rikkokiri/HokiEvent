@@ -23,15 +23,15 @@
             android:textSize="18dp"
             android:textAlignment="center"
             android:layout_marginBottom="20dp"/>
-
+        <!--
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:stretchColumns="2">
-
+        -->
             <!-- TODO Should the texts for buttons be hardcoded or...? -->
 
-            <!-- Row 1 -->
+            <!-- Row 1
             <TableRow>
 
                 <Button
@@ -41,8 +41,8 @@
                     android:layout_weight="1"/>
 
             </TableRow>
-
-            <!-- Row 2 -->
+            -->
+            <!-- Row 2
             <TableRow>
 
                 <Button
@@ -52,8 +52,8 @@
                     android:layout_weight="1"/>
 
             </TableRow>
-
-            <!-- Row 3 -->
+            -->
+            <!-- Row 3
             <TableRow>
 
                 <Button
@@ -63,8 +63,8 @@
                     android:layout_weight="1"/>
 
             </TableRow>
-
-            <!-- Row 4 -->
+            -->
+            <!-- Row 4
             <TableRow>
 
                 <Button
@@ -74,8 +74,8 @@
                     android:layout_weight="1"/>
 
             </TableRow>
-
-            <!-- Row 5 -->
+            -->
+            <!-- Row 5
             <TableRow>
 
                 <Button
@@ -85,8 +85,8 @@
                     android:layout_weight="1"/>
 
             </TableRow>
-
-            <!-- Row 6 -->
+            -->
+            <!-- Row 6
             <TableRow>
 
                 <Button
@@ -96,8 +96,8 @@
                     android:layout_weight="1"/>
 
             </TableRow>
-
-            <!-- Row 7 -->
+            -->
+            <!-- Row 7
             <TableRow>
 
                 <Button
@@ -119,7 +119,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"/>
 
-
+        -->
     </LinearLayout>
 
 </RelativeLayout>
