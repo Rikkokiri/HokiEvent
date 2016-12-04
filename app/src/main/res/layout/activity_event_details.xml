@@ -66,14 +66,55 @@
 
         <!-- Map -->
 
-        <!-- Number of people attending (?) -->
+        <!-- TODO -->
 
+        <!-- Number of people attending (?) -->
+        <TextView
+            android:id="@+id/peopleAttending"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <!-- Tags -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tags"/>
 
+        <TextView
+            android:id="@+id/tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextfieldBaseStyle"/>
 
         <!-- BUTTONS -->
 
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="2"
+            android:gravity="bottom">
+
+            <TableRow>
+
+                <!-- TODO: Text determined based on user previous interactions with event -->
+                <Button
+                    android:id="@+id/joinLeaveEvent"
+                    android:text=""
+                    style="@style/ButtonBaseStyle"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"/>
+
+                <!-- TODO: Text determined based on user previous interactions with event -->
+                <Button
+                    android:id="@+id/saveUnsaveEvent"
+                    android:text=""
+                    style="@style/ButtonBaseStyle"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"/>
+
+            </TableRow>
+
+        </TableLayout>
 
     </LinearLayout>
 
