@@ -48,7 +48,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         selectInterestsButton = (Button) findViewById(R.id.selectInterestsButton);
         selectInterestsButton.setOnClickListener(selectInterestListener);
 
-        signUpButton = (Button) findViewById(R.id.selectInterestsButton);
+        signUpButton = (Button) findViewById(R.id.signUpButton);
         signUpButton.setOnClickListener(signUpListener);
 
         cancelButton = (Button) findViewById(R.id.cancelButton);
