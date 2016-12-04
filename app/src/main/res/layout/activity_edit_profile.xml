@@ -10,4 +10,111 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.virginiatech.piraj.hokievent.EditProfileActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="2">
+
+            <!-- First name & middle name titles -->
+            <TableRow>
+
+                <TextView
+                    android:text="@string/firstname"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:text="@string/middlename"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"/>
+
+            </TableRow>
+
+            <!-- First name & middle name fields -->
+            <TableRow>
+
+                <EditText
+                    android:id="@+id/firstNameField"
+                    android:text=""
+                    android:layout_weight="1"
+                    style="@style/TextfieldBaseStyle"
+                    android:layout_marginRight="5dp"/>
+
+                <EditText
+                    android:id="@+id/middleNameField"
+                    android:text=""
+                    android:layout_weight="1"
+                    style="@style/TextfieldBaseStyle"
+                    android:layout_marginLeft="5dp"/>
+
+            </TableRow>
+
+            <!-- Last name & phone number titles -->
+            <TableRow>
+
+                <TextView
+                    android:text="@string/lastname"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:text="@string/phonenumber"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"/>
+
+            </TableRow>
+
+            <!-- Last name & phone number fields -->
+            <TableRow>
+
+                <EditText
+                    android:id="@+id/lastNameField"
+                    android:text=""
+                    android:layout_weight="1"
+                    style="@style/TextfieldBaseStyle"
+                    android:layout_marginRight="5dp"/>
+
+                <EditText
+                    android:id="@+id/phonenumberField"
+                    android:text=""
+                    android:layout_weight="1"
+                    style="@style/TextfieldBaseStyle"
+                    android:layout_marginLeft="5dp"/>
+
+            </TableRow>
+
+        </TableLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/interestsTitle"/>
+
+        <!-- Maximum 14 intersts -->
+        <!-- TODO: Show interests -->
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+        </TableLayout>
+
+        <Button
+            android:id="@+id/editInterestsButton"
+            style="@style/ButtonBaseStyle"
+            android:text="@string/editInterestsButton"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:id="@+id/saveChangesButton"
+            style="@style/ButtonBaseStyle"
+            android:text="@string/saveChangesButton"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"/>
+
+    </LinearLayout>
+
 </RelativeLayout>

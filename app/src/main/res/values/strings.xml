@@ -31,5 +31,14 @@
     <string name="editProfileButton">Edit Profile</string>
     <string name="logoutButton">Log out</string>
 
+    <!-- Edit profile strings -->
+    <string name="firstname">First name</string>
+    <string name="middlename">Middle name</string>
+    <string name="lastname">Last name</string>
+    <string name="phonenumber">Phone number</string>
+    <string name="interestsTitle">Interests</string>
+    <string name="editInterestsButton">Edit interests</string>
+    <string name="saveChangesButton">Save changes</string>
+    <string name="cancelButton">Cancel</string> <!-- TODO: Would this useful? -->
 
 </resources>
