@@ -16,6 +16,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     //TODO More elements...
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
