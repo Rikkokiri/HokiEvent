@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
@@ -20,6 +21,10 @@ public class ProfileActivity extends AppCompatActivity {
 
     private BottomBar bottomBar;
 
+    private TextView fullNameField;
+    private TextView phonenumberField;
+    private TextView emailField;
+
     private Button editProfileButton;
 
     @Override
@@ -30,9 +35,34 @@ public class ProfileActivity extends AppCompatActivity {
         //Build bottom navigation
         //buildBottomBar(this, savedInstanceState);
 
+        // --- TextViews for displaying the user information ---
+        fullNameField = (TextView) findViewById(R.id.userFullName);
+        phonenumberField = (TextView) findViewById(R.id.userPhonenumber);
+        emailField = (TextView) findViewById(R.id.userEmail);
+
+        // --- Edit profile button ---
         editProfileButton = (Button) findViewById(R.id.editProfileButton);
         editProfileButton.setOnClickListener(editProfileListener);
-        
+
+        //TODO Pull the user's data from the server?
+
+        //TODO Populate text views with data pulled from the server
+        //displayUserInfo(user);
+
+        //TODO Populate pull the interests from the server and show them
+
+    }
+
+    /**
+     * Fill in the TextViews showing the user's name, phone number and email
+     */
+    private void displayUserInfo(User user){
+        //Show name
+        fullNameField.setText(user.getFirstName() + " " + user.getMiddleName() + " " + user.getLastName());
+        //Show phone number
+        phonenumberField.setText(user.getPhoneNumber());
+        //Show email
+        emailField.setText(user.getUserEmail());
     }
 
     /**
