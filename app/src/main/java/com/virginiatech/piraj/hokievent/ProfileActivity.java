@@ -31,6 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
         //buildBottomBar(this, savedInstanceState);
 
         editProfileButton = (Button) findViewById(R.id.editProfileButton);
+        editProfileButton.setOnClickListener(editProfileListener);
         
     }
 

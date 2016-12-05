@@ -98,7 +98,14 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:stretchColumns="3">
+
+            <TableRow></TableRow>
+            <TableRow></TableRow>
+            <TableRow></TableRow>
+            <TableRow></TableRow>
+            <TableRow></TableRow>
 
         </TableLayout>
 
