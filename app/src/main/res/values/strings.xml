@@ -24,7 +24,9 @@
     <string name="location">Event location</string>
     <string name="description">Description</string>
     <string name="tags">Tags</string>
-    <string name="eventDoneButton">Done</string>
+    <string name="createEventEnterTags">Enter Tags</string>
+    <string name="createEventDoneButton">Done</string>
+    <string name="createEventCancelButton">Cancel</string>
 
     <!-- Event details view -->
     <string name="eventDetailsTitle">Event Details</string>

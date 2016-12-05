@@ -6,13 +6,16 @@ import java.util.Locale;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.icu.text.TimeZoneFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 public class CreateEventActivity extends AppCompatActivity {
@@ -20,6 +23,13 @@ public class CreateEventActivity extends AppCompatActivity {
     private EditText eventNameField;
 
     private EditText eventDescriptionField;
+
+    private TextView tagsList;
+    private TextView messageView;
+
+    private Button enterTags;
+    private Button done;
+    private Button cancel;
 
     // --- Time and date ---
     private DatePicker datePicker;
@@ -37,6 +47,9 @@ public class CreateEventActivity extends AppCompatActivity {
     private EditText endTimeField;
     private TimePickerDialog startTimePicker;
     private TimePickerDialog endTimePicker;
+
+    private String tags;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +83,16 @@ public class CreateEventActivity extends AppCompatActivity {
 
         startTimeField = (EditText) findViewById(R.id.startTime);
         endTimeField = (EditText) findViewById(R.id.endTime);
+
+        tagsList = (TextView) findViewById(R.id.tagsList);
+        messageView = (TextView) findViewById(R.id.createAccountMessage);
+        enterTags = (Button) findViewById(R.id.createEventTagsButton);
+        done = (Button) findViewById(R.id.createEventDoneButton);
+        cancel = (Button) findViewById(R.id.createEventCancelButton);
+
+        enterTags.setOnClickListener(selectTagsListener);
+        cancel.setOnClickListener(cancelListener);
+        //done.setOnClickListener(doneListener);
 
     }
 
@@ -194,5 +217,75 @@ public class CreateEventActivity extends AppCompatActivity {
             endTimeField.setText(timeFormatter.format(newTime.getTime()));
         }
     };
+
+    /**
+     * Listener for Select tags -button
+     */
+    private View.OnClickListener selectTagsListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            Intent tagsActivityListener = new Intent(view.getContext(), TagsActivity.class);
+            tagsActivityListener.putExtra(TagsActivity.TAGS, tags);
+
+            System.out.println("CreateAccount sends :" + tagsActivityListener.getStringExtra(TagsActivity.TAGS));
+            startActivityForResult(tagsActivityListener, 0);
+
+        }
+    };
+
+
+    /**
+     * Listener for cancel button. Pressing the cancel button takes the user back to the home view
+     */
+    private View.OnClickListener cancelListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view){
+            finish();
+        }
+    };
+
+    /**
+     * Listener for Sign up -button
+     */
+
+    //TODO figure out how we're doing location.
+    /*
+    private View.OnClickListener doneListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View view){
+
+            if (eventNameField.getText().toString().equals("") ||
+                    eventDescriptionField.getText().toString().equals("") ||
+                    eventLocationField.getText().toString().equals("") ||
+                    eventStartField.getText().toString().equals("") ||
+                    eventEndField.getText().toString().equals("") ||
+                    tags == 0)
+            {
+                messageView.setText("Please fill in all fields");
+                return;
+            }
+
+
+            HokiEvent newEvent = new HokiEvent(
+                    eventNameField.getText().toString(),
+                    eventDescriptionField.getText().toString(),
+                    eventLocationField.getText().toString(),
+                    eventStartField.getText().toString(),
+                    eventEndField.getText().toString().
+                    tags);
+
+
+            //TODO Communicate with server and send it the new event entry
+
+            Intent startEventDetailsActivity = new Intent(view.getContext(), EventDetailsActivity.class);
+
+            startEventDetailsActivity.putExtra(HokiEvent.EVENT, newEvent);
+
+            startActivity(startEventDetailsActivity);
+
+        }
+    };*/
+
 
 }

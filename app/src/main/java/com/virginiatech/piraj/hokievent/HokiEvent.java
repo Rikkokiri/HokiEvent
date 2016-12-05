@@ -18,17 +18,19 @@ public class HokiEvent implements Parcelable {
     private int eventID;
     private String eventName;
     private String eventDesc;
-    private String eventAdd;
+    private String eventLoc;
     private String eventStart;
     private String eventEnd;
     private String interests;
 
-    public HokiEvent(int id, String name, String desc, String add, String start, String end, String tags)
+    public static final String EVENT = "event";
+
+    public HokiEvent(int id, String name, String desc, String loc, String start, String end, String tags)
     {
         eventID = id;
         eventName = name;
         eventDesc = desc;
-        eventAdd = add;
+        eventLoc = loc;
         eventStart = start;
         eventEnd = end;
         interests = tags;
@@ -38,7 +40,7 @@ public class HokiEvent implements Parcelable {
         eventID = in.readInt();
         eventName = in.readString();
         eventDesc = in.readString();
-        eventAdd = in.readString();
+        eventLoc = in.readString();
         eventStart = in.readString();
         eventEnd = in.readString();
         interests = in.readString();
@@ -68,8 +70,8 @@ public class HokiEvent implements Parcelable {
         return eventDesc;
     }
 
-    public String getEventAdd() {
-        return eventAdd;
+    public String getEventLoc() {
+        return eventLoc;
     }
 
     public String getEventStart() {
@@ -92,7 +94,7 @@ public class HokiEvent implements Parcelable {
         dest.writeInt(eventID);
         dest.writeString(eventName);
         dest.writeString(eventDesc);
-        dest.writeString(eventAdd);
+        dest.writeString(eventLoc);
         dest.writeString(eventStart);
         dest.writeString(eventEnd);
         dest.writeString(interests);

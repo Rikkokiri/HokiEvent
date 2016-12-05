@@ -10,14 +10,30 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.virginiatech.piraj.hokievent.CreateEventActivity">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <!-- HokiEvent name -->
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="@string/eventName">
+            </TextView>
+
+
+            <EditText
+                android:id="@+id/eventName"
+                style="@style/TextfieldBaseStyle"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
 
             <TableLayout
                 android:layout_width="match_parent"
@@ -27,30 +43,21 @@
                 android:layout_alignParentStart="true"
                 android:id="@+id/tableLayout">
 
-                <!-- Event name -->
-
-                <TableRow>
-                    <TextView
-                        android:text="@string/eventName">
-                    </TextView>
-                </TableRow>
-
-                <TableRow>
-                    <EditText
-                        android:id="@+id/eventName"
-                        style="@style/TextfieldBaseStyle"
-                        android:layout_weight="1"/>
-                </TableRow>
 
                 <!-- Date and time -->
 
                 <TableRow>
                     <TextView
                         android:text="@string/startDate"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"/>
 
                     <TextView
                         android:text="@string/endDate"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+
                         android:layout_weight="1"/>
                 </TableRow>
 
@@ -59,7 +66,6 @@
                     <EditText
                         android:id="@+id/startDate"
                         style="@style/TextfieldBaseStyle"
-                        android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:inputType="date" />
 
@@ -128,30 +134,62 @@
                 android:lines="3"
                 android:scrollbars="vertical"/>
 
-            <!-- Tags -->
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_height="wrap_content"
-                android:text="@string/tags"
-                />
-
-            <!-- TODO: How to input these? -->
-            <AutoCompleteTextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/TextfieldBaseStyle"/>
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/createEventTagsButton"
+                    android:text="@string/createEventEnterTags"
+                    style="@style/ButtonBaseStyle"
+                    android:background="@drawable/pill_button_bg"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal|center_vertical"/>
+
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="60dp"
+                    android:layout_width="match_parent"
+                    android:id="@+id/tagsList"
+                    android:layout_weight="2"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_height="20dp"
+                android:layout_width="match_parent"
+                android:id="@+id/createEventMessage"
+                android:textAlignment="center"/>
 
             <!-- Done button -->
-            <Button
-                android:id="@+id/eventDoneButton"
-                style="@style/ButtonBaseStyle"
-                android:text="@string/eventDoneButton"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"/>
+
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/createEventCancelButton"
+                    style="@style/ButtonBaseStyle"
+                    android:text="@string/createEventCancelButton"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/createEventDoneButton"
+                    style="@style/ButtonBaseStyle"
+                    android:text="@string/createEventDoneButton"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
 
         </LinearLayout>
 
-    </ScrollView>
+    </LinearLayout>
 
 </RelativeLayout>
