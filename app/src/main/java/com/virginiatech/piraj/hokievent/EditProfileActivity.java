@@ -29,7 +29,14 @@ public class EditProfileActivity extends AppCompatActivity {
         //Find componenets by id
         findById();
 
+        //TODO Get user data from either previous activity or from the server?
+        Intent userIntent = getIntent();
+        Bundle bundle = userIntent.getExtras();
+        User user = (User) bundle.get("User");
 
+        if(user != null){
+            showData(user);
+        }
 
     }
 
@@ -48,6 +55,19 @@ public class EditProfileActivity extends AppCompatActivity {
         // --- Buttons ---
         editInterestsButton = (Button) findViewById(R.id.editInterestsButton);
         saveChangesButton = (Button) findViewById(R.id.saveChangesButton);
+
+    }
+
+    /**
+     * Show the "old" user information in the text fields
+     * @param user
+     */
+    private void showData(User user){
+
+        firstNameField.setText(user.getFirstName());
+        middleNameField.setText(user.getMiddleName());
+        lastNameField.setText(user.getLastName());
+        phonenumberField.setText(user.getPhoneNumber());
 
     }
 

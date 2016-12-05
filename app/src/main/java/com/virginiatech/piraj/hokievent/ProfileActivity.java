@@ -25,6 +25,8 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView phonenumberField;
     private TextView emailField;
 
+    private User user = null;
+
     private Button editProfileButton;
 
     @Override
@@ -72,6 +74,9 @@ public class ProfileActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent editProfileIntent = new Intent(view.getContext(), EditProfileActivity.class);
+
+            //TODO: Should we pass the user to the new activity or request user data from there?
+            editProfileIntent.putExtra("User", user);
             startActivity(editProfileIntent);
         }
     };
@@ -139,6 +144,5 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Necessary to restore the BottomBar's state, otherwise we would
         // lose the current tab on orientation change.
-        //bottomBar.onSaveInstanceState(outState);
     }
 }
