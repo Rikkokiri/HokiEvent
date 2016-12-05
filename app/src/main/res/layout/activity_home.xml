@@ -13,6 +13,14 @@
 
     </android.support.v7.widget.RecyclerView>
 
+
+    <!-- TODO: Remove later, just for testing -->
+    <TextView
+        android:text="HOME VIEW"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"/>
+
     <include android:id="@+id/bottomBar"
         layout="@layout/navigation_bar"/>
 

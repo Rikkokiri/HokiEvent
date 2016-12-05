@@ -16,6 +16,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private BottomBar bottomBar;
+    private static String CURRENT_TAB = "current_tab";
 
     private RecyclerView eventListView;
     
@@ -32,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         eventListView.setLayoutManager(llm);
         
         //Build the bottom navigation
-        buildBottomBar(this, savedInstanceState);
+        buildBottomBar(this);
 
     }
 
@@ -40,11 +41,10 @@ public class HomeActivity extends AppCompatActivity {
      * Build navigation bar located on the bottom of the screen.
      *
      * @param activity
-     * @param savedInstanceState
      */
-    private void buildBottomBar(Activity activity, Bundle savedInstanceState){
+    private void buildBottomBar(Activity activity){
 
-        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        bottomBar = (BottomBar) findViewById(R.id.bottomBar);;
 
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
@@ -81,6 +81,21 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(profileIntent);
                 break;
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        outState.putInt(CURRENT_TAB, R.id.action_home);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        //TODO This doesn't work :-/
+        bottomBar.selectTabWithId(savedInstanceState.getInt(CURRENT_TAB));
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
 }
