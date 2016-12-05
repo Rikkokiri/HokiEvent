@@ -103,7 +103,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
 
             @Override
             public void onMenuTabReSelected(@IdRes int menuItemId) {
-                Log.i("NavBar","Menu item selected");
+                //Do nothing
             }
         });
 

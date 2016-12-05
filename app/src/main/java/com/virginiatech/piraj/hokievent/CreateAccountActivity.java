@@ -71,7 +71,8 @@ public class CreateAccountActivity extends AppCompatActivity {
             //Intent selectInterests = new Intent(view.getContext(), InterestsActivity.class);
             //Intent selectInterests = new Intent(view.getContext(), EventDetailsActivity.class);
             //Intent selectInterests = new Intent(view.getContext(), CreateEventActivity.class);
-            Intent selectInterests = new Intent(view.getContext(), EventDetailsActivity.class);
+            //Intent selectInterests = new Intent(view.getContext(), EventDetailsActivity.class);
+            Intent selectInterests = new Intent(view.getContext(), HomeActivity.class);
             startActivity(selectInterests);
         }
     };
