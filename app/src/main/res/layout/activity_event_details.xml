@@ -8,118 +8,125 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.virginiatech.piraj.hokievent.EventDetailsActivity">
+    tools:context="com.virginiatech.piraj.hokievent.EventDetailsActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <!-- TODO: All the data will be pulled from server -->
-        <!-- TODO: Define styles -->
-
-        <!-- Event name -->
-        <TextView
-            android:id="@+id/eventName"
-            android:text="Fancy Party"
-            style="@style/EventDetailsTitles"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <!-- Event date -->
-        <TextView
-            android:id="@+id/eventDate"
-            style="@style/EventDetailsItems"
-            android:text="Friday, November 25th 2016"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <!-- TODO: All the data will be pulled from server -->
+            <!-- TODO: Define styles -->
 
-        <!-- Event time -->
-        <TextView
-            android:id="@+id/eventTime"
-            style="@style/EventDetailsItems"
-            android:text="8:00 PM to 11:00 PM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <!-- Event name -->
+            <TextView
+                android:id="@+id/eventName"
+                android:text="Fancy Party"
+                style="@style/EventDetailsTitles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <!-- Event address -->
-        <TextView
-            android:id="@+id/eventAddress"
-            style="@style/EventDetailsItems"
-            android:text="10 Downing St, London SW1A 2AA, UK"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <!-- Event date -->
+            <TextView
+                android:id="@+id/eventDate"
+                style="@style/EventDetailsItems"
+                android:text="Friday, November 25th 2016"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <!-- Title: "Description" -->
-        <TextView
-            android:text="Description"
-            style="@style/EventDetailsTitles"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <!-- Event time -->
+            <TextView
+                android:id="@+id/eventTime"
+                style="@style/EventDetailsItems"
+                android:text="8:00 PM to 11:00 PM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <!-- Event description -->
-        <TextView
-            android:id="@+id/eventDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <!-- Event address -->
+            <TextView
+                android:id="@+id/eventAddress"
+                style="@style/EventDetailsItems"
+                android:text="10 Downing St, London SW1A 2AA, UK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <!-- Map -->
-        <!-- TODO -->
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            android:name="com.google.android.gms.maps.MapFragment"
-            android:id="@+id/map"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            <!-- Title: "Description" -->
+            <TextView
+                android:text="Description"
+                style="@style/EventDetailsTitles"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <!-- Number of people attending (?) -->
-        <TextView
-            android:id="@+id/peopleAttending"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <!-- Event description -->
+            <TextView
+                android:id="@+id/eventDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <!-- Tags -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/tags"/>
+            <!-- Map -->
+            <!-- TODO -->
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                android:name="com.google.android.gms.maps.MapFragment"
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
-        <TextView
-            android:id="@+id/tags"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/TextfieldBaseStyle"/>
+            <!-- Number of people attending (?) -->
+            <TextView
+                android:id="@+id/peopleAttending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <!-- BUTTONS -->
+            <!-- Tags -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tags"/>
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="2"
-            android:gravity="bottom">
+            <TextView
+                android:id="@+id/tags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextfieldBaseStyle"/>
 
-            <TableRow>
+            <!-- BUTTONS -->
 
-                <!-- TODO: Text determined based on user previous interactions with event -->
-                <Button
-                    android:id="@+id/joinLeaveEvent"
-                    android:text=""
-                    style="@style/ButtonBaseStyle"
-                    android:layout_weight="1"
-                    android:layout_marginRight="10dp"/>
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="2"
+                android:gravity="bottom">
 
-                <!-- TODO: Text determined based on user previous interactions with event -->
-                <Button
-                    android:id="@+id/saveUnsaveEvent"
-                    android:text=""
-                    style="@style/ButtonBaseStyle"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp"/>
+                <TableRow>
 
-            </TableRow>
+                    <!-- TODO: Text determined based on user previous interactions with event -->
+                    <Button
+                        android:id="@+id/joinLeaveEvent"
+                        android:text=""
+                        style="@style/ButtonBaseStyle"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"/>
 
-        </TableLayout>
+                    <!-- TODO: Text determined based on user previous interactions with event -->
+                    <Button
+                        android:id="@+id/saveUnsaveEvent"
+                        android:text=""
+                        style="@style/ButtonBaseStyle"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"/>
 
-    </LinearLayout>
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+        </ScrollView>
 
 </RelativeLayout>
