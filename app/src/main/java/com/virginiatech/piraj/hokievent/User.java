@@ -11,22 +11,27 @@ public class User implements Parcelable{
 
     private int userID;
     private String firstName;
+    private String middleName;
     private String lastName;
     private String userEmail;
     private int phoneNumber;
     private String password;
-    private String[] interests;
-    private int[] ownEvents;
-    private int[] savedEvents;
+    private String interests;
+    private String ownEvents;
+    private String savedEvents;
+
+    public static final String USER = "user";
 
 
-    public User(String first, String last, String email, int phone, String[] newInterests, String pass) {
-        this(first, last, email, phone, newInterests);
+
+
+    public User(String first, String middle, String last, String email, int phone, String newInterests, String pass) {
+        this(first, middle, last, email, phone, newInterests);
         password = pass;
     }
 
 
-    public User(String first, String last, String email, int phone, String[] newInterests) {
+    public User(String first, String middle, String last, String email, int phone, String newInterests) {
         firstName = first;
         lastName = last;
         userEmail = email;
@@ -42,9 +47,9 @@ public class User implements Parcelable{
         userEmail = in.readString();
         password = in.readString();
         phoneNumber = in.readInt();
-        interests = in.createStringArray();
-        ownEvents = in.createIntArray();
-        savedEvents = in.createIntArray();
+        interests = in.readString();
+        ownEvents = in.readString();
+        savedEvents = in.readString();
     }
 
     @Override
@@ -60,9 +65,9 @@ public class User implements Parcelable{
         dest.writeString(userEmail);
         dest.writeString(password);
         dest.writeInt(phoneNumber);
-        dest.writeStringArray(interests);
-        dest.writeIntArray(ownEvents);
-        dest.writeIntArray(savedEvents);
+        dest.writeString(interests);
+        dest.writeString(ownEvents);
+        dest.writeString(savedEvents);
 
 
     }
@@ -108,6 +113,10 @@ public class User implements Parcelable{
         return lastName;
     }
 
+    public String getMiddleName() { return middleName; }
+
+    public void setMiddleName(String middleName) { this.middleName = middleName; }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -128,29 +137,27 @@ public class User implements Parcelable{
         this.password = password;
     }
 
-    public String[] getInterests() {
+    public String getInterests() {
         return interests;
     }
 
-    public void setInterests(String[] interests) {
+    public void setInterests(String interests) {
         this.interests = interests;
     }
 
-    public int[] getOwnEvents() {
+    public String getOwnEvents() {
         return ownEvents;
     }
 
-    public void setOwnEvents(int[] ownEvents) {
+    public void setOwnEvents(String ownEvents) {
         this.ownEvents = ownEvents;
     }
 
-    public int[] getSavedEvents() {
+    public String getSavedEvents() {
         return savedEvents;
     }
 
-    public void setSavedEvents(int[] savedEvents) {
-        this.savedEvents = savedEvents;
-    }
+    public void setSavedEvents(String savedEvents) { this.savedEvents = savedEvents; }
 
 
 }

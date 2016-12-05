@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.net.IDN;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -17,11 +19,11 @@ public class HokiEvent implements Parcelable {
     private String eventName;
     private String eventDesc;
     private String eventAdd;
-    private int eventStart;
-    private int eventEnd;
-    private String[] interests;
+    private String eventStart;
+    private String eventEnd;
+    private String interests;
 
-    public HokiEvent(int id, String name, String desc, String add, int start, int end, String[] tags)
+    public HokiEvent(int id, String name, String desc, String add, String start, String end, String tags)
     {
         eventID = id;
         eventName = name;
@@ -37,9 +39,9 @@ public class HokiEvent implements Parcelable {
         eventName = in.readString();
         eventDesc = in.readString();
         eventAdd = in.readString();
-        eventStart = in.readInt();
-        eventEnd = in.readInt();
-        interests = in.createStringArray();
+        eventStart = in.readString();
+        eventEnd = in.readString();
+        interests = in.readString();
     }
 
     public static final Creator<HokiEvent> CREATOR = new Creator<HokiEvent>() {
@@ -70,15 +72,13 @@ public class HokiEvent implements Parcelable {
         return eventAdd;
     }
 
-    public int getEventStart() {
+    public String getEventStart() {
         return eventStart;
     }
 
-    public int getEventEnd() {
-        return eventEnd;
-    }
+    public String getEventEnd() { return eventEnd; }
 
-    public String[] getInterests() {
+    public String getInterests() {
         return interests;
     }
 
@@ -93,8 +93,8 @@ public class HokiEvent implements Parcelable {
         dest.writeString(eventName);
         dest.writeString(eventDesc);
         dest.writeString(eventAdd);
-        dest.writeInt(eventStart);
-        dest.writeInt(eventEnd);
-        dest.writeStringArray(interests);
+        dest.writeString(eventStart);
+        dest.writeString(eventEnd);
+        dest.writeString(interests);
     }
 }

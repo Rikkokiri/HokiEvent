@@ -3,4 +3,7 @@
     <color name="colorPrimary">#600</color>
     <color name="colorPrimaryDark">#4d0000</color> <!-- TODO Edit this? -->
     <color name="colorAccent">#f60</color> <!-- Originally: #FF4081 -->
+    <color name="white">#fff</color>
+    <color name="maroon">#600</color>
+    <color name="orange">#f60</color>
 </resources>
