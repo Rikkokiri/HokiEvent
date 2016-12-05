@@ -18,7 +18,7 @@
         <!-- TODO: All the data will be pulled from server -->
         <!-- TODO: Define styles -->
 
-        <!-- Event name -->
+        <!-- HokiEvent name -->
         <TextView
             android:id="@+id/eventName"
             android:text="Fancy Party"
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!-- Event date -->
+        <!-- HokiEvent date -->
         <TextView
             android:id="@+id/eventDate"
             style="@style/EventDetailsItems"
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <!-- Event time -->
+        <!-- HokiEvent time -->
         <TextView
             android:id="@+id/eventTime"
             style="@style/EventDetailsItems"
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <!-- Event address -->
+        <!-- HokiEvent address -->
         <TextView
             android:id="@+id/eventAddress"
             style="@style/EventDetailsItems"
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <!-- Event description -->
+        <!-- HokiEvent description -->
         <TextView
             android:id="@+id/eventDescription"
             android:layout_width="wrap_content"

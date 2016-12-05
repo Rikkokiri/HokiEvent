@@ -45,7 +45,7 @@
 
     </style>
 
-    <!-- Event time, address etc. in EventDetails view -->
+    <!-- HokiEvent time, address etc. in EventDetails view -->
     <style name="EventDetailsItems">
         <item name="android:textSize">16dp</item> <!-- TODO Adjust -->
         <item name="android:padding">2dp</item>

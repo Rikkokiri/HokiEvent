@@ -23,7 +23,7 @@
             android:layout_alignParentStart="true"
             android:id="@+id/tableLayout">
 
-            <!-- Event name -->
+            <!-- HokiEvent name -->
 
             <TableRow>
                 <TextView
@@ -41,11 +41,12 @@
             <!-- Date and time -->
 
             <TableRow>
-                <TextView
+                <EditText
                     android:text="@string/startDate"
+                    android:id="@+id/eventName"
                     android:layout_weight="1"/>
 
-                <TextView
+                <EditText
                     android:text="@string/endDate"
                     android:layout_weight="1"/>
             </TableRow>

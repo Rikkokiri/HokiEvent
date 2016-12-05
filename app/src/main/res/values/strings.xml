@@ -13,7 +13,7 @@
     <!-- Create account view -->
     <string name="createAccountTitle">Create Account</string>
 
-    <!-- Create Event view strings -->
+    <!-- Create HokiEvent view strings -->
     <string name="createEventTitle">Create Event</string>
     <string name="eventName">Event name</string>
     <string name="startDate">Start date</string>
