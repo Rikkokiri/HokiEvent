@@ -20,7 +20,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         //Build bottom navigation
-        buildBottomBar(this, savedInstanceState);
+        //buildBottomBar(this, savedInstanceState);
 
     }
 
@@ -87,6 +87,6 @@ public class SearchActivity extends AppCompatActivity {
 
         // Necessary to restore the BottomBar's state, otherwise we would
         // lose the current tab on orientation change.
-        bottomBar.onSaveInstanceState(outState);
+        //bottomBar.onSaveInstanceState(outState);
     }
 }

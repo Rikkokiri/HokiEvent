@@ -28,7 +28,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         //Build bottom navigation
-        buildBottomBar(this, savedInstanceState);
+        //buildBottomBar(this, savedInstanceState);
 
         editProfileButton = (Button) findViewById(R.id.editProfileButton);
         
@@ -108,6 +108,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Necessary to restore the BottomBar's state, otherwise we would
         // lose the current tab on orientation change.
-        bottomBar.onSaveInstanceState(outState);
+        //bottomBar.onSaveInstanceState(outState);
     }
 }

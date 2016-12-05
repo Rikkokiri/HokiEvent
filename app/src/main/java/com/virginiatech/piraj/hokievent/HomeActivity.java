@@ -99,7 +99,7 @@ public class HomeActivity extends AppCompatActivity {
 
         // Necessary to restore the BottomBar's state, otherwise we would
         // lose the current tab on orientation change.
-        bottomBar.onSaveInstanceState(outState);
+        //bottomBar.onSaveInstanceState(outState);
         
     }
 }
