@@ -41,20 +41,29 @@
             android:layout_height="wrap_content" />
 
         <!-- TODO Show interest "buttons"/"shapes" whatever -->
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="4">
 
+            <!-- TODO -->
+
+        </TableLayout>
 
         <!-- Edit profile button -->
         <Button
             android:id="@+id/editProfileButton"
             android:text="@string/editProfileButton"
-            style="@style/ButtonBaseStyle" />
+            style="@style/ButtonBaseStyle"
+            android:layout_gravity="center_horizontal"/>
 
         <!-- Log out button -->
         <!-- TODO Style differently -->
         <Button
             android:id="@+id/logoutButton"
             android:text="@string/logoutButton"
-            style="@style/ButtonBaseStyle" />
+            style="@style/ButtonBaseStyle"
+            android:layout_gravity="right|bottom" />
 
     </LinearLayout>
 
