@@ -57,10 +57,7 @@ public class InterestsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interests);
-
-        //Build bottom navigation
-        buildBottomBar(this, savedInstanceState);
-
+        
         // DONE -button
         doneButton = (Button) findViewById(R.id.doneSelecting);
         doneButton.setOnClickListener(doneSelectingListener);
@@ -107,62 +104,6 @@ public class InterestsActivity extends AppCompatActivity {
         }
     };
 
-    /**
-     * Build navigation bar located on the bottom of the screen.
-     *
-     * @param activity
-     * @param savedInstanceState
-     */
-    private void buildBottomBar(Activity activity, Bundle savedInstanceState){
-
-        bottomBar = BottomBar.attach(activity, savedInstanceState,
-                ContextCompat.getColor(this, R.color.colorPrimary), // Background Color
-                ContextCompat.getColor(this, R.color.colorAccent), // Tab Item Color
-                0.25f); // Tab Item Alpha
-        bottomBar.setItems(R.menu.navigation_bar_items);
-
-
-        bottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
-            @Override
-            public void onMenuTabSelected(@IdRes int menuItemId) {
-                navigate(menuItemId);
-            }
-
-            @Override
-            public void onMenuTabReSelected(@IdRes int menuItemId) {
-                //Do nothing
-            }
-        });
-
-    }
-
-    /**
-     *
-     * @param menuID
-     */
-    private void navigate(int menuID){
-
-        switch (menuID){
-            case R.id.action_home:
-                //Do nothing
-                break;
-
-            case R.id.action_create_event:
-                Intent createEventIntent = new Intent(getApplicationContext(), CreateEventActivity.class);
-                startActivity(createEventIntent);
-                break;
-
-            case R.id.action_search:
-                Intent searchIntent = new Intent(getApplicationContext(), SearchActivity.class);
-                startActivity(searchIntent);
-                break;
-
-            case R.id.action_profile:
-                Intent profileIntent = new Intent(getApplicationContext(), ProfileActivity.class);
-                startActivity(profileIntent);
-                break;
-        }
-    }
 
     /**
      * Listener for Done button
