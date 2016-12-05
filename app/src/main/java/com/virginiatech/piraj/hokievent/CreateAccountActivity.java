@@ -65,8 +65,11 @@ public class CreateAccountActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
 
-            //TODO Open SelectInterestsActivity to allow user to select their interests, save data the user has entered so far
+            // TODO save data the user has entered so far
 
+            // Open SelectInterestsActivity to allow user to select their interests
+            Intent selectInterests = new Intent(view.getContext(), InterestsActivity.class);
+            startActivity(selectInterests);
         }
     };
 

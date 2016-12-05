@@ -35,12 +35,14 @@
             <TableRow>
 
                 <ToggleButton
+                    android:id="@+id/interest01"
                     android:layout_weight="1"
                     android:background="@drawable/toggle_interest"
                     style="@style/InterestToggleButton"
                     android:textColor="@color/toggle_interest_text"/>
 
                 <ToggleButton
+                    android:id="@+id/interest02"
                     android:layout_weight="1"
                     android:background="@drawable/toggle_interest"
                     style="@style/InterestToggleButton"
@@ -52,12 +54,14 @@
             <TableRow>
 
                 <ToggleButton
+                    android:id="@+id/interest03"
                     android:layout_weight="1"
                     android:background="@drawable/toggle_interest"
                     style="@style/InterestToggleButton"
                     android:textColor="@color/toggle_interest_text"/>
 
                 <ToggleButton
+                    android:id="@+id/interest04"
                     android:layout_weight="1"
                     android:background="@drawable/toggle_interest"
                     style="@style/InterestToggleButton"
@@ -69,12 +73,14 @@
             <TableRow>
 
                 <ToggleButton
+                    android:id="@+id/interest05"
                     android:layout_weight="1"
                     android:background="@drawable/toggle_interest"
                     style="@style/InterestToggleButton"
                     android:textColor="@color/toggle_interest_text"/>
 
                 <ToggleButton
+                    android:id="@+id/interest06"
                     android:layout_weight="1"
                     android:background="@drawable/toggle_interest"
                     style="@style/InterestToggleButton"
@@ -86,12 +92,14 @@
             <TableRow>
 
                 <ToggleButton
+                    android:id="@+id/interest07"
                     android:layout_weight="1"
                     android:background="@drawable/toggle_interest"
                     style="@style/InterestToggleButton"
                     android:textColor="@color/toggle_interest_text"/>
 
                 <ToggleButton
+                    android:id="@+id/interest08"
                     android:layout_weight="1"
                     android:background="@drawable/toggle_interest"
                     style="@style/InterestToggleButton"
@@ -103,12 +111,14 @@
             <TableRow>
 
                 <ToggleButton
+                    android:id="@+id/interest09"
                     android:layout_weight="1"
                     android:background="@drawable/toggle_interest"
                     style="@style/InterestToggleButton"
                     android:textColor="@color/toggle_interest_text"/>
 
                 <ToggleButton
+                    android:id="@+id/interest10"
                     android:layout_weight="1"
                     android:background="@drawable/toggle_interest"
                     style="@style/InterestToggleButton"
@@ -120,12 +130,14 @@
             <TableRow>
 
                 <ToggleButton
+                    android:id="@+id/interest11"
                     android:layout_weight="1"
                     android:background="@drawable/toggle_interest"
                     style="@style/InterestToggleButton"
                     android:textColor="@color/toggle_interest_text"/>
 
                 <ToggleButton
+                    android:id="@+id/interest12"
                     android:layout_weight="1"
                     android:background="@drawable/toggle_interest"
                     style="@style/InterestToggleButton"
@@ -137,19 +149,20 @@
             <TableRow>
 
                 <ToggleButton
+                    android:id="@+id/interest13"
                     android:layout_weight="1"
                     android:background="@drawable/toggle_interest"
                     style="@style/InterestToggleButton"
-                    android:textColor="@color/toggle_interest_text"/>
+                    android:textColor="@color/toggle_interest_text" />
 
                 <ToggleButton
+                    android:id="@+id/interest14"
                     android:layout_weight="1"
                     android:background="@drawable/toggle_interest"
                     style="@style/InterestToggleButton"
                     android:textColor="@color/toggle_interest_text"/>
 
             </TableRow>
-
 
         </TableLayout>
 
@@ -161,7 +174,6 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"/>
 
-        -->
     </LinearLayout>
 
 </RelativeLayout>
