@@ -6,6 +6,8 @@ import android.support.annotation.IdRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
@@ -13,6 +15,8 @@ import com.roughike.bottombar.OnMenuTabClickListener;
 public class SearchActivity extends AppCompatActivity {
 
     private BottomBar bottomBar;
+
+    private Button searchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +26,25 @@ public class SearchActivity extends AppCompatActivity {
         //Build bottom navigation
         //buildBottomBar(this, savedInstanceState);
 
+        //Search button
+        searchButton = (Button) findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(searchHandler);
+
     }
+
+
+    /**
+     * Listener for search button
+     */
+    private View.OnClickListener searchHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            //TODO Perform the search by doing calls to the server
+
+        }
+    };
+
 
     /**
      * Build navigation bar located on the bottom of the screen.

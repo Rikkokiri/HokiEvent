@@ -68,7 +68,13 @@
     <!-- Search activity -->
     <string name="searchActivityTitle">Search Events</string>
 
-    <!-- Search resusults -->
+    <string name="searchTagsTitle">Input Tags</string>
+    <string name="searchDateTitle">Input Date</string>
+    <string name="searchTimeTitle">Select Time</string>
+    <string name="searchDistanceTitle">Seect Distance</string>
+    <string name="searchButton">Search</string>
+
+    <!-- Search results -->
     <string name="searchResultsTitle">Search Results</string>
 
 </resources>

@@ -10,4 +10,63 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.virginiatech.piraj.hokievent.SearchActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- .o.o.o.o. Tags .o.o.o.o. -->
+
+            <TextView
+                android:text="@string/searchTagsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- TODO Input tags -->
+
+            <!-- .o.o.o.o. Date .o.o.o.o. -->
+
+            <TextView
+                android:text="@string/searchDateTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- TODO Input date: DatePicker? -->
+
+            <!-- .o.o.o.o. Time .o.o.o.o. -->
+
+            <TextView
+                android:text="@string/searchTimeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- TODO Input time: TimePicker? -->
+
+            <!-- .o.o.o.o. Distance .o.o.o.o. -->
+
+            <TextView
+                android:text="@string/searchDistanceTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- TODO Input distance: Slider? -->
+
+            <!-- .o.o.o.o. Search button .o.o.o.o. -->
+            <Button
+                android:id="@+id/searchButton"
+                android:text="@string/searchButton"
+                style="@style/ButtonBaseStyle"
+                android:layout_gravity="center|bottom"
+                android:layout_marginTop="20dp"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </RelativeLayout>
+
