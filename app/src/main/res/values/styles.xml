@@ -51,4 +51,9 @@
         <item name="android:padding">2dp</item>
     </style>
 
+    <!-- Interest toggle button style -->
+    <style name="InterestToggleButton">
+        <item name="android:layout_margin">3dp</item>
+    </style>
+
 </resources>
