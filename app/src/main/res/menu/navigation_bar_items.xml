@@ -5,15 +5,19 @@
     <!-- android:icon="@drawable/ic_action_navigation_menu" -->
 
     <item android:id="@+id/action_home"
-        android:title="@string/nav_home"/>
+        android:title="@string/nav_home"
+        android:icon="@drawable/home"/>
 
     <item android:id="@+id/action_create_event"
-        android:title="@string/nav_create_event"/>
+        android:title="@string/nav_create_event"
+        android:icon="@drawable/edit"/>
 
     <item android:id="@+id/action_search"
-        android:title="@string/nav_search"/>
+        android:title="@string/nav_search"
+        android:icon="@drawable/search"/>
 
     <item android:id="@+id/action_profile"
-        android:title="@string/nav_profile"/>
+        android:title="@string/nav_profile"
+        android:icon="@drawable/avatar"/>
 
 </menu>

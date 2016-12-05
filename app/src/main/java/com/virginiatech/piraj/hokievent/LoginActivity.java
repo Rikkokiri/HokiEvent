@@ -61,7 +61,7 @@ public class LoginActivity extends Activity {
 
             //TODO Communicate with server to look for user from given login credentials
 
-            if (true)
+            if (false) //TODO Temporarily skip login and just move to home activity
             {
                 loginFailed.setText("Invalid email/password");
                 return;
@@ -90,4 +90,5 @@ public class LoginActivity extends Activity {
             startActivity(startCreateAccountIntent);
         }
     };
+
 }

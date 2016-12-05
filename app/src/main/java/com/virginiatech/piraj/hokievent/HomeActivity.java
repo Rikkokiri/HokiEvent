@@ -50,7 +50,6 @@ public class HomeActivity extends AppCompatActivity {
                 0.25f); // Tab Item Alpha
         bottomBar.setItems(R.menu.navigation_bar_items);
 
-
         bottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
