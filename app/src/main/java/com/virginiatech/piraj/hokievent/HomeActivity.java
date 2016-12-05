@@ -6,19 +6,31 @@ import android.support.annotation.IdRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
 
 public class HomeActivity extends AppCompatActivity {
 
+
     private BottomBar bottomBar;
 
+    private RecyclerView eventListView;
+    
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        RecyclerView eventListView = (RecyclerView) findViewById(R.id.cardList);
+        eventListView.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        eventListView.setLayoutManager(llm);
+        
         //Build the bottom navigation
         buildBottomBar(this, savedInstanceState);
 
@@ -88,5 +100,6 @@ public class HomeActivity extends AppCompatActivity {
         // Necessary to restore the BottomBar's state, otherwise we would
         // lose the current tab on orientation change.
         bottomBar.onSaveInstanceState(outState);
+        
     }
 }

@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/white"
     tools:context="com.virginiatech.piraj.hokievent.InterestsActivity">
 
     <LinearLayout
@@ -16,7 +17,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:text="Choose your interests"
             android:textColor="#000"
@@ -32,135 +33,239 @@
             <!-- TODO Should the texts for buttons be hardcoded or...? -->
 
             <!-- Row 1 -->
-            <TableRow>
+            <TableRow
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="3dp">
 
                 <ToggleButton
-                    android:id="@+id/interest01"
-                    android:layout_weight="1"
-                    android:background="@drawable/toggle_interest"
-                    style="@style/InterestToggleButton"
-                    android:textColor="@color/toggle_interest_text"/>
-
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    style="@style/ToggleButtonStyle"
+                    android:background="@drawable/toggle_selector"
+                    android:textColor="@color/button_toggle"
+                    android:layout_weight=".5"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textOn="@string/academics"
+                    android:textOff="@string/academics"
+                    android:id="@+id/academics" />
                 <ToggleButton
-                    android:id="@+id/interest02"
+
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    style="@style/ToggleButtonStyle"
+                    android:background="@drawable/toggle_selector"
+                    android:textColor="@color/button_toggle"
                     android:layout_weight="1"
-                    android:background="@drawable/toggle_interest"
-                    style="@style/InterestToggleButton"
-                    android:textColor="@color/toggle_interest_text"/>
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textOn="@string/animals"
+                    android:textOff="@string/animals"
+                    android:id="@+id/animals"/>
 
             </TableRow>
 
             <!-- Row 2 -->
-            <TableRow>
+            <TableRow
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp">
+
 
                 <ToggleButton
-                    android:id="@+id/interest03"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    style="@style/ToggleButtonStyle"
+                    android:background="@drawable/toggle_selector"
+                    android:textColor="@color/button_toggle"
                     android:layout_weight="1"
-                    android:background="@drawable/toggle_interest"
-                    style="@style/InterestToggleButton"
-                    android:textColor="@color/toggle_interest_text"/>
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textOn="@string/art"
+                    android:textOff="@string/art"
+                    android:id="@+id/art"/>
 
                 <ToggleButton
-                    android:id="@+id/interest04"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    style="@style/ToggleButtonStyle"
+                    android:background="@drawable/toggle_selector"
+                    android:textColor="@color/button_toggle"
                     android:layout_weight="1"
-                    android:background="@drawable/toggle_interest"
-                    style="@style/InterestToggleButton"
-                    android:textColor="@color/toggle_interest_text"/>
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textOn="@string/culture"
+                    android:textOff="@string/culture"
+                    android:id="@+id/culture"/>
 
             </TableRow>
 
             <!-- Row 3 -->
-            <TableRow>
+            <TableRow
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp">
 
                 <ToggleButton
-                    android:id="@+id/interest05"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    style="@style/ToggleButtonStyle"
+                    android:background="@drawable/toggle_selector"
+                    android:textColor="@color/button_toggle"
                     android:layout_weight="1"
-                    android:background="@drawable/toggle_interest"
-                    style="@style/InterestToggleButton"
-                    android:textColor="@color/toggle_interest_text"/>
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textOn="@string/family"
+                    android:textOff="@string/family"
+                    android:id="@+id/family"/>
 
                 <ToggleButton
-                    android:id="@+id/interest06"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    style="@style/ToggleButtonStyle"
+                    android:background="@drawable/toggle_selector"
+                    android:textColor="@color/button_toggle"
                     android:layout_weight="1"
-                    android:background="@drawable/toggle_interest"
-                    style="@style/InterestToggleButton"
-                    android:textColor="@color/toggle_interest_text"/>
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textOn="@string/filmTV"
+                    android:textOff="@string/filmTV"
+                    android:id="@+id/filmTV"/>
+
 
             </TableRow>
 
             <!-- Row 4 -->
-            <TableRow>
+            <TableRow
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp">
 
                 <ToggleButton
-                    android:id="@+id/interest07"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    style="@style/ToggleButtonStyle"
+                    android:background="@drawable/toggle_selector"
+                    android:textColor="@color/button_toggle"
                     android:layout_weight="1"
-                    android:background="@drawable/toggle_interest"
-                    style="@style/InterestToggleButton"
-                    android:textColor="@color/toggle_interest_text"/>
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textOn="@string/food"
+                    android:textOff="@string/food"
+                    android:id="@+id/food"
+                    />
 
                 <ToggleButton
-                    android:id="@+id/interest08"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    style="@style/ToggleButtonStyle"
+                    android:background="@drawable/toggle_selector"
+                    android:textColor="@color/button_toggle"
                     android:layout_weight="1"
-                    android:background="@drawable/toggle_interest"
-                    style="@style/InterestToggleButton"
-                    android:textColor="@color/toggle_interest_text"/>
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textOn="@string/gaming"
+                    android:textOff="@string/gaming"
+                    android:id="@+id/gaming"/>
+
 
             </TableRow>
 
             <!-- Row 5 -->
-            <TableRow>
+            <TableRow
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp">
 
                 <ToggleButton
-                    android:id="@+id/interest09"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    style="@style/ToggleButtonStyle"
+                    android:background="@drawable/toggle_selector"
+                    android:textColor="@color/button_toggle"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/toggle_interest"
-                    style="@style/InterestToggleButton"
-                    android:textColor="@color/toggle_interest_text"/>
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textOn="@string/literature"
+                    android:textOff="@string/literature"
+                    android:id="@+id/literature"/>
+
 
                 <ToggleButton
-                    android:id="@+id/interest10"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    style="@style/ToggleButtonStyle"
+                    android:background="@drawable/toggle_selector"
+                    android:textColor="@color/button_toggle"
                     android:layout_weight="1"
-                    android:background="@drawable/toggle_interest"
-                    style="@style/InterestToggleButton"
-                    android:textColor="@color/toggle_interest_text"/>
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textOn="@string/military"
+                    android:textOff="@string/military"
+                    android:id="@+id/military"/>
 
             </TableRow>
 
             <!-- Row 6 -->
-            <TableRow>
+            <TableRow
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp">
 
                 <ToggleButton
-                    android:id="@+id/interest11"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    style="@style/ToggleButtonStyle"
+                    android:background="@drawable/toggle_selector"
+                    android:textColor="@color/button_toggle"
                     android:layout_weight="1"
-                    android:background="@drawable/toggle_interest"
-                    style="@style/InterestToggleButton"
-                    android:textColor="@color/toggle_interest_text"/>
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textOn="@string/music"
+                    android:textOff="@string/music"
+                    android:id="@+id/music"/>
 
                 <ToggleButton
-                    android:id="@+id/interest12"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    style="@style/ToggleButtonStyle"
+                    android:background="@drawable/toggle_selector"
+                    android:textColor="@color/button_toggle"
                     android:layout_weight="1"
-                    android:background="@drawable/toggle_interest"
-                    style="@style/InterestToggleButton"
-                    android:textColor="@color/toggle_interest_text"/>
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textOn="@string/nature"
+                    android:textOff="@string/nature"
+                    android:id="@+id/nature"/>
 
             </TableRow>
 
             <!-- Row 7 -->
-            <TableRow>
+            <TableRow
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="0dp">
 
                 <ToggleButton
-                    android:id="@+id/interest13"
-                    android:layout_weight="1"
-                    android:background="@drawable/toggle_interest"
-                    style="@style/InterestToggleButton"
-                    android:textColor="@color/toggle_interest_text" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    style="@style/ToggleButtonStyle"
+                    android:background="@drawable/toggle_selector"
+                    android:textColor="@color/button_toggle"
+                    android:layout_weight=".5"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textOn="@string/sports"
+                    android:textOff="@string/sports"
+                    android:id="@+id/sports"/>
 
                 <ToggleButton
-                    android:id="@+id/interest14"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    style="@style/ToggleButtonStyle"
+                    android:background="@drawable/toggle_selector"
+                    android:textColor="@color/button_toggle"
                     android:layout_weight="1"
-                    android:background="@drawable/toggle_interest"
-                    style="@style/InterestToggleButton"
-                    android:textColor="@color/toggle_interest_text"/>
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textOn="@string/travel"
+                    android:textOff="@string/travel"
+                    android:id="@+id/travel"/>
 
             </TableRow>
 
@@ -168,11 +273,13 @@
 
         <Button
             android:id="@+id/doneSelecting"
-            android:text="DONE"
+            android:text="Done"
             android:textStyle="bold"
             style="@style/ButtonBaseStyle"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:layout_height = "20dp"
+            android:layout_weight="1"/>
 
     </LinearLayout>
 

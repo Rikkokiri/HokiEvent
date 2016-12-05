@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  *
@@ -19,6 +20,8 @@ public class LoginActivity extends Activity {
     // --- Textfields & buttons ---
     private EditText emailField;
     private EditText passwordField;
+
+    private TextView loginFailed;
 
     private Button loginButton;
     private Button createAccountButton;
@@ -35,8 +38,11 @@ public class LoginActivity extends Activity {
         emailField = (EditText) findViewById(R.id.email);
         passwordField = (EditText) findViewById(R.id.password);
 
+        loginFailed = (TextView) findViewById(R.id.loginFailed);
+
         // -*-*-*- Buttons -*-*-*-
         loginButton = (Button) findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(loginHandler);
 
 
         createAccountButton = (Button) findViewById(R.id.createAccountButton);
@@ -51,7 +57,21 @@ public class LoginActivity extends Activity {
         @Override
         public void onClick(View view) {
 
-            //TODO
+            User user;
+
+            //TODO Communicate with server to look for user from given login credentials
+
+            if (true)
+            {
+                loginFailed.setText("Invalid email/password");
+                return;
+            }
+
+            //Create intent for starting create account activity
+            Intent startHomeIntent = new Intent(view.getContext(), HomeActivity.class);
+
+            //Start the CreateAccountActivity
+            startActivity(startHomeIntent);
 
         }
     };

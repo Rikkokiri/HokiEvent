@@ -1,11 +1,13 @@
 package com.virginiatech.piraj.hokievent;
 
 import android.content.Intent;
+import android.os.Parcel;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
@@ -14,17 +16,33 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText middleNameField;
     private EditText lastNameField;
 
-    private EditText phonenumberField;
+    private EditText phoneNumberField;
     private EditText emailField;
     private EditText confirmEmailField;
 
     private EditText passwordField;
     private EditText confirmPasswordField;
 
+    // --- TextViews ---
+    private TextView messageView;
+
     // --- Buttons ---
     private Button selectInterestsButton;
     private Button signUpButton;
     private Button cancelButton;
+
+    // --- Strings ---
+    private String interests; //used to store interests for user account creation
+
+    static final String FIRST_NAME = "first name";
+    static final String MIDDLE_NAME = "middle name";
+    static final String LAST_NAME = "last name";
+    static final String PHONE = "phone";
+    static final String EMAIL = "email";
+    static final String CONFIRM_EMAIL = "confirm email";
+    static final String PASS = "pass";
+    static final String CONFIRM_PASS = "confirm pass";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +54,14 @@ public class CreateAccountActivity extends AppCompatActivity {
         middleNameField = (EditText) findViewById(R.id.middleName);
         lastNameField = (EditText) findViewById(R.id.lastName);
 
-        phonenumberField = (EditText) findViewById(R.id.phonenumber);
+        phoneNumberField = (EditText) findViewById(R.id.phonenumber);
         emailField = (EditText) findViewById(R.id.email);
         confirmEmailField = (EditText) findViewById(R.id.confirmEmail);
 
-        //TODO How to deal with password fields?
         passwordField = (EditText) findViewById(R.id.password);
         confirmPasswordField = (EditText) findViewById(R.id.confirmPassword);
+
+        messageView = (TextView) findViewById(R.id.message);
 
         // -*-*-*- Buttons & listeners for buttons  -*-*-*-
         selectInterestsButton = (Button) findViewById(R.id.selectInterestsButton);
@@ -54,6 +73,8 @@ public class CreateAccountActivity extends AppCompatActivity {
         cancelButton = (Button) findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(cancelListener);
 
+
+        interests = "";
         //TODO Add functionality to button listeners
 
     }
@@ -65,15 +86,14 @@ public class CreateAccountActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
 
-            // TODO save data the user has entered so far
-
             // Open SelectInterestsActivity to allow user to select their interests
-            //Intent selectInterests = new Intent(view.getContext(), InterestsActivity.class);
-            //Intent selectInterests = new Intent(view.getContext(), EventDetailsActivity.class);
-            //Intent selectInterests = new Intent(view.getContext(), CreateEventActivity.class);
-            //Intent selectInterests = new Intent(view.getContext(), EventDetailsActivity.class);
-            Intent selectInterests = new Intent(view.getContext(), HomeActivity.class);
-            startActivity(selectInterests);
+            Intent interestActivityIntent = new Intent(view.getContext(), InterestsActivity.class);
+            interestActivityIntent.putExtra(InterestsActivity.INTEREST, interests);
+
+            System.out.println("CreateAccount sends :" + interestActivityIntent.getStringExtra(InterestsActivity.INTEREST));
+            startActivityForResult(interestActivityIntent, 0);
+
+
         }
     };
 
@@ -84,7 +104,36 @@ public class CreateAccountActivity extends AppCompatActivity {
         @Override
         public void onClick(View view){
 
-            //TODO Take the data user has provided and (try to) create a new account (verify email etc?)
+
+
+            if (!emailField.getText().toString().equals(confirmEmailField.getText().toString()))
+            {
+                messageView.setText("Emails do not match");
+                return;
+            }
+            if (!passwordField.getText().toString().equals(confirmPasswordField.getText().toString()))
+            {
+                messageView.setText("Passwords do not match");
+                return;
+            }
+
+            User user = new User(
+                    firstNameField.getText().toString(),
+                    middleNameField.getText().toString(),
+                    lastNameField.getText().toString(),
+                    emailField.getText().toString(),
+                    Integer.parseInt(phoneNumberField.getText().toString()),
+                    interests,
+                    passwordField.getText().toString()
+            );
+
+            //TODO Communicate with server and send it the new user entry
+
+            Intent startHomeActivity = new Intent(view.getContext(), HomeActivity.class);
+
+            startHomeActivity.putExtra(User.USER, user);
+
+            startActivity(startHomeActivity);
 
         }
     };
@@ -101,4 +150,43 @@ public class CreateAccountActivity extends AppCompatActivity {
         }
     };
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
+            interests = data.getStringExtra(InterestsActivity.INTEREST);
+            System.out.println("CreateAccountActivity received: " + interests);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        outState.putString(FIRST_NAME, firstNameField.getText().toString());
+        outState.putString(MIDDLE_NAME, middleNameField.getText().toString());
+        outState.putString(LAST_NAME, lastNameField.getText().toString());
+        outState.putString(EMAIL, emailField.getText().toString());
+        outState.putString(PHONE, phoneNumberField.getText().toString());
+        outState.putString(CONFIRM_EMAIL, confirmEmailField.getText().toString());
+        outState.putString(PASS, passwordField.getText().toString());
+        outState.putString(CONFIRM_PASS, confirmPasswordField.getText().toString());
+        outState.putString(InterestsActivity.INTEREST, interests);
+
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        firstNameField.setText(savedInstanceState.getString(FIRST_NAME));
+        middleNameField.setText(savedInstanceState.getString(MIDDLE_NAME));
+        lastNameField.setText(savedInstanceState.getString(LAST_NAME));
+        emailField.setText(savedInstanceState.getString(EMAIL));
+        confirmEmailField.setText(savedInstanceState.getString(CONFIRM_EMAIL));
+        phoneNumberField.setText(savedInstanceState.getString(PHONE));
+        passwordField.setText(savedInstanceState.getString(PASS));
+        confirmPasswordField.setText(savedInstanceState.getString(CONFIRM_PASS));
+        interests = savedInstanceState.getString(InterestsActivity.INTEREST);
+
+        super.onRestoreInstanceState(savedInstanceState);
+
+    }
 }

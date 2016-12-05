@@ -31,8 +31,10 @@
         <activity android:name=".ProfileActivity"
             android:label="@string/profileViewTitle"/>
 
-        <activity android:name=".EditProfileActivity" />
-        <activity android:name=".InterestsActivity" />
+        <activity android:name=".EditProfileActivity"
+            android:label="Edit Profile"/>
+        <activity android:name=".InterestsActivity"
+            android:label="Interests"/>
         <activity android:name=".SearchActivity" />
         <activity android:name=".SearchResultsActivity" />
         <activity android:name=".HomeActivity"></activity>

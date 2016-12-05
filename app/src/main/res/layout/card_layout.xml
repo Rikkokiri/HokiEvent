@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="4dp"
+        android:layout_margin="5dp"
+        card_view:cardBackgroundColor="@color/orange">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/cardEventName"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:text="Event Name"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/white"
+                    android:textSize="14dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/cardEventDate"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:text="Date"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/white"
+                    android:textSize="14dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"/>
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/cardEventTags"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Tags: XXX, XXX"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/white"
+                android:textSize="14dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="10dp"
+                />
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
