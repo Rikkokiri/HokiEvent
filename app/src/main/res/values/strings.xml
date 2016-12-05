@@ -5,6 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Navigation bar texts -->
+    <string name="homeActivityTitle">Home</string>
     <string name="nav_home">Home</string>
     <string name="nav_create_event">Create</string>
     <string name="nav_search">Search</string>
@@ -25,6 +26,9 @@
     <string name="tags">Tags</string>
     <string name="eventDoneButton">Done</string>
 
+    <!-- Event details view -->
+    <string name="eventDetailsTitle">Event Details</string>
+
     <!-- Profile view strings -->
     <string name="profileViewTitle">Profile</string>
     <string name="profileInterestsTitle">Your Interests</string>
@@ -33,6 +37,7 @@
 
 
     <!-- Edit profile strings -->
+    <string name="editProfileTitle">Edit Profile</string>
     <string name="firstname">First name</string>
     <string name="middlename">Middle name</string>
     <string name="lastname">Last name</string>
@@ -43,6 +48,8 @@
     <string name="cancelButton">Cancel</string> <!-- TODO: Would this useful? -->
 
     <!-- Interest strings -->
+    <string name="interestsActivityTitle">Interests</string>
+
     <string name="sports">Sports</string>
     <string name="academics">Academics</string>
     <string name="food">Food</string>
@@ -58,5 +65,10 @@
     <string name="travel">Travel</string>
     <string name="animals">Animals</string>
 
+    <!-- Search activity -->
+    <string name="searchActivityTitle">Search Events</string>
+
+    <!-- Search resusults -->
+    <string name="searchResultsTitle">Search Results</string>
 
 </resources>

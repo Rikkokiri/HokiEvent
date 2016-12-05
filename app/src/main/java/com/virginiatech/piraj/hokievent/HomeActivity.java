@@ -46,8 +46,9 @@ public class HomeActivity extends AppCompatActivity {
 
         bottomBar = BottomBar.attach(activity, savedInstanceState,
                 ContextCompat.getColor(this, R.color.colorPrimary), // Background Color
-                ContextCompat.getColor(this, R.color.colorAccent), // Tab Item Color
+                ContextCompat.getColor(this, R.color.white), // Tab Item Color
                 0.25f); // Tab Item Alpha
+
         bottomBar.setItems(R.menu.navigation_bar_items);
 
         bottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {

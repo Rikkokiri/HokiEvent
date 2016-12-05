@@ -26,18 +26,26 @@
         <activity android:name=".CreateAccountActivity"
             android:label="@string/createAccountTitle"/>
 
-        <activity android:name=".EventDetailsActivity" />
+        <activity android:name=".EventDetailsActivity"
+            android:label="@string/eventDetailsTitle"/>
 
         <activity android:name=".ProfileActivity"
             android:label="@string/profileViewTitle"/>
 
         <activity android:name=".EditProfileActivity"
-            android:label="Edit Profile"/>
+            android:label="@string/editProfileTitle"/>
+
         <activity android:name=".InterestsActivity"
-            android:label="Interests"/>
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".SearchResultsActivity" />
-        <activity android:name=".HomeActivity"></activity>
+            android:label="@string/interestsActivityTitle"/>
+
+        <activity android:name=".SearchActivity"
+            android:label="@string/searchActivityTitle"/>
+
+        <activity android:name=".SearchResultsActivity"
+            android:label="@string/searchResultsTitle"/>
+
+        <activity android:name=".HomeActivity"
+            android:label="@string/homeActivityTitle"></activity>
 
         <!-- Google Maps API key -->
         <meta-data
