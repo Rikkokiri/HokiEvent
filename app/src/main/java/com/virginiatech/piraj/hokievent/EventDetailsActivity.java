@@ -14,7 +14,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnMenuTabClickListener;
 
 public class EventDetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -40,7 +39,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_details);
 
-        buildBottomBar(this, savedInstanceState);
+        //buildBottomBar(this, savedInstanceState);
 
         eventName = (TextView) findViewById(R.id.eventName);
         eventDate = (TextView) findViewById(R.id.eventDate);
@@ -88,24 +87,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
      */
     private void buildBottomBar(Activity activity, Bundle savedInstanceState){
 
-        bottomBar = BottomBar.attach(activity, savedInstanceState,
-                ContextCompat.getColor(this, R.color.colorPrimary), // Background Color
-                ContextCompat.getColor(this, R.color.colorAccent), // Tab Item Color
-                0.25f); // Tab Item Alpha
-        bottomBar.setItems(R.menu.navigation_bar_items);
 
-
-        bottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
-            @Override
-            public void onMenuTabSelected(@IdRes int menuItemId) {
-                navigate(menuItemId);
-            }
-
-            @Override
-            public void onMenuTabReSelected(@IdRes int menuItemId) {
-                //Do nothing
-            }
-        });
 
     }
 
@@ -142,9 +124,6 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        // Necessary to restore the BottomBar's state, otherwise we would
-        // lose the current tab on orientation change.
-        bottomBar.onSaveInstanceState(outState);
     }
 
 }

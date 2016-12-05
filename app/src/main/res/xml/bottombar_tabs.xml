@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/action_home"
+        title="@string/nav_home"
+        icon="@drawable/home"/>
+
+    <tab
+        id="@+id/action_create_event"
+        title="@string/nav_create_event"
+        icon="@drawable/edit"/>
+
+    <tab
+        id="@+id/action_search"
+        title="@string/nav_search"
+        icon="@drawable/search"/>
+
+    <tab
+        id="@+id/action_profile"
+        title="@string/nav_profile"
+        icon="@drawable/avatar"/>
+</tabs>

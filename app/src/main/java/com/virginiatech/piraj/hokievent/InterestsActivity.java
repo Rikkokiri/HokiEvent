@@ -1,19 +1,12 @@
 package com.virginiatech.piraj.hokievent;
 
-
-import android.app.Activity;
-import android.content.Intent;
-import android.support.annotation.IdRes;
-import android.support.v4.content.ContextCompat;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.ToggleButton;
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnMenuTabClickListener;
 
 public class InterestsActivity extends AppCompatActivity {
 
@@ -259,7 +252,7 @@ public class InterestsActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         // Necessary to restore the BottomBar's state, otherwise we would
         // lose the current tab on orientation change.
-        bottomBar.onSaveInstanceState(outState);
+
 
         outState.putString(INTEREST, buildInterests());
 

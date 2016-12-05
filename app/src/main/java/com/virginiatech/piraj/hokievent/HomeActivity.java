@@ -10,7 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnMenuTabClickListener;
+import com.roughike.bottombar.OnTabSelectListener;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -25,7 +25,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        RecyclerView eventListView = (RecyclerView) findViewById(R.id.cardList);
+        eventListView = (RecyclerView) findViewById(R.id.cardList);
         eventListView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -44,22 +44,12 @@ public class HomeActivity extends AppCompatActivity {
      */
     private void buildBottomBar(Activity activity, Bundle savedInstanceState){
 
-        bottomBar = BottomBar.attach(activity, savedInstanceState,
-                ContextCompat.getColor(this, R.color.colorPrimary), // Background Color
-                ContextCompat.getColor(this, R.color.white), // Tab Item Color
-                0.25f); // Tab Item Alpha
+        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
 
-        bottomBar.setItems(R.menu.navigation_bar_items);
-
-        bottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
-            public void onMenuTabSelected(@IdRes int menuItemId) {
-                navigate(menuItemId);
-            }
-
-            @Override
-            public void onMenuTabReSelected(@IdRes int menuItemId) {
-                //Do nothing
+            public void onTabSelected(@IdRes int tabId) {
+                navigate(tabId);
             }
         });
 
@@ -93,13 +83,4 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        // Necessary to restore the BottomBar's state, otherwise we would
-        // lose the current tab on orientation change.
-        //bottomBar.onSaveInstanceState(outState);
-        
-    }
 }

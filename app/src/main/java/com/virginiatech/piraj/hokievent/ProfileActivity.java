@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnMenuTabClickListener;
 
 /**
  *
@@ -88,25 +87,6 @@ public class ProfileActivity extends AppCompatActivity {
      * @param savedInstanceState
      */
     private void buildBottomBar(Activity activity, Bundle savedInstanceState){
-
-        bottomBar = BottomBar.attach(activity, savedInstanceState,
-                ContextCompat.getColor(this, R.color.colorPrimary), // Background Color
-                ContextCompat.getColor(this, R.color.colorAccent), // Tab Item Color
-                0.25f); // Tab Item Alpha
-        bottomBar.setItems(R.menu.navigation_bar_items);
-
-
-        bottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
-            @Override
-            public void onMenuTabSelected(@IdRes int menuItemId) {
-                navigate(menuItemId);
-            }
-
-            @Override
-            public void onMenuTabReSelected(@IdRes int menuItemId) {
-                //Do nothing
-            }
-        });
 
     }
 
