@@ -18,18 +18,21 @@
         <!-- Name -->
         <TextView
             android:id="@+id/userFullName"
+            android:text="Sammy Zacharias Sample"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <!-- Phone number -->
         <TextView
             android:id="@+id/userPhonenumber"
+            android:text="909-789-8967"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <!-- Email address -->
         <TextView
             android:id="@+id/userEmail"
+            android:text="samsam@vt.edu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
