@@ -10,139 +10,148 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.virginiatech.piraj.hokievent.CreateEventActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="2"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/tableLayout">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <!-- Event name -->
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="2"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/tableLayout">
 
-            <TableRow>
-                <TextView
-                    android:text="@string/eventName">
-                </TextView>
-            </TableRow>
+                <!-- Event name -->
 
-            <TableRow>
-                <EditText
-                    android:id="@+id/eventName"
-                    style="@style/TextfieldBaseStyle"
-                    android:layout_weight="1"/>
-            </TableRow>
+                <TableRow>
+                    <TextView
+                        android:text="@string/eventName">
+                    </TextView>
+                </TableRow>
 
-            <!-- Date and time -->
+                <TableRow>
+                    <EditText
+                        android:id="@+id/eventName"
+                        style="@style/TextfieldBaseStyle"
+                        android:layout_weight="1"/>
+                </TableRow>
 
-            <TableRow>
-                <TextView
-                    android:text="@string/startDate"
-                    android:layout_weight="1"/>
+                <!-- Date and time -->
 
-                <TextView
-                    android:text="@string/endDate"
-                    android:layout_weight="1"/>
-            </TableRow>
+                <TableRow>
+                    <TextView
+                        android:text="@string/startDate"
+                        android:layout_weight="1"/>
 
-            <TableRow>
-                <!-- TODO Use DatePicker and TimePicker? -->
-                <EditText
-                    android:id="@+id/startDate"
-                    style="@style/TextfieldBaseStyle"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:inputType="date" />
+                    <TextView
+                        android:text="@string/endDate"
+                        android:layout_weight="1"/>
+                </TableRow>
 
-                <EditText
-                    android:id="@+id/endDate"
-                    style="@style/TextfieldBaseStyle"
-                    android:layout_weight="1"
-                    android:inputType="date" />
-            </TableRow>
+                <TableRow>
+                    <!-- TODO Use DatePicker and TimePicker? -->
+                    <EditText
+                        android:id="@+id/startDate"
+                        style="@style/TextfieldBaseStyle"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:inputType="date" />
 
-            <TableRow>
-                <TextView
-                    android:text="@string/startTime"
-                    android:layout_weight="1"/>
+                    <EditText
+                        android:id="@+id/endDate"
+                        style="@style/TextfieldBaseStyle"
+                        android:layout_weight="1"
+                        android:inputType="date" />
+                </TableRow>
 
-                <TextView
-                    android:text="@string/endTime"
-                    android:layout_weight="1"/>
-            </TableRow>
+                <TableRow>
+                    <TextView
+                        android:text="@string/startTime"
+                        android:layout_weight="1"/>
 
-            <TableRow>
-                <EditText
-                    android:id="@+id/startTime"
-                    style="@style/TextfieldBaseStyle"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:inputType="time" />
+                    <TextView
+                        android:text="@string/endTime"
+                        android:layout_weight="1"/>
+                </TableRow>
 
-                <EditText
-                    android:id="@+id/endTime"
-                    style="@style/TextfieldBaseStyle"
-                    android:layout_weight="1"
-                    android:inputType="time" />
+                <TableRow>
+                    <EditText
+                        android:id="@+id/startTime"
+                        style="@style/TextfieldBaseStyle"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:inputType="time" />
 
-            </TableRow>
+                    <EditText
+                        android:id="@+id/endTime"
+                        style="@style/TextfieldBaseStyle"
+                        android:layout_weight="1"
+                        android:inputType="time" />
 
-        </TableLayout>
+                </TableRow>
+
+            </TableLayout>
 
 
-        <!-- Location -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/location" />
+            <!-- Location -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/location" />
 
-        <!-- TODO How to input this? -->
-        <EditText
-            android:id="@+id/eventLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/TextfieldBaseStyle"/>
+            <!-- TODO How to input this? -->
+            <!-- Solution: https://developers.google.com/places/android-api/autocomplete -->
 
-        <!-- Description -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/description"/>
+            <EditText
+                android:id="@+id/eventLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextfieldBaseStyle"/>
 
-        <EditText
-            android:id="@+id/eventDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/TextfieldBaseStyle"
-            android:lines="3"
-            android:scrollbars="vertical"/>
+            <!-- Description -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description"/>
 
-        <!-- Tags -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tags"
-            />
+            <EditText
+                android:id="@+id/eventDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextfieldBaseStyle"
+                android:lines="3"
+                android:scrollbars="vertical"/>
 
-        <!-- TODO: How to input these? -->
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/TextfieldBaseStyle"/>
+            <!-- Tags -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tags"
+                />
 
-        <!-- Done button -->
-        <Button
-            android:id="@+id/eventDoneButton"
-            style="@style/ButtonBaseStyle"
-            android:text="@string/eventDoneButton"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"/>
+            <!-- TODO: How to input these? -->
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextfieldBaseStyle"/>
 
-    </LinearLayout>
+            <!-- Done button -->
+            <Button
+                android:id="@+id/eventDoneButton"
+                style="@style/ButtonBaseStyle"
+                android:text="@string/eventDoneButton"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

@@ -42,7 +42,7 @@ public class CreateEventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
-        
+
         dateFormatter = new SimpleDateFormat("MMM d, ''yy", Locale.US); //"EEE, MMM d, ''yy"
         //dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         timeFormatter = new SimpleDateFormat("h:mm a", Locale.US);
@@ -70,6 +70,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
         startTimeField = (EditText) findViewById(R.id.startTime);
         endTimeField = (EditText) findViewById(R.id.endTime);
+
     }
 
     /**
