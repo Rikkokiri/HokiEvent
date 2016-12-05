@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.icu.text.TimeZoneFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -24,6 +25,8 @@ public class CreateEventActivity extends AppCompatActivity {
     private DatePicker datePicker;
     private TimePicker timePicker;
     private Calendar calendar;
+    private SimpleDateFormat dateFormatter;
+    private SimpleDateFormat timeFormatter;
 
     private EditText startDateField;
     private EditText endDateField;
@@ -35,20 +38,15 @@ public class CreateEventActivity extends AppCompatActivity {
     private TimePickerDialog startTimePicker;
     private TimePickerDialog endTimePicker;
 
-    private int year;
-    private int month;
-    private int day;
-
-    private SimpleDateFormat dateFormatter;
-
-    //TODO Time?
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
+        
+        dateFormatter = new SimpleDateFormat("MMM d, ''yy", Locale.US); //"EEE, MMM d, ''yy"
+        //dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        timeFormatter = new SimpleDateFormat("h:mm a", Locale.US);
 
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         calendar = Calendar.getInstance();
 
         //Initialize views
@@ -79,16 +77,19 @@ public class CreateEventActivity extends AppCompatActivity {
      */
     private void buildDatepicking(){
 
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        // --- Time & date ---
-        startTimeField.setFocusable(false);
-        startTimeField.setClickable(true);
+        startDateField.setFocusable(false);
+        startDateField.setClickable(true);
 
-        endTimeField.setFocusable(false);
-        endTimeField.setClickable(true);
+        endDateField.setFocusable(false);
+        endDateField.setClickable(true);
+
+        // --- DatePickers ---
+        startDatePicker = new DatePickerDialog(this, startDateListener, year, month, day);
+        endDatePicker = new DatePickerDialog(this, endDateListener, year, month, day);
 
         startDateField.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,16 +98,12 @@ public class CreateEventActivity extends AppCompatActivity {
             }
         });
 
-        endTimeField.setOnClickListener(new View.OnClickListener() {
+        endDateField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 endDatePicker.show();
             }
         });
-
-        // --- DatePickers ---
-        startDatePicker = new DatePickerDialog(this, startDateListener, year, month, day);
-        endDatePicker = new DatePickerDialog(this, endDateListener, year, month, day);
 
     }
 
@@ -114,6 +111,12 @@ public class CreateEventActivity extends AppCompatActivity {
 
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
+
+        startTimeField.setFocusable(false);
+        startTimeField.setClickable(true);
+
+        endTimeField.setFocusable(false);
+        endTimeField.setClickable(true);
 
         startTimePicker = new TimePickerDialog(this, startTimeListener, hour, minute, DateFormat.is24HourFormat(this));
         endTimePicker = new TimePickerDialog(this, endTimeListener, hour, minute, DateFormat.is24HourFormat(this));
@@ -155,7 +158,7 @@ public class CreateEventActivity extends AppCompatActivity {
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             Calendar newDate = Calendar.getInstance();
             newDate.set(year, monthOfYear, dayOfMonth);
-            endTimeField.setText(dateFormatter.format(newDate.getTime()));
+            endDateField.setText(dateFormatter.format(newDate.getTime()));
         }
     };
 
@@ -167,7 +170,11 @@ public class CreateEventActivity extends AppCompatActivity {
         public void onTimeSet(TimePicker timePicker, int hour, int minute) {
 
             //TODO
+            Calendar newTime = Calendar.getInstance();
+            newTime.set(Calendar.HOUR_OF_DAY, hour);
+            newTime.set(Calendar.MINUTE, minute);
 
+            startTimeField.setText(timeFormatter.format(newTime.getTime()));
         }
     };
 
@@ -179,7 +186,11 @@ public class CreateEventActivity extends AppCompatActivity {
         public void onTimeSet(TimePicker timePicker, int hour, int minute) {
 
             //TODO
+            Calendar newTime = Calendar.getInstance();
+            newTime.set(Calendar.HOUR_OF_DAY, hour);
+            newTime.set(Calendar.MINUTE, minute);
 
+            endTimeField.setText(timeFormatter.format(newTime.getTime()));
         }
     };
 
