@@ -1,7 +1,10 @@
 package com.virginiatech.piraj.hokievent;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Pilvi Rajala (piraj) on 06/12/16.
@@ -27,6 +30,7 @@ public class JSONHelper {
     private static final String EVENT_ENDTIME_JSON = "eventEndTime";
     private static final String EVENT_DESC_JSON = "eventDescription";
     private static final String EVENT_LOC_JSON = "eventLocation";
+    private static final String EVENT_TAGS_JSON = "eventTags";
 
 
     public JSONHelper(){
@@ -79,6 +83,7 @@ public class JSONHelper {
 
             json.put(EVENT_LOC_JSON, event.getEventLoc());
             json.put(EVENT_DESC_JSON, event.getEventDesc());
+            json.put(EVENT_TAGS_JSON, event.getInterests());
 
             //Owner email
             json.put(EVENT_OWNER_EMAIL, event.getOwnerEmail());
@@ -90,6 +95,49 @@ public class JSONHelper {
         }
 
         return json;
+    }
+
+    public static ArrayList<HokiEvent> getAllEvents(JSONArray jsonArray){
+
+        ArrayList<HokiEvent> events = new ArrayList<HokiEvent>();
+
+        if (jsonArray != null) {
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+                JSONObject eventJSON = null;
+                try {
+
+                    eventJSON = jsonArray.getJSONObject(i);
+                    String eventName = eventJSON.getString(EVENT_NAME_JSON);
+                    String eventDesc = eventJSON.getString(EVENT_DESC_JSON);
+                    String eventLoc = eventJSON.getString(EVENT_LOC_JSON);
+                    String eventStartDate = eventJSON.getString(EVENT_STARTDATE_JSON);
+                    String eventStartTime = eventJSON.getString(EVENT_ENDTIME_JSON);
+                    String eventTags = eventJSON.getString(EVENT_TAGS_JSON);
+                    String ownerEmail = eventJSON.getString(EVENT_OWNER_EMAIL);
+
+                    HokiEvent newEvent = new HokiEvent(eventName, eventDesc, eventLoc, eventStartDate, eventStartTime, eventTags);
+                    newEvent.setOwnerEmail(ownerEmail);
+
+                    if(eventJSON.getString(EVENT_ENDDATE_JSON) != null){
+                        newEvent.setEventEndDate(eventJSON.getString(EVENT_ENDDATE_JSON));
+                    }
+
+                    if(eventJSON.getString(EVENT_ENDTIME_JSON) != null){
+                        newEvent.setEventEndTime(eventJSON.getString(EVENT_ENDTIME_JSON));
+                    }
+
+                    events.add(newEvent);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+
+        return events;
     }
 
 }
