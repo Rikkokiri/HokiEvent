@@ -40,6 +40,8 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
     private Button rightButton;
 
     private boolean owned;
+    private boolean saved;
+    private boolean joined;
 
     //TODO More elements...
 
@@ -70,6 +72,8 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         Bundle bundle = intent.getExtras();
 
         owned = false;
+        saved = false;
+        joined = false;
 
         if (bundle != null)
         {
@@ -77,6 +81,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         }
 
         if(event != null){
+            getRelationships();
             showEventInfo();
         }
 
@@ -105,16 +110,16 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
 
     }
 
-    private void showEventInfo(){
-
+    private void getRelationships()
+    {
         try {
-
 
             FileInputStream fin = openFileInput(User.USER_FILE);
             BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
 
+            String email = reader.readLine();
 
-            if (event.getOwnerEmail().equals(reader.readLine()))
+            if (event.getOwnerEmail().equals(email))
             {
                 owned = true;
             }
@@ -125,6 +130,10 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         {
             e.printStackTrace();
         }
+    }
+
+
+    private void showEventInfo(){
 
         //Event title
         eventName.setText(event.getEventName());
@@ -158,11 +167,34 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         if (owned)
         {
             leftButton.setText("Cancel Event");
+            leftButton.setOnClickListener(cancelListener);
             rightButton.setText("Edit Event");
+            rightButton.setOnClickListener(editListener);
         }
         else
         {
-            
+            if (saved)
+            {
+                leftButton.setText("Discard Event");
+                leftButton.setOnClickListener(discardListener);
+            }
+            else
+            {
+                leftButton.setText("Save Event");
+                leftButton.setOnClickListener(saveListener);
+            }
+
+            if (joined)
+            {
+                rightButton.setText("Leave Event");
+                rightButton.setOnClickListener(leaveListener);
+            }
+            else
+            {
+                rightButton.setText("Join Event");
+                rightButton.setOnClickListener(joinListener);
+            }
+
         }
     }
 
