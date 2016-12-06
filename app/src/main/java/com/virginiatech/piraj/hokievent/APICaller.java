@@ -28,6 +28,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,8 +44,12 @@ public class APICaller  {
 
     public JSONObject APIgetUser(String email) throws IOException, JSONException {
         new getUser().execute(email);
-        //System.out.println(response);
         return new JSONObject(response);
+    }
+
+    public JSONArray APIgetEventAll() throws IOException, JSONException {
+        new getEventAll().execute();
+        return new JSONArray(response);
     }
 
     public void APIpostUser(JSONObject jObject) throws IOException {
@@ -100,6 +105,48 @@ public class APICaller  {
                 Log.v("sing", "null");
             }
         }
+
+    private class getEventAll extends AsyncTask<Void, Void, String> {
+        @Override
+        protected String doInBackground(Void... avoid) {
+            InputStream input = null;
+            try {
+                URL url = new URL(address + "get/eventall.php");
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+                urlConnection.setConnectTimeout(15000);
+                urlConnection.setRequestMethod("GET");
+                urlConnection.setChunkedStreamingMode(0);
+                urlConnection.connect();
+
+                input = urlConnection.getInputStream();
+                final int bufferSize = 1024;
+                final char[] buffer = new char[bufferSize];
+                final StringBuilder out = new StringBuilder();
+                Reader in = new InputStreamReader(input, "UTF-8");
+                for (; ; ) {
+                    int rsz = in.read(buffer, 0, buffer.length);
+                    if (rsz < 0)
+                        break;
+                    out.append(buffer, 0, rsz);
+                }
+                urlConnection.disconnect();
+                return out.toString();
+            } catch (Exception e) {
+                System.out.println("ERROR: " + e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if (s != null)
+                Log.v("sina", s); // !! DataFromWebService is null because AsyncTask hasn't done its task
+            else
+                Log.v("sing", "null");
+        }
+    }
 
     private class postUser extends AsyncTask<JSONObject, Void, Void> {
         @Override
