@@ -22,5 +22,7 @@
         android:gravity="center"/>
 
 
+    <include android:id="@+id/bottomBar"
+        layout="@layout/navigation_bar"/>
 
 </RelativeLayout>
