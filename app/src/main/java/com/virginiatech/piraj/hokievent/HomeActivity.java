@@ -65,6 +65,7 @@ public class HomeActivity extends AppCompatActivity {
         //TEST
 
 
+
         if (eventList.size() == 0)
         {
             message.setText("You have no events!");

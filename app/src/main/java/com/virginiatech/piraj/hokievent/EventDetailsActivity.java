@@ -114,6 +114,8 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         //Event description
         eventDescription.setText(event.getEventDesc());
 
+        eventTags.setText(event.getInterests());
+
     }
 
     /**
@@ -124,7 +126,6 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
 
-        setLocationMarker();
 
         if(event == null){
 
@@ -155,17 +156,6 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         }
     }
 
-    /**
-     *
-     */
-    private void setLocationMarker(){
-
-        if(map != null){
-
-            //TODO
-
-        }
-    }
 
     /**
      * Build navigation bar located on the bottom of the screen.
@@ -210,8 +200,21 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+
+        outState.putParcelable(HokiEvent.EVENT, event);
+
         super.onSaveInstanceState(outState);
 
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+
+
+        event = savedInstanceState.getParcelable(HokiEvent.EVENT);
+
+        showEventInfo();
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
 }

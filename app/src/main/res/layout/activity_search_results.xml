@@ -10,10 +10,22 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.virginiatech.piraj.hokievent.SearchResultsActivity">
 
-    <ScrollView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/cardList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        >
 
-    </ScrollView>
+    </android.support.v7.widget.RecyclerView>
+
+
+    <TextView
+        android:id="@+id/resultsMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        />
 
 </RelativeLayout>
