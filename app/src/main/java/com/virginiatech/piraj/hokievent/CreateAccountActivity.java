@@ -181,11 +181,11 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                 OutputStreamWriter writer = new OutputStreamWriter(fos);
 
+                writer.write(user.getUserEmail() + "\n");
                 writer.write(user.getUserID() + "\n");
                 writer.write(user.getFirstName() + "\n");
                 writer.write(user.getMiddleName() + "\n");
                 writer.write(user.getLastName() + "\n");
-                writer.write(user.getUserEmail() + "\n");
                 writer.write(user.getPhoneNumber() + "\n");
                 writer.write(user.getInterests() + "\n");
                 writer.write(user.getPassword());

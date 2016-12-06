@@ -19,7 +19,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 
 public class EventDetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -35,6 +38,8 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
 
     private Button leftButton;
     private Button rightButton;
+
+    private boolean owned;
 
     //TODO More elements...
 
@@ -64,6 +69,8 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
+        owned = false;
+
         if (bundle != null)
         {
             event = bundle.getParcelable(HokiEvent.EVENT);
@@ -73,11 +80,14 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
             showEventInfo();
         }
 
+        setUpButtons();
+
         // --- Map ---
         mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
 
         // Use getMapAsync() to set the callback on the fragment.
         mapFragment.getMapAsync(this);
+
 
     }
 
@@ -96,6 +106,25 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
     }
 
     private void showEventInfo(){
+
+        try {
+
+
+            FileInputStream fin = openFileInput(User.USER_FILE);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
+
+
+            if (event.getOwnerEmail().equals(reader.readLine()))
+            {
+                owned = true;
+            }
+
+            reader.close();
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
 
         //Event title
         eventName.setText(event.getEventName());
@@ -122,6 +151,19 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
 
         eventTags.setText(event.getInterests());
 
+    }
+
+    private void setUpButtons()
+    {
+        if (owned)
+        {
+            leftButton.setText("Cancel Event");
+            rightButton.setText("Edit Event");
+        }
+        else
+        {
+            
+        }
     }
 
     /**

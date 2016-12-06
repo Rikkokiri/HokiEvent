@@ -87,11 +87,11 @@ public class ProfileActivity extends AppCompatActivity {
             FileInputStream fin = openFileInput(User.USER_FILE);
             BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
 
+            String email = reader.readLine();
             String id = reader.readLine();
             String first = reader.readLine();
             String middle = reader.readLine();
             String last = reader.readLine();
-            String email = reader.readLine();
             String phone = reader.readLine();
             String interests = reader.readLine();
             String password = reader.readLine();

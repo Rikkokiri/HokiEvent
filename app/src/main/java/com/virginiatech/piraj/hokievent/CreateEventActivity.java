@@ -307,10 +307,6 @@ public class CreateEventActivity extends AppCompatActivity {
                 FileInputStream fin = openFileInput(User.USER_FILE);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
 
-                String id = reader.readLine();
-                String first = reader.readLine();
-                String middle = reader.readLine();
-                String last = reader.readLine();
                 String email = reader.readLine();
 
                 newEvent.setOwnerEmail(email);
