@@ -3,20 +3,20 @@
     <tab
         id="@+id/action_home"
         title="@string/nav_home"
-        icon="@drawable/home"/>
+        icon="@drawable/ic_house"/>
 
     <tab
         id="@+id/action_create_event"
         title="@string/nav_create_event"
-        icon="@drawable/edit"/>
+        icon="@drawable/ic_edit"/>
 
     <tab
         id="@+id/action_search"
         title="@string/nav_search"
-        icon="@drawable/search"/>
+        icon="@drawable/ic_magnifying_glass"/>
 
     <tab
         id="@+id/action_profile"
         title="@string/nav_profile"
-        icon="@drawable/avatar"/>
+        icon="@drawable/ic_avatar"/>
 </tabs>
