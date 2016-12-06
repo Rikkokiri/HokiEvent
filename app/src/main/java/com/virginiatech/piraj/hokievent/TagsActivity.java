@@ -10,7 +10,7 @@ import android.widget.ToggleButton;
 public class TagsActivity extends AppCompatActivity {
 
     // --- Strings ---
-    private String oldInterests;
+    private String oldTags;
 
     // --- ToggleButtons ---
     private ToggleButton sports;
@@ -45,9 +45,9 @@ public class TagsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tags);
 
         Intent intent = getIntent();
-        oldInterests = intent.getStringExtra(TAGS);
+        oldTags = intent.getStringExtra(TAGS);
 
-        System.out.println("InterestsActivity OnCreate, oldInterests: " + oldInterests);
+        System.out.println("InterestsActivity OnCreate, oldInterests: " + oldTags);
 
         sports = (ToggleButton) findViewById(R.id.sports);
         academics = (ToggleButton) findViewById(R.id.academics);
@@ -68,7 +68,7 @@ public class TagsActivity extends AppCompatActivity {
 
         done.setOnClickListener(doneListener);
 
-        setButtons(oldInterests);
+        setButtons(oldTags);
 
     }
 
@@ -83,7 +83,7 @@ public class TagsActivity extends AppCompatActivity {
             output.putExtra(TAGS, buildTags());
             setResult(RESULT_OK, output);
 
-            System.out.println("InterestsActivity returns: " + output.getStringExtra(TAGS));
+            System.out.println("TagsActivity returns: " + output.getStringExtra(TAGS));
 
             finish();
 
@@ -216,7 +216,7 @@ public class TagsActivity extends AppCompatActivity {
             string = string.substring(0, string.length() - 2);
         }
 
-        System.out.println("InterestsActivity builds: " + string);
+        System.out.println("TagsActivity builds: " + string);
 
         return string;
     }

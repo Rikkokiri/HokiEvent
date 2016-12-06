@@ -61,7 +61,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         passwordField = (EditText) findViewById(R.id.password);
         confirmPasswordField = (EditText) findViewById(R.id.confirmPassword);
 
-        messageView = (TextView) findViewById(R.id.message);
+        messageView = (TextView) findViewById(R.id.createAccountMessage);
 
         // -*-*-*- Buttons & listeners for buttons  -*-*-*-
         selectInterestsButton = (Button) findViewById(R.id.selectInterestsButton);
@@ -154,6 +154,14 @@ public class CreateAccountActivity extends AppCompatActivity {
         if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
             interests = data.getStringExtra(InterestsActivity.INTEREST);
             System.out.println("CreateAccountActivity received: " + interests);
+            if (interests.equals(""))
+            {
+                messageView.setText("No interests selected");
+            }
+            else
+            {
+                messageView.setText(interests);
+            }
         }
     }
 
