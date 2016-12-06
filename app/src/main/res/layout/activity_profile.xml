@@ -19,44 +19,46 @@
 
         <!-- Name -->
         <TextView
-            android:id="@+id/userFullName"
+            android:id="@+id/profileFullName"
             android:text="Sammy Zacharias Sample"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
 
         <!-- Phone number -->
         <TextView
-            android:id="@+id/userPhonenumber"
+            android:id="@+id/profilePhonenumber"
             android:text="909-789-8967"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
 
         <!-- Email address -->
         <TextView
-            android:id="@+id/userEmail"
+            android:id="@+id/profileEmail"
             android:text="samsam@vt.edu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
 
 
         <!-- Interests -->
         <TextView
-            android:text=""
+            android:layout_marginTop="30dp"
+            android:text="Interests:"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <!-- TODO Show interest "buttons"/"shapes" whatever -->
-        <TableLayout
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stretchColumns="4">
+            android:textSize="20sp"/>
 
-            <!-- TODO -->
-
-        </TableLayout>
+        <TextView
+            android:id="@+id/profileInterestList"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
 
         <!-- Edit profile button -->
         <Button
+            android:layout_marginTop="50dp"
             android:id="@+id/editProfileButton"
             android:text="@string/editProfileButton"
             style="@style/ButtonBaseStyle"
@@ -64,13 +66,15 @@
 
         <!-- Log out button -->
         <!-- TODO Style differently -->
-        <Button
-            android:id="@+id/logoutButton"
-            android:text="@string/logoutButton"
-            style="@style/ButtonBaseStyle"
-            android:layout_gravity="right|bottom" />
+
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/logoutButton"
+        android:text="@string/logoutButton"
+        style="@style/ButtonBaseStyle"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>

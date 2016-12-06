@@ -25,6 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ConfirmEventActivity"
+            android:label="Confirm Event"/>
+
         <activity android:name=".CreateEventActivity"
             android:label="@string/createEventTitle"/>
 
@@ -51,6 +54,8 @@
 
         <activity android:name=".HomeActivity"
             android:label="@string/homeActivityTitle"></activity>
+        <activity android:name=".TagsActivity"
+            android:label="Tags"/>
 
         <!-- Google Maps API key -->
         <meta-data

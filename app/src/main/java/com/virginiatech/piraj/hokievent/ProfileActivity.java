@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.roughike.bottombar.BottomBar;
 
+import org.w3c.dom.Text;
+
 /**
  *
  * @version 2016.12.XX
@@ -21,8 +23,9 @@ public class ProfileActivity extends AppCompatActivity {
     private BottomBar bottomBar;
 
     private TextView fullNameField;
-    private TextView phonenumberField;
+    private TextView phoneNumberField;
     private TextView emailField;
+    private TextView interestsField;
 
     private User user = null;
 
@@ -37,9 +40,11 @@ public class ProfileActivity extends AppCompatActivity {
         //buildBottomBar(this, savedInstanceState);
 
         // --- TextViews for displaying the user information ---
-        fullNameField = (TextView) findViewById(R.id.userFullName);
-        phonenumberField = (TextView) findViewById(R.id.userPhonenumber);
-        emailField = (TextView) findViewById(R.id.userEmail);
+        fullNameField = (TextView) findViewById(R.id.profileFullName);
+        phoneNumberField = (TextView) findViewById(R.id.profilePhonenumber);
+        emailField = (TextView) findViewById(R.id.profileEmail);
+        interestsField = (TextView) findViewById(R.id.profileInterestList);
+
 
         // --- Edit profile button ---
         editProfileButton = (Button) findViewById(R.id.editProfileButton);
@@ -61,9 +66,10 @@ public class ProfileActivity extends AppCompatActivity {
         //Show name
         fullNameField.setText(user.getFirstName() + " " + user.getMiddleName() + " " + user.getLastName());
         //Show phone number
-        phonenumberField.setText(user.getPhoneNumber());
+        phoneNumberField.setText(user.getPhoneNumber());
         //Show email
         emailField.setText(user.getUserEmail());
+        interestsField.setText(user.getInterests());
     }
 
     /**
@@ -75,7 +81,7 @@ public class ProfileActivity extends AppCompatActivity {
             Intent editProfileIntent = new Intent(view.getContext(), EditProfileActivity.class);
 
             //TODO: Should we pass the user to the new activity or request user data from there?
-            editProfileIntent.putExtra("User", user);
+            editProfileIntent.putExtra(User.USER, user);
             startActivity(editProfileIntent);
         }
     };

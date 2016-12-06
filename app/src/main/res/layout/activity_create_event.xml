@@ -13,7 +13,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,7 +32,7 @@
 
 
             <EditText
-                android:id="@+id/eventName"
+                android:id="@+id/createEventName"
                 style="@style/TextfieldBaseStyle"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"/>
@@ -118,7 +120,7 @@
             <!-- Solution: https://developers.google.com/places/android-api/autocomplete -->
 
             <EditText
-                android:id="@+id/eventLocation"
+                android:id="@+id/createEventLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/TextfieldBaseStyle"/>
@@ -130,7 +132,7 @@
                 android:text="@string/description"/>
 
             <EditText
-                android:id="@+id/eventDescription"
+                android:id="@+id/createEventDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/TextfieldBaseStyle"
@@ -183,9 +185,9 @@
                     android:layout_weight="1"/>
 
                 <Button
-                    android:id="@+id/createEventDoneButton"
+                    android:id="@+id/createEventNextButton"
                     style="@style/ButtonBaseStyle"
-                    android:text="@string/createEventDoneButton"
+                    android:text="@string/createEventNextButton"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
                     android:layout_weight="1"/>

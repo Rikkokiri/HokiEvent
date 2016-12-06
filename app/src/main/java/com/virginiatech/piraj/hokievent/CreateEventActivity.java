@@ -24,11 +24,13 @@ public class CreateEventActivity extends AppCompatActivity {
 
     private EditText eventDescriptionField;
 
+    private EditText eventLocationField;
+
     private TextView tagsList;
     private TextView messageView;
 
     private Button enterTags;
-    private Button done;
+    private Button next;
     private Button cancel;
 
     // --- Time and date ---
@@ -75,8 +77,10 @@ public class CreateEventActivity extends AppCompatActivity {
      */
     private void findViewsById(){
 
-        eventNameField = (EditText) findViewById(R.id.eventName);
-        eventDescriptionField = (EditText) findViewById(R.id.eventDescription);
+        eventNameField = (EditText) findViewById(R.id.createEventName);
+        eventDescriptionField = (EditText) findViewById(R.id.createEventDescription);
+
+        eventLocationField = (EditText) findViewById(R.id.createEventLocation);
 
         startDateField = (EditText) findViewById(R.id.startDate);
         endDateField = (EditText) findViewById(R.id.endDate);
@@ -87,12 +91,12 @@ public class CreateEventActivity extends AppCompatActivity {
         tagsList = (TextView) findViewById(R.id.tagsList);
         messageView = (TextView) findViewById(R.id.createAccountMessage);
         enterTags = (Button) findViewById(R.id.createEventTagsButton);
-        done = (Button) findViewById(R.id.createEventDoneButton);
+        next = (Button) findViewById(R.id.createEventNextButton);
         cancel = (Button) findViewById(R.id.createEventCancelButton);
 
         enterTags.setOnClickListener(selectTagsListener);
         cancel.setOnClickListener(cancelListener);
-        //done.setOnClickListener(doneListener);
+        //next.setOnClickListener(nextListener);
 
     }
 
@@ -250,19 +254,34 @@ public class CreateEventActivity extends AppCompatActivity {
      */
 
     //TODO figure out how we're doing location.
-    /*
-    private View.OnClickListener doneListener = new View.OnClickListener(){
+
+    private View.OnClickListener nextListener = new View.OnClickListener(){
         @Override
         public void onClick(View view){
 
-            if (eventNameField.getText().toString().equals("") ||
-                    eventDescriptionField.getText().toString().equals("") ||
-                    eventLocationField.getText().toString().equals("") ||
-                    eventStartField.getText().toString().equals("") ||
-                    eventEndField.getText().toString().equals("") ||
-                    tags == 0)
+            if (eventNameField.getText().toString().equals(""))
             {
-                messageView.setText("Please fill in all fields");
+                messageView.setText("Please name your event");
+                return;
+            }
+            if (eventDescriptionField.getText().toString().equals(""))
+            {
+                messageView.setText("Please provide a description");
+                return;
+            }
+            if ( startDateField.getText().toString().equals("") )
+            {
+                messageView.setText("Please provide a start date");
+                return;
+            }
+            if ( startTimeField.getText().toString().equals("") )
+            {
+                messageView.setText("Please provide a start time");
+                return;
+            }
+            else if (tags.equals(""))
+            {
+                messageView.setText("Please tag your event");
                 return;
             }
 
@@ -271,21 +290,19 @@ public class CreateEventActivity extends AppCompatActivity {
                     eventNameField.getText().toString(),
                     eventDescriptionField.getText().toString(),
                     eventLocationField.getText().toString(),
-                    eventStartField.getText().toString(),
-                    eventEndField.getText().toString().
+                    startDateField.getText().toString(),
+                    startTimeField.getText().toString(),
                     tags);
 
 
-            //TODO Communicate with server and send it the new event entry
+            Intent startConfirmEventActivity = new Intent(view.getContext(), EventDetailsActivity.class);
 
-            Intent startEventDetailsActivity = new Intent(view.getContext(), EventDetailsActivity.class);
+            startConfirmEventActivity.putExtra(HokiEvent.EVENT, newEvent);
 
-            startEventDetailsActivity.putExtra(HokiEvent.EVENT, newEvent);
-
-            startActivity(startEventDetailsActivity);
+            startActivity(startConfirmEventActivity);
 
         }
-    };*/
+    };
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0 && resultCode == RESULT_OK && data != null) {

@@ -25,7 +25,7 @@
     <string name="description">Description</string>
     <string name="tags">Tags</string>
     <string name="createEventEnterTags">Enter Tags</string>
-    <string name="createEventDoneButton">Done</string>
+    <string name="createEventNextButton">Next</string>
     <string name="createEventCancelButton">Cancel</string>
 
     <!-- Event details view -->

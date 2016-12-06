@@ -19,20 +19,29 @@ public class HokiEvent implements Parcelable {
     private String eventName;
     private String eventDesc;
     private String eventLoc;
-    private String eventStart;
-    private String eventEnd;
+    private String eventStartDate;
+    private String eventStartTime;
+    private String eventEndDate;
+    private String eventEndTime;
     private String interests;
 
     public static final String EVENT = "event";
 
-    public HokiEvent(int id, String name, String desc, String loc, String start, String end, String tags)
+    public HokiEvent(String name, String desc, String loc, String startDate, String startTime, String endTime, String endDate, String tags)
     {
-        eventID = id;
+        this(name, desc, loc, startTime, startDate, tags );
+
+        eventEndTime = endTime;
+        eventEndDate = endDate;
+    }
+
+    public HokiEvent(String name, String desc, String loc, String date, String time, String tags)
+    {
         eventName = name;
         eventDesc = desc;
         eventLoc = loc;
-        eventStart = start;
-        eventEnd = end;
+        eventStartTime = time;
+        eventStartDate = date;
         interests = tags;
     }
 
@@ -41,8 +50,10 @@ public class HokiEvent implements Parcelable {
         eventName = in.readString();
         eventDesc = in.readString();
         eventLoc = in.readString();
-        eventStart = in.readString();
-        eventEnd = in.readString();
+        eventStartDate = in.readString();
+        eventStartTime = in.readString();
+        eventEndDate = in.readString();
+        eventEndTime = in.readString();
         interests = in.readString();
     }
 
@@ -62,6 +73,8 @@ public class HokiEvent implements Parcelable {
         return eventID;
     }
 
+    public void setEventID(int newID) {  eventID = newID; }
+
     public String getEventName() {
         return eventName;
     }
@@ -74,11 +87,17 @@ public class HokiEvent implements Parcelable {
         return eventLoc;
     }
 
-    public String getEventStart() {
-        return eventStart;
+    public String getEventStartDate() {
+        return eventStartDate;
     }
 
-    public String getEventEnd() { return eventEnd; }
+    public String getEventEndDate() { return eventEndDate; }
+
+    public String getEventStartTime() {
+        return eventStartTime;
+    }
+
+    public String getEventEndTime() { return eventEndTime; }
 
     public String getInterests() {
         return interests;
@@ -95,8 +114,10 @@ public class HokiEvent implements Parcelable {
         dest.writeString(eventName);
         dest.writeString(eventDesc);
         dest.writeString(eventLoc);
-        dest.writeString(eventStart);
-        dest.writeString(eventEnd);
+        dest.writeString(eventStartDate);
+        dest.writeString(eventStartTime);
+        dest.writeString(eventEndDate);
+        dest.writeString(eventEndTime);
         dest.writeString(interests);
     }
 }

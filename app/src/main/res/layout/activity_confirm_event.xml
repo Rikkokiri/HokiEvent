@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_confirm_event"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.virginiatech.piraj.hokievent.EventDetailsActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- TODO: All the data will be pulled from server -->
+            <!-- TODO: Define styles -->
+
+            <!-- Event name -->
+            <TextView
+                android:id="@+id/eventName"
+                android:text="Fancy Party"
+                style="@style/EventDetailsTitles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Event date -->
+            <TextView
+                android:id="@+id/eventDate"
+                style="@style/EventDetailsItems"
+                android:text="Friday, November 25th 2016"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!-- Event time -->
+            <TextView
+                android:id="@+id/eventTime"
+                style="@style/EventDetailsItems"
+                android:text="8:00 PM to 11:00 PM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!-- Event address -->
+            <TextView
+                android:id="@+id/eventAddress"
+                style="@style/EventDetailsItems"
+                android:text="10 Downing St, London SW1A 2AA, UK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!-- Title: "Description" -->
+            <TextView
+                android:text="Description"
+                style="@style/EventDetailsTitles"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!-- Event description -->
+            <TextView
+                android:id="@+id/eventDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!-- Map -->
+            <!-- TODO -->
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                android:name="com.google.android.gms.maps.MapFragment"
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <!-- Number of people attending (?) -->
+            <TextView
+                android:id="@+id/peopleAttending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Tags -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tags"/>
+
+            <TextView
+                android:id="@+id/confirmEventTags"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+            <!-- BUTTONS -->
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="2"
+                android:gravity="bottom">
+
+                <TableRow>
+
+                    <Button
+                        android:id="@+id/backToCreateEvent"
+                        android:text="Back"
+                        style="@style/ButtonBaseStyle"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"/>
+
+                    <Button
+                        android:id="@+id/finishEventCreation"
+                        android:text="Finish"
+                        style="@style/ButtonBaseStyle"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"/>
+
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
