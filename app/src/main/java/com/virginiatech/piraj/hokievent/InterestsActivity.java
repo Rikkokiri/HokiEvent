@@ -129,29 +129,30 @@ public class InterestsActivity extends AppCompatActivity {
         {
             switch(temp[i].toLowerCase())
             {
-                case "sports":
-                    sports.setChecked(true);
-                    break;
+
                 case "academics":
                     academics.setChecked(true);
                     break;
-                case "food":
-                    food.setChecked(true);
-                    break;
-                case "culture":
-                    culture.setChecked(true);
+                case "animals":
+                    animals.setChecked(true);
                     break;
                 case "art":
                     art.setChecked(true);
                     break;
-                case "nature":
-                    nature.setChecked(true);
+                case "culture":
+                    culture.setChecked(true);
+                    break;
+                case "family":
+                    family.setChecked(true);
                     break;
                 case "film/tv":
                     filmTV.setChecked(true);
                     break;
-                case "music":
-                    music.setChecked(true);
+                case "food":
+                    food.setChecked(true);
+                    break;
+                case "gaming":
+                    gaming.setChecked(true);
                     break;
                 case "literature":
                     literature.setChecked(true);
@@ -159,17 +160,17 @@ public class InterestsActivity extends AppCompatActivity {
                 case "military":
                     military.setChecked(true);
                     break;
-                case "family":
-                    family.setChecked(true);
+                case "music":
+                    music.setChecked(true);
                     break;
-                case "gaming":
-                    gaming.setChecked(true);
+                case "nature":
+                    nature.setChecked(true);
+                    break;
+                case "sports":
+                    sports.setChecked(true);
                     break;
                 case "travel":
                     travel.setChecked(true);
-                    break;
-                case "animals":
-                    animals.setChecked(true);
                     break;
                 default:
                     break;

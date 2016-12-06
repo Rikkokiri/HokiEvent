@@ -62,7 +62,6 @@ public class EditProfileActivity extends AppCompatActivity {
         readData();
         showData();
 
-
     }
 
 
@@ -145,14 +144,35 @@ public class EditProfileActivity extends AppCompatActivity {
 
         }
     };
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
+            interests = data.getStringExtra(InterestsActivity.INTEREST);
+            System.out.println("EditProfileActivity received: " + interests);
+            if (interests.equals(""))
+            {
+                interestsList.setText("Select interest");
+            }
+            else
+            {
+                interestsList.setText(interests);
+            }
+        }
+    }
+
 
     private View.OnClickListener saveChangesListener = new View.OnClickListener(){
         @Override
         public void onClick(View view){
 
-
-
             //TODO Update new user data on server
+
+            user.setFirstName(firstNameField.getText().toString());
+            user.setMiddleName(middleNameField.getText().toString());
+            user.setLastName(lastNameField.getText().toString());
+            user.setPhoneNumber(phonenumberField.getText().toString());
+            user.setInterests(interests);
+
+
 
             try {
 
@@ -193,6 +213,8 @@ public class EditProfileActivity extends AppCompatActivity {
             {
                 e.printStackTrace();
             }
+
+            finish();
 
 
         }

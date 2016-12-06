@@ -116,7 +116,9 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     }
-
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        displayUserInfo();
+    }
     /**
      * Listener for "Edit profile" -button. Pressing the button takes user to Edit Profile view.
      */
@@ -126,7 +128,7 @@ public class ProfileActivity extends AppCompatActivity {
             Intent editProfileIntent = new Intent(view.getContext(), EditProfileActivity.class);
 
             //TODO: Should we pass the user to the new activity or request user data from there?
-            startActivity(editProfileIntent);
+            startActivityForResult(editProfileIntent, 0);
         }
     };
 
