@@ -26,36 +26,48 @@
             </intent-filter>
         </activity>
         <activity android:name=".ConfirmEventActivity"
-            android:label="Confirm Event"/>
+            android:label="Confirm Event"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".CreateEventActivity"
-            android:label="@string/createEventTitle"/>
+            android:label="@string/createEventTitle"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".CreateAccountActivity"
-            android:label="@string/createAccountTitle"/>
+            android:label="@string/createAccountTitle"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".EventDetailsActivity"
-            android:label="@string/eventDetailsTitle"/>
+            android:label="@string/eventDetailsTitle"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".ProfileActivity"
-            android:label="@string/profileViewTitle"/>
+            android:label="@string/profileViewTitle"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".EditProfileActivity"
-            android:label="@string/editProfileTitle"/>
+            android:label="@string/editProfileTitle"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".InterestsActivity"
-            android:label="@string/interestsActivityTitle"/>
+            android:label="@string/interestsActivityTitle"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".SearchActivity"
-            android:label="@string/searchActivityTitle"/>
+            android:label="@string/searchActivityTitle"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".SearchResultsActivity"
-            android:label="@string/searchResultsTitle"/>
+            android:label="@string/searchResultsTitle"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".HomeActivity"
-            android:label="@string/homeActivityTitle"></activity>
+            android:label="@string/homeActivityTitle"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".TagsActivity"
-            android:label="Tags"/>
+            android:label="Tags"
+            android:screenOrientation="portrait"/>
 
         <!-- Google Maps API key -->
         <meta-data
