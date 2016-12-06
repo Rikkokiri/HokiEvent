@@ -1,6 +1,10 @@
 package com.virginiatech.piraj.hokievent;
 
+import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.TextView;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -12,37 +16,42 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
 
 /**
- * Created by Pilvi on 05/12/16.
+ *
  */
 
-public class ServerCall extends AsyncTask<String, String, String> {
+public class ServerCall extends AsyncTask<String, String, JSONObject> {
+
     private int byGetOrPost = 0;
 
+
+    //flag 0 means get and 1 means post.(By default it is get.)
+    public ServerCall(int flag) {
+        byGetOrPost = flag;
+    }
+
     @Override
-    protected String doInBackground(String... params) {
-        if(byGetOrPost == 0){ //means by Get Method
+    protected void onPreExecute(){
+    }
+
+
+    @Override
+    protected JSONObject doInBackground(String... params) {
+
+        // ------------ GET ------------
+        if(byGetOrPost == 0){
 
             try{
-                String call = (String) params[0];
+                String link = (String) params[0];
 
-                String username = (String) params[0];
-                String password = (String)params[1];
-
-                String link = "http://71.62.121.1/index.php?email="+username;
-
-                URL url = new URL(link);
-                //HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                //try {
-                //    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                //    readStream(in);
-                // } finally {
-                //    urlConnection.disconnect();
-                //}
                 HttpClient client = new DefaultHttpClient();
                 HttpGet request = new HttpGet();
+
+                //Create URI from the link
                 request.setURI(new URI(link));
+
                 HttpResponse response = client.execute(request);
                 BufferedReader in = new BufferedReader(new
                         InputStreamReader(response.getEntity().getContent()));
@@ -56,20 +65,30 @@ public class ServerCall extends AsyncTask<String, String, String> {
                 }
 
                 in.close();
-                return sb.toString();
+                //return sb.toString();
+
+                //TODO
+                return null;
+
             } catch(Exception e){
-                return new String("Exception: " + e.getMessage());
+                //return new String("Exception: " + e.getMessage());
+                Log.i("ServerCall:", "Exception: " + e.getMessage());
+                return null;
             }
-        } else{
+
+        }
+
+        // ------------ POST ------------
+        else{
             try{
                 String username = (String) params[0];
                 //String password = (String)arg0[1];
 
                 String link="http://myphpmysqlweb.hostei.com/loginpost.php";
+
+                //TODO
                 String data  = URLEncoder.encode("username", "UTF-8") + "=" +
                         URLEncoder.encode(username, "UTF-8");
-                //data += "&" + URLEncoder.encode("password", "UTF-8") + "=" +
-                //       URLEncoder.encode(password, "UTF-8");
 
                 URL url = new URL(link);
                 URLConnection conn = url.openConnection();
@@ -92,15 +111,19 @@ public class ServerCall extends AsyncTask<String, String, String> {
                     break;
                 }
 
-                return sb.toString();
+                //return sb.toString();
+                return null;
+
             } catch(Exception e){
-                return new String("Exception: " + e.getMessage());
+                //return new String("Exception: " + e.getMessage());
+                Log.i("ServerCall: ", "Exception " + e.getMessage());
+                return null;
             }
         }
     }
 
     @Override
-    protected void onPostExecute(String result){
+    protected void onPostExecute(JSONObject result){
 
         //TODO Do we need this for anything?
 
