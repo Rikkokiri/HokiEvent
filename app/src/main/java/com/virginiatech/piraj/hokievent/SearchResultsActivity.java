@@ -13,6 +13,10 @@ import android.widget.TextView;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SearchResultsActivity extends AppCompatActivity {
@@ -35,6 +39,28 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         eventList = intent.getParcelableArrayListExtra(HokiEvent.EVENT);
+
+        APICaller api = new APICaller();
+        JSONArray array;
+
+        ArrayList<HokiEvent> events = new ArrayList<HokiEvent>();
+
+        try{
+
+            array = api.APIgetEventAll();
+
+            System.out.println("blag: " + array.toString());
+            events = JSONHelper.getAllEvents(array);
+
+            //System.out.println("events inside" + events.toString());
+        } catch (JSONException e)
+        {
+            System.out.print("EXCEPTIOANL: " + e);
+        }
+        catch (IOException e)
+        {
+            System.out.print("EXCEPTIOANL: " + e);
+        }
 /*
         //TEST DATA
         eventList = new ArrayList<HokiEvent>();

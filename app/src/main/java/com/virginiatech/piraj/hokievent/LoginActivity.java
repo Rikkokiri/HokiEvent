@@ -1,6 +1,7 @@
 package com.virginiatech.piraj.hokievent;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 /**
  *
@@ -57,15 +69,72 @@ public class LoginActivity extends Activity {
         @Override
         public void onClick(View view) {
 
-            User user;
+            User user = null;
 
-            //TODO Communicate with server to look for user from given login credentials
+            APICaller api = new APICaller();
+            try {
+                JSONObject json = api.APIgetUser(emailField.getText().toString());
+                user = JSONHelper.createUser(json);
+            }
+            catch (JSONException e)
+            {
+                System.out.println(e.toString());
+            }
+            catch (IOException e)
+            {
+                System.out.println(e.toString());
+            }
 
-            if (false) //TODO Temporarily skip login and just move to home activity
+
+            if (user == null) //TODO Temporarily skip login and just move to home activity
             {
                 loginFailed.setText("Invalid email/password");
                 return;
             }
+
+            try {
+
+                File dir = getFilesDir();
+                File file = new File(dir, User.USER_FILE);
+                file.delete();
+
+                FileOutputStream fos = openFileOutput(User.USER_FILE, Context.MODE_PRIVATE);
+
+                OutputStreamWriter writer = new OutputStreamWriter(fos);
+
+                writer.write(user.getUserEmail() + "\n");
+                writer.write(user.getUserID() + "\n");
+                writer.write(user.getFirstName() + "\n");
+                writer.write(user.getMiddleName() + "\n");
+                writer.write(user.getLastName() + "\n");
+                writer.write(user.getPhoneNumber() + "\n");
+                writer.write(user.getInterests() + "\n");
+                writer.write(user.getPassword());
+
+                writer.flush();
+                writer.close();
+
+                FileInputStream fin = openFileInput(User.USER_FILE);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
+
+                String line = reader.readLine();
+
+                while (line != null)
+                {
+                    System.out.println(line);
+                    line = reader.readLine();
+                }
+
+                reader.close();
+
+
+
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+
+
 
             //Create intent for starting create account activity
             Intent startHomeIntent = new Intent(view.getContext(), HomeActivity.class);

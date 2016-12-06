@@ -73,34 +73,14 @@ public class SearchActivity extends AppCompatActivity {
             //TODO Perform the search by doing calls to the server
 
 
-            APICaller api = new APICaller();
-            JSONArray array;
-
-            ArrayList<HokiEvent> events = new ArrayList<HokiEvent>();
-
-            try{
-
-                array = api.APIgetEventAll();
-
-                System.out.println("blag: " + array.toString());
-                //events = JSONHelper.getAllEvents(array);
-
-                //System.out.println("events inside" + events.toString());
-            } catch (JSONException e)
-            {
-                System.out.print("EXCEPTIOANL: " + e);
-            }
-            catch (IOException e)
-            {
-                System.out.print("EXCEPTIOANL: " + e);
-            }
 
 
-            System.out.println("events outsdie " + events.toString());
+
+            //System.out.println("events outsdie " + events.toString());
 
 
             Intent startResultsActivity = new Intent(v.getContext(), SearchResultsActivity.class);
-            startResultsActivity.putParcelableArrayListExtra(HokiEvent.EVENT, events);
+            //startResultsActivity.putParcelableArrayListExtra(HokiEvent.EVENT, events);
             startActivity(startResultsActivity);
 
         }
