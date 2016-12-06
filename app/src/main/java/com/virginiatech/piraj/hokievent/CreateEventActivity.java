@@ -55,15 +55,6 @@ public class CreateEventActivity extends AppCompatActivity {
 
     private String tags;
 
-    // --- JSON Keys --- TODO Correct names
-    private static final String EVENT_NAME_JSON = "eventName";
-    private static final String EVENT_STARTDATE_JSON = "eventStartDate";
-    private static final String EVENT_ENDDATE_JSON = "eventEndDate";
-    private static final String EVENT_STARTTIME_JSON = "eventStartTime";
-    private static final String EVENT_ENDTIME_JSON = "eventEndTime";
-    private static final String EVENT_DESC_JSON = "eventDescription";
-    private static final String EVENT_LOC_JSON = "eventLocation";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -306,33 +297,28 @@ public class CreateEventActivity extends AppCompatActivity {
                     startTimeField.getText().toString(),
                     tags);
 
-            if(endTimeField.getText() != null){
+            if(endDateField.getText().length() > 0){
+                newEvent.setEventEndDate(endDateField.getText().toString());
+            }
 
+            if(endTimeField.getText().length() > 0){
+                newEvent.setEventEndTime(endTimeField.getText().toString());
             }
 
             //Send server new event entry
-            JSONObject json = new JSONObject();
+            JSONObject eventJSON = new JSONHelper().createEventJSON(newEvent);
 
-            try {
-                json.put(EVENT_NAME_JSON, newEvent.getEventName());
-                json.put(EVENT_STARTDATE_JSON, newEvent.getEventStartDate());
-
-                if(newEvent.getEventEndDate() != null){
-                    json.put(EVENT_ENDDATE_JSON, newEvent.getEventEndDate());
+            if(eventJSON != null) {
+                APICaller api = new APICaller();
+                try {
+                    api.APIpostEvent(eventJSON);
+                } catch (Exception e) {
+                    System.out.println(e);
                 }
-
-                json.put(EVENT_STARTTIME_JSON, newEvent.getEventStartTime());
-                if(newEvent.getEventEndTime() != null){
-                    json.put(EVENT_ENDTIME_JSON, newEvent.getEventEndTime());
-                }
-
-                json.put(EVENT_LOC_JSON, newEvent.getEventLoc());
-
-
-            } catch (JSONException exception){
-                //TODO Handle exception
             }
-
+            else {
+                //TODO Handle the case where the JSON couldn't be created ???
+            }
 
             Intent startConfirmEventActivity = new Intent(view.getContext(), EventDetailsActivity.class);
 

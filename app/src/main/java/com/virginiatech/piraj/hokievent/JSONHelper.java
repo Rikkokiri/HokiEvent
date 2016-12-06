@@ -18,6 +18,14 @@ public class JSONHelper {
     private static final String INTERESTS_JSON = "interests";
     private static final String PASSWORD_JSON = "password";
 
+    // --- JSON Keys for event ---
+    private static final String EVENT_NAME_JSON = "eventName";
+    private static final String EVENT_STARTDATE_JSON = "eventStartDate";
+    private static final String EVENT_ENDDATE_JSON = "eventEndDate";
+    private static final String EVENT_STARTTIME_JSON = "eventStartTime";
+    private static final String EVENT_ENDTIME_JSON = "eventEndTime";
+    private static final String EVENT_DESC_JSON = "eventDescription";
+    private static final String EVENT_LOC_JSON = "eventLocation";
 
 
     public JSONHelper(){
@@ -42,6 +50,35 @@ public class JSONHelper {
             json.put(PHONE_NUMBER_JSON, user.getPhoneNumber());
             json.put(INTERESTS_JSON, user.getInterests());
             json.put(PASSWORD_JSON, user.getPassword());
+
+        } catch (JSONException exception){
+            //TODO Handle exception
+            return null;
+        }
+
+        return json;
+    }
+
+    public static JSONObject createEventJSON(HokiEvent event){
+
+        JSONObject json = new JSONObject();
+
+        try {
+            json.put(EVENT_NAME_JSON, event.getEventName());
+
+            json.put(EVENT_STARTDATE_JSON, event.getEventStartDate());
+            if(event.getEventEndDate() != null){
+                json.put(EVENT_ENDDATE_JSON, event.getEventEndDate());
+            }
+
+            json.put(EVENT_STARTTIME_JSON, event.getEventStartTime());
+            if(event.getEventEndTime() != null){
+                json.put(EVENT_ENDTIME_JSON, event.getEventEndTime());
+            }
+
+            json.put(EVENT_LOC_JSON, event.getEventLoc());
+            json.put(EVENT_DESC_JSON, event.getEventDesc());
+
 
         } catch (JSONException exception){
             //TODO Handle exception
