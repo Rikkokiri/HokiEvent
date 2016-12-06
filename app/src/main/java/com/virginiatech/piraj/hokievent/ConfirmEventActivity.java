@@ -2,16 +2,24 @@ package com.virginiatech.piraj.hokievent;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.roughike.bottombar.BottomBar;
+
+import java.io.IOException;
+import java.util.List;
 
 public class ConfirmEventActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -35,7 +43,7 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
 
     // --- HokiEvent ---
 
-    private HokiEvent hokiEvent;
+    private HokiEvent event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +68,7 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
         Bundle extras = getIntent().getExtras();
         if (extras != null)
         {
-            hokiEvent = extras.getParcelable(HokiEvent.EVENT);
+            event = extras.getParcelable(HokiEvent.EVENT);
         }
 
 
@@ -109,8 +117,36 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
 
-        setLocationMarker();
+
+        if(event == null){
+
+            //TODO Handle the situation where we don't have address
+
+        } else {
+            Geocoder geocoder = new Geocoder(this);
+            List<Address> addresses = null;
+
+            try {
+                addresses = geocoder.getFromLocationName(event.getEventLoc(), 1);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (addresses.size() > 0) {
+                double latitude = addresses.get(0).getLatitude();
+                double longitude = addresses.get(0).getLongitude();
+
+                map.addMarker(new MarkerOptions()
+                        .position(new LatLng(latitude, longitude))
+                        .title("Event location"));
+
+                map.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude) , 14.0f) );
+            }
+
+        }
     }
+
 
     /**
      *

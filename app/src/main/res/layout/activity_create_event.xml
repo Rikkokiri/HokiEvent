@@ -133,7 +133,6 @@
                     android:id="@+id/createEventLocation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="1"
                     style="@style/TextfieldBaseStyle"/>
 
                 <!-- Description -->
@@ -147,7 +146,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/TextfieldBaseStyle"
-                    android:lines="4"
                     android:scrollbars="vertical"/>
 
                 <LinearLayout
