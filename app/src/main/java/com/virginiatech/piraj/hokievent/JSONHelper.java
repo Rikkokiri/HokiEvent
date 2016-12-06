@@ -19,6 +19,7 @@ public class JSONHelper {
     private static final String PASSWORD_JSON = "password";
 
     // --- JSON Keys for event ---
+    private static final String EVENT_OWNER_EMAIL = "eventOwner";
     private static final String EVENT_NAME_JSON = "eventName";
     private static final String EVENT_STARTDATE_JSON = "eventStartDate";
     private static final String EVENT_ENDDATE_JSON = "eventEndDate";
@@ -43,6 +44,7 @@ public class JSONHelper {
         JSONObject json = new JSONObject();
 
         try {
+            json.put(EVENT_OWNER_EMAIL, "");
             json.put(FIRTS_NAME_JSON, user.getFirstName());
             json.put(MIDDLE_NAME_JSON, user.getMiddleName());
             json.put(LAST_NAME_JSON, user.getMiddleName());
@@ -64,6 +66,7 @@ public class JSONHelper {
         JSONObject json = new JSONObject();
 
         try {
+            json.put()
             json.put(EVENT_NAME_JSON, event.getEventName());
 
             json.put(EVENT_STARTDATE_JSON, event.getEventStartDate());

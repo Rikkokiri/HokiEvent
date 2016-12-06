@@ -24,7 +24,8 @@ public class HokiEvent implements Parcelable {
     private String eventEndDate;
     private String eventEndTime;
     private String interests;
-    private int ownerID;
+    private String ownerEmail;
+
 
     public static final String EVENT = "event";
 
@@ -56,6 +57,7 @@ public class HokiEvent implements Parcelable {
         eventEndDate = in.readString();
         eventEndTime = in.readString();
         interests = in.readString();
+        ownerEmail = in.readString();
     }
 
     public static final Creator<HokiEvent> CREATOR = new Creator<HokiEvent>() {
@@ -112,6 +114,10 @@ public class HokiEvent implements Parcelable {
         this.eventEndTime = endTime;
     }
 
+    public void setOwnerEmail(String ownerEmail){
+        this.ownerEmail = ownerEmail;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -128,5 +134,6 @@ public class HokiEvent implements Parcelable {
         dest.writeString(eventEndDate);
         dest.writeString(eventEndTime);
         dest.writeString(interests);
+        dest.writeString(ownerEmail);
     }
 }
