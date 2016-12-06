@@ -24,6 +24,7 @@ public class HokiEvent implements Parcelable {
     private String eventEndDate;
     private String eventEndTime;
     private String interests;
+    private int ownerID;
 
     public static final String EVENT = "event";
 

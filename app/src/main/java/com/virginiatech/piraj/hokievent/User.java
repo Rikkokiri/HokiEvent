@@ -9,30 +9,31 @@ import android.os.Parcelable;
 
 public class User implements Parcelable{
 
-    private int userID;
+    private String userID;
     private String firstName;
     private String middleName;
     private String lastName;
     private String userEmail;
-    private int phoneNumber;
+    private String phoneNumber;
     private String password;
     private String interests;
     private String ownEvents;
     private String savedEvents;
 
     public static final String USER = "user";
+    public static final String USER_FILE = "user.txt";
 
 
 
-
-    public User(String first, String middle, String last, String email, int phone, String newInterests, String pass) {
+    public User(String first, String middle, String last, String email, String phone, String newInterests, String pass) {
         this(first, middle, last, email, phone, newInterests);
         password = pass;
     }
 
 
-    public User(String first, String middle, String last, String email, int phone, String newInterests) {
+    public User(String first, String middle, String last, String email, String phone, String newInterests) {
         firstName = first;
+        middleName = middle;
         lastName = last;
         userEmail = email;
         phoneNumber = phone;
@@ -41,12 +42,13 @@ public class User implements Parcelable{
     }
 
     protected User(Parcel in) {
-        userID = in.readInt();
+        userID = in.readString();
         firstName = in.readString();
+        middleName = in.readString();
         lastName = in.readString();
         userEmail = in.readString();
         password = in.readString();
-        phoneNumber = in.readInt();
+        phoneNumber = in.readString();
         interests = in.readString();
         ownEvents = in.readString();
         savedEvents = in.readString();
@@ -59,12 +61,13 @@ public class User implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(userID);
+        dest.writeString(userID);
         dest.writeString(firstName);
+        dest.writeString(middleName);
         dest.writeString(lastName);
         dest.writeString(userEmail);
         dest.writeString(password);
-        dest.writeInt(phoneNumber);
+        dest.writeString(phoneNumber);
         dest.writeString(interests);
         dest.writeString(ownEvents);
         dest.writeString(savedEvents);
@@ -85,11 +88,11 @@ public class User implements Parcelable{
         }
     };
 
-    public int getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
@@ -121,11 +124,11 @@ public class User implements Parcelable{
         this.lastName = lastName;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

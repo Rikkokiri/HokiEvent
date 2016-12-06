@@ -37,6 +37,8 @@
                 <EditText
                     android:id="@+id/firstName"
                     android:hint="First name"
+                    android:inputType="textPersonName"
+                    android:lines="1"
                     android:layout_weight="1"
                     style="@style/TextfieldBaseStyle"
                     android:layout_marginRight="5dp"/>
@@ -44,6 +46,8 @@
                 <EditText
                     android:id="@+id/middleName"
                     android:hint="Middle name"
+                    android:lines="1"
+                    android:inputType="textPersonName"
                     android:layout_weight="1"
                     android:layout_marginLeft="5dp"
                     style="@style/TextfieldBaseStyle" />
@@ -56,6 +60,8 @@
                 <EditText
                     android:id="@+id/lastName"
                     android:hint="Last name"
+                    android:lines="1"
+                    android:inputType="textPersonName"
                     android:layout_weight="1"
                     android:layout_marginRight="5dp"
                     style="@style/TextfieldBaseStyle"/>

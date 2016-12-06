@@ -1,5 +1,7 @@
 package com.virginiatech.piraj.hokievent;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,20 +16,57 @@ import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
-    private List<HokiEvent> ownedEventList;
-    private List<HokiEvent> savedEventList;
+    private List<HokiEvent> eventList;
+
+
+    public static class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        protected TextView eventName;
+        protected TextView eventDate;
+        protected TextView eventTags;
+
+        protected HokiEvent event;
+
+        private static final String EVENT_KEY = "event";
+
+        public EventViewHolder(View v) {
+            super(v);
+            eventName = (TextView) v.findViewById(R.id.cardEventName);
+            eventDate = (TextView) v.findViewById(R.id.cardEventDate);
+            eventTags = (TextView) v.findViewById(R.id.cardEventTags);
+            v.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent startEventDetailsActivity = new Intent(view.getContext(), EventDetailsActivity.class);
+
+            startEventDetailsActivity.putExtra(HokiEvent.EVENT, event);
+
+            view.getContext().startActivity(startEventDetailsActivity);
+        }
+    }
+
+    public EventAdapter(List<HokiEvent> events)
+    {
+        eventList = events;
+    }
 
     @Override
     public int getItemCount() {
-        return ownedEventList.size();
+        return eventList.size();
     }
 
     @Override
     public void onBindViewHolder(EventViewHolder eventViewHolder, int i) {
-        HokiEvent event = ownedEventList.get(i);
+        HokiEvent event = eventList.get(i);
         eventViewHolder.eventName.setText(event.getEventName());
-        //eventViewHolder.eventDate.setText(event.getEventStart());
+
+        eventViewHolder.eventDate.setText(event.getEventStartDate());
+
         eventViewHolder.eventTags.setText(event.getInterests());
+
+        eventViewHolder.event = event;
     }
 
     @Override
@@ -39,17 +78,5 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         return new EventViewHolder(itemView);
     }
 
-    public static class EventViewHolder extends RecyclerView.ViewHolder {
-        protected TextView eventName;
-        protected TextView eventDate;
-        protected TextView eventTags;
 
-        public EventViewHolder(View v) {
-            super(v);
-            eventName = (TextView) v.findViewById(R.id.cardEventName);
-            eventDate = (TextView) v.findViewById(R.id.cardEventDate);
-            eventTags = (TextView) v.findViewById(R.id.cardEventTags);
-
-        }
-    }
 }

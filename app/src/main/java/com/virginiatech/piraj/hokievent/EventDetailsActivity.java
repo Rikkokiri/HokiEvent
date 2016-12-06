@@ -2,18 +2,24 @@ package com.virginiatech.piraj.hokievent;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.annotation.IdRes;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
+
+import java.io.IOException;
+import java.util.List;
 
 public class EventDetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -24,6 +30,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
     private TextView eventTime;
     private TextView eventAddress;
     private TextView eventDescription;
+    private TextView eventTags;
 
     //TODO More elements...
 
@@ -31,28 +38,82 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
     private MapFragment mapFragment;
     private GoogleMap map;
 
+    private HokiEvent event = null;
+
     // --- Bottom bar ---
     BottomBar bottomBar;
+    private boolean activityLaunched = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_details);
 
-        //buildBottomBar(this, savedInstanceState);
+        buildBottomBar(this, savedInstanceState);
 
+        //Find view components
+        findById();
+
+        //TODO Pull data from the "server" and write it into TextViews
+        //this.event = ...
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        if (bundle != null)
+        {
+            event = bundle.getParcelable(HokiEvent.EVENT);
+        }
+
+        if(event != null){
+            showEventInfo();
+        }
+
+        // --- Map ---
+        mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+
+        // Use getMapAsync() to set the callback on the fragment.
+        mapFragment.getMapAsync(this);
+
+    }
+
+
+    private void findById(){
         eventName = (TextView) findViewById(R.id.eventName);
         eventDate = (TextView) findViewById(R.id.eventDate);
         eventTime = (TextView) findViewById(R.id.eventTime);
         eventAddress = (TextView) findViewById(R.id.eventAddress);
         eventDescription = (TextView) findViewById(R.id.eventDescription);
+        eventTags = (TextView) findViewById(R.id.tags);
 
-        //TODO Pull data from the "server" and write it into TextViews
+    }
 
-        // --- Map ---
-        mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
-        // Use getMapAsync() to set the callback on the fragment.
-        mapFragment.getMapAsync(this);
+    private void showEventInfo(){
+
+        //Event title
+        eventName.setText(event.getEventName());
+
+        if(event.getEventEndDate() != null){
+            //Multiday event
+            eventDate.setText("From " + event.getEventStartDate() + " to " + event.getEventEndDate());
+        } else {
+            eventDate.setText(event.getEventStartDate());
+        }
+
+        if(event.getEventEndTime() != null){
+            //Has end time
+            eventTime.setText("From " + event.getEventStartTime() + " to " + event.getEventEndTime());
+        } else {
+            eventTime.setText(event.getEventStartTime());
+        }
+
+        //Event address
+        eventAddress.setText(event.getEventLoc());
+
+        //Event description
+        eventDescription.setText(event.getEventDesc());
+
+        eventTags.setText(event.getInterests());
 
     }
 
@@ -64,20 +125,36 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
 
-        setLocationMarker();
-    }
 
-    /**
-     *
-     */
-    private void setLocationMarker(){
+        if(event == null){
 
-        if(map != null){
+            //TODO Handle the situation where we don't have address
 
-            //TODO
+        } else {
+            Geocoder geocoder = new Geocoder(this);
+            List<Address> addresses = null;
+
+            try {
+                addresses = geocoder.getFromLocationName(event.getEventLoc(), 1);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (addresses.size() > 0) {
+                double latitude = addresses.get(0).getLatitude();
+                double longitude = addresses.get(0).getLongitude();
+
+                map.addMarker(new MarkerOptions()
+                        .position(new LatLng(latitude, longitude))
+                        .title("Event location"));
+
+                map.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude) , 14.0f) );
+            }
 
         }
     }
+
 
     /**
      * Build navigation bar located on the bottom of the screen.
@@ -87,8 +164,14 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
      */
     private void buildBottomBar(Activity activity, Bundle savedInstanceState){
 
+        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
 
-
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                navigate(tabId);
+            }
+        });
     }
 
     /**
@@ -99,8 +182,13 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
 
         switch (menuID){
             case R.id.action_home:
-                Intent goHomeIntent = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(goHomeIntent);
+                //This boolean check is here to stop the app from throwing the user back to home view from profile view
+                if(activityLaunched) {
+                    Intent goHomeIntent = new Intent(getApplicationContext(), HomeActivity.class);
+                    startActivity(goHomeIntent);
+                } else {
+                    activityLaunched = true;
+                }
                 break;
 
             case R.id.action_create_event:
@@ -122,8 +210,20 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+
+        outState.putParcelable(HokiEvent.EVENT, event);
+
         super.onSaveInstanceState(outState);
 
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        event = savedInstanceState.getParcelable(HokiEvent.EVENT);
+
+        showEventInfo();
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
 }

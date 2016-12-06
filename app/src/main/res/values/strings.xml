@@ -73,7 +73,7 @@
     <string name="searchTagsTitle">Input Tags</string>
     <string name="searchDateTitle">Input Date</string>
     <string name="searchTimeTitle">Select Time</string>
-    <string name="searchDistanceTitle">Seect Distance</string>
+    <string name="searchDistanceTitle">Select Distance</string>
     <string name="searchButton">Search</string>
 
     <!-- Search results -->

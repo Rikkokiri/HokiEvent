@@ -25,31 +25,24 @@
 
             <!-- Event name -->
             <TextView
-                android:id="@+id/eventName"
+                android:id="@+id/confirmEventName"
                 android:text="Fancy Party"
                 style="@style/EventDetailsTitles"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <!-- Event date -->
+            <!-- Event start and end date and time -->
             <TextView
-                android:id="@+id/eventDate"
+                android:id="@+id/confirmEventDateTime"
                 style="@style/EventDetailsItems"
                 android:text="Friday, November 25th 2016"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <!-- Event time -->
-            <TextView
-                android:id="@+id/eventTime"
-                style="@style/EventDetailsItems"
-                android:text="8:00 PM to 11:00 PM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:lines="3"/>
 
             <!-- Event address -->
             <TextView
-                android:id="@+id/eventAddress"
+                android:id="@+id/confirmEventAddress"
                 style="@style/EventDetailsItems"
                 android:text="10 Downing St, London SW1A 2AA, UK"
                 android:layout_width="wrap_content"
@@ -65,7 +58,7 @@
 
             <!-- Event description -->
             <TextView
-                android:id="@+id/eventDescription"
+                android:id="@+id/confirmEventDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
