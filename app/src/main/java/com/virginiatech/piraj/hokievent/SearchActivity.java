@@ -44,7 +44,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
     /**
-     *
+     * Find view components by id
      */
     private void findById(){
 
