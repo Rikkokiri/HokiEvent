@@ -2,17 +2,20 @@ package com.virginiatech.piraj.hokievent;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
 public class SearchActivity extends AppCompatActivity {
 
     private BottomBar bottomBar;
 
     private Button searchButton;
+    private boolean activityLaunched = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +23,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         //Build bottom navigation
-        //buildBottomBar(this, savedInstanceState);
+        buildBottomBar(this, savedInstanceState);
 
         //Search button
         searchButton = (Button) findViewById(R.id.searchButton);
@@ -50,6 +53,14 @@ public class SearchActivity extends AppCompatActivity {
      */
     private void buildBottomBar(Activity activity, Bundle savedInstanceState){
 
+        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                navigate(tabId);
+            }
+        });
     }
 
     /**
@@ -60,8 +71,13 @@ public class SearchActivity extends AppCompatActivity {
 
         switch (menuID){
             case R.id.action_home:
-                Intent goHomeIntent = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(goHomeIntent);
+                //This boolean check is here to stop the app from throwing the user back to home view from profile view
+                if(activityLaunched) {
+                    Intent goHomeIntent = new Intent(getApplicationContext(), HomeActivity.class);
+                    startActivity(goHomeIntent);
+                } else {
+                    activityLaunched = true;
+                }
                 break;
 
             case R.id.action_create_event:
