@@ -37,9 +37,10 @@ public class ParsingHelper {
 
             String email = jsonObject.getString(EMAIL);
             String phoneNumber = jsonObject.getString(PHONENUMBER);
-            String[] interests = jsonObject.getString(INTERESTS).split(",");
+            //String[] interests = jsonObject.getString(INTERESTS).split(",");
+            String interests = jsonObject.getString(INTERESTS);
 
-            user = new User(firstName, middleName, lastName, email, phoneNumber)
+            //user = new User(firstName, middleName, lastName, email, phoneNumber, interests);
 
         } catch (JSONException exception){
             Log.i("ParsingHelper: ", exception.getMessage());
