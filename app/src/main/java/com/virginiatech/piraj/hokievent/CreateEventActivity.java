@@ -18,6 +18,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class CreateEventActivity extends AppCompatActivity {
 
     private EditText eventNameField;
@@ -51,6 +54,15 @@ public class CreateEventActivity extends AppCompatActivity {
     private TimePickerDialog endTimePicker;
 
     private String tags;
+
+    // --- JSON Keys --- TODO Correct names
+    private static final String EVENT_NAME_JSON = "eventName";
+    private static final String EVENT_STARTDATE_JSON = "eventStartDate";
+    private static final String EVENT_ENDDATE_JSON = "eventEndDate";
+    private static final String EVENT_STARTTIME_JSON = "eventStartTime";
+    private static final String EVENT_ENDTIME_JSON = "eventEndTime";
+    private static final String EVENT_DESC_JSON = "eventDescription";
+    private static final String EVENT_LOC_JSON = "eventLocation";
 
 
     @Override
@@ -199,7 +211,6 @@ public class CreateEventActivity extends AppCompatActivity {
         @Override
         public void onTimeSet(TimePicker timePicker, int hour, int minute) {
 
-            //TODO
             Calendar newTime = Calendar.getInstance();
             newTime.set(Calendar.HOUR_OF_DAY, hour);
             newTime.set(Calendar.MINUTE, minute);
@@ -215,7 +226,6 @@ public class CreateEventActivity extends AppCompatActivity {
         @Override
         public void onTimeSet(TimePicker timePicker, int hour, int minute) {
 
-            //TODO
             Calendar newTime = Calendar.getInstance();
             newTime.set(Calendar.HOUR_OF_DAY, hour);
             newTime.set(Calendar.MINUTE, minute);
@@ -297,6 +307,19 @@ public class CreateEventActivity extends AppCompatActivity {
                     tags);
 
             //Send server new event entry
+            JSONObject json = new JSONObject();
+
+            try {
+                json.put(EVENT_NAME_JSON, newEvent.getEventName());
+                json.put(EVENT_STARTDATE_JSON, newEvent.getEventStartDate());
+
+                if(newEvent.getEventEndDate() != null){
+                    json.put(EVENT_ENDDATE_JSON, newEvent.getEventEndDate());
+                }
+
+            } catch (JSONException exception){
+                //TODO Handle exception
+            }
 
 
             Intent startConfirmEventActivity = new Intent(view.getContext(), EventDetailsActivity.class);
