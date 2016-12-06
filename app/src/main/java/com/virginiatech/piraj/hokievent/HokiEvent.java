@@ -118,6 +118,10 @@ public class HokiEvent implements Parcelable {
         this.ownerEmail = ownerEmail;
     }
 
+    public String getOwnerEmail(){
+        return this.ownerEmail;
+    }
+
     @Override
     public int describeContents() {
         return 0;

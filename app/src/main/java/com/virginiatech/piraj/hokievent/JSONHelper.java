@@ -44,7 +44,6 @@ public class JSONHelper {
         JSONObject json = new JSONObject();
 
         try {
-            json.put(EVENT_OWNER_EMAIL, "");
             json.put(FIRTS_NAME_JSON, user.getFirstName());
             json.put(MIDDLE_NAME_JSON, user.getMiddleName());
             json.put(LAST_NAME_JSON, user.getMiddleName());
@@ -66,7 +65,6 @@ public class JSONHelper {
         JSONObject json = new JSONObject();
 
         try {
-            json.put()
             json.put(EVENT_NAME_JSON, event.getEventName());
 
             json.put(EVENT_STARTDATE_JSON, event.getEventStartDate());
@@ -81,6 +79,9 @@ public class JSONHelper {
 
             json.put(EVENT_LOC_JSON, event.getEventLoc());
             json.put(EVENT_DESC_JSON, event.getEventDesc());
+
+            //Owner email
+            json.put(EVENT_OWNER_EMAIL, event.getOwnerEmail());
 
 
         } catch (JSONException exception){
