@@ -1,5 +1,9 @@
 package com.virginiatech.piraj.hokievent;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -297,27 +301,37 @@ public class CreateEventActivity extends AppCompatActivity {
                     startTimeField.getText().toString(),
                     tags);
 
+            try {
+
+
+                FileInputStream fin = openFileInput(User.USER_FILE);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
+
+                String id = reader.readLine();
+                String first = reader.readLine();
+                String middle = reader.readLine();
+                String last = reader.readLine();
+                String email = reader.readLine();
+
+                newEvent.setOwnerEmail(email);
+
+                reader.close();
+
+
+
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+
+
+
             if(endDateField.getText().length() > 0){
                 newEvent.setEventEndDate(endDateField.getText().toString());
             }
 
             if(endTimeField.getText().length() > 0){
                 newEvent.setEventEndTime(endTimeField.getText().toString());
-            }
-
-            //Send server new event entry
-            JSONObject eventJSON = new JSONHelper().createEventJSON(newEvent);
-
-            if(eventJSON != null) {
-                APICaller api = new APICaller();
-                try {
-                    api.APIpostEvent(eventJSON);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-            }
-            else {
-                //TODO Handle the case where the JSON couldn't be created ???
             }
 
             Intent startConfirmEventActivity = new Intent(view.getContext(), EventDetailsActivity.class);

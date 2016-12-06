@@ -18,6 +18,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.roughike.bottombar.BottomBar;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -89,7 +91,22 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
         public void onClick(View view){
 
 
-            //TODO Communicate with server and send it the new event entry
+
+            //Send server new event entry
+            JSONObject eventJSON = new JSONHelper().createEventJSON(event);
+
+            if(eventJSON != null) {
+                APICaller api = new APICaller();
+                try {
+
+                    api.APIpostEvent(eventJSON);
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            }
+            else {
+                //TODO Handle the case where the JSON couldn't be created ???
+            }
 
             Intent startHomeActivity = new Intent(view.getContext(), HomeActivity.class);
 
