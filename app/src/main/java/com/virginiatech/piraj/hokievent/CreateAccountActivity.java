@@ -25,6 +25,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     // --- TextViews ---
     private TextView messageView;
+    private TextView interestsView;
 
     // --- Buttons ---
     private Button selectInterestsButton;
@@ -62,6 +63,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         confirmPasswordField = (EditText) findViewById(R.id.confirmPassword);
 
         messageView = (TextView) findViewById(R.id.createAccountMessage);
+        interestsView = (TextView) findViewById(R.id.interestsList);
 
         // -*-*-*- Buttons & listeners for buttons  -*-*-*-
         selectInterestsButton = (Button) findViewById(R.id.selectInterestsButton);
@@ -75,6 +77,9 @@ public class CreateAccountActivity extends AppCompatActivity {
 
 
         interests = "";
+
+        interestsView.setText("Select interests");
+
         //TODO Add functionality to button listeners
 
     }
@@ -156,11 +161,11 @@ public class CreateAccountActivity extends AppCompatActivity {
             System.out.println("CreateAccountActivity received: " + interests);
             if (interests.equals(""))
             {
-                messageView.setText("No interests selected");
+                interestsView.setText("Select interest");
             }
             else
             {
-                messageView.setText(interests);
+                interestsView.setText(interests);
             }
         }
     }
