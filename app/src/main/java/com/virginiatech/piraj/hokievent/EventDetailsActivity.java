@@ -7,6 +7,7 @@ import android.location.Geocoder;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,6 +32,9 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
     private TextView eventAddress;
     private TextView eventDescription;
     private TextView eventTags;
+
+    private Button leftButton;
+    private Button rightButton;
 
     //TODO More elements...
 
@@ -85,6 +89,9 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         eventAddress = (TextView) findViewById(R.id.eventAddress);
         eventDescription = (TextView) findViewById(R.id.eventDescription);
         eventTags = (TextView) findViewById(R.id.tags);
+
+        leftButton = (Button) findViewById(R.id.leftButton);
+        rightButton = (Button) findViewById(R.id.rightButton);
 
     }
 

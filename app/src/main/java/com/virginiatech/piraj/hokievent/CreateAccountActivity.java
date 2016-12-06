@@ -190,8 +190,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                 System.out.println(e);
             }
 
-            user.setUserID(0 + ""); //TODO ?
-
             try {
 
                 File dir = getFilesDir();
