@@ -17,6 +17,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.roughike.bottombar.BottomBar;
 
 import java.io.IOException;
@@ -136,8 +137,13 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
                 double latitude = addresses.get(0).getLatitude();
                 double longitude = addresses.get(0).getLongitude();
 
+                map.addMarker(new MarkerOptions()
+                        .position(new LatLng(latitude, longitude))
+                        .title("Event location"));
+
                 map.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude) , 14.0f) );
             }
+
         }
     }
 
