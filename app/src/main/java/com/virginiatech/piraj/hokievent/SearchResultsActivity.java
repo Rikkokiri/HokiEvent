@@ -33,6 +33,8 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         message = (TextView) findViewById(R.id.resultsMessage);
 
+        Intent intent = getIntent();
+        eventList = intent.getParcelableArrayListExtra(HokiEvent.EVENT);
 
         //TEST DATA
         eventList = new ArrayList<HokiEvent>();

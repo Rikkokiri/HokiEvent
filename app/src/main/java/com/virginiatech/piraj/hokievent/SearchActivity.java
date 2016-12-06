@@ -12,6 +12,8 @@ import android.widget.EditText;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import java.util.ArrayList;
+
 public class SearchActivity extends AppCompatActivity {
 
     //Navigation bar
@@ -65,6 +67,10 @@ public class SearchActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             //TODO Perform the search by doing calls to the server
+            ArrayList<HokiEvent> events = null;
+            Intent startResultsActivity = new Intent(v.getContext(), SearchResultsActivity.class);
+            startResultsActivity.putParcelableArrayListExtra(HokiEvent.EVENT, events);
+            startActivity(startResultsActivity);
 
         }
     };
