@@ -1,10 +1,8 @@
 package com.virginiatech.piraj.hokievent;
 
-import android.content.Context;
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.TextView;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -21,19 +19,23 @@ import org.json.JSONObject;
 /**
  *
  */
-
 public class ServerCall extends AsyncTask<String, String, JSONObject> {
 
+    private static final String URL = "http://71.62.121.1/index.php?";
+
     private int byGetOrPost = 0;
+    private ResponseRetriever responseRetriever;
 
 
-    //flag 0 means get and 1 means post.(By default it is get.)
-    public ServerCall(int flag) {
+    //Flag 0 means get and 1 means post.(By default it is get.)
+    public ServerCall(ResponseRetriever responseRetriever, int flag) {
+        this.responseRetriever = responseRetriever;
         byGetOrPost = flag;
     }
 
     @Override
     protected void onPreExecute(){
+        super.onPreExecute();
     }
 
 
@@ -122,10 +124,25 @@ public class ServerCall extends AsyncTask<String, String, JSONObject> {
         }
     }
 
+
+
     @Override
     protected void onPostExecute(JSONObject result){
 
-        //TODO Do we need this for anything?
+        responseRetriever.getResponse(result);
 
     }
+
+    //---------------------------------------------------------------------------
+
+    public User getUser(String email){
+
+        String url = URL + "email="+email;
+
+        //JSONObject object = new ServerCall(POST).execute(url);
+
+
+        return null;
+    }
+
 }

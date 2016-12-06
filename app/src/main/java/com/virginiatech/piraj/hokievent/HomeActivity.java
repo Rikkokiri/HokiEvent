@@ -44,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
      */
     private void buildBottomBar(Activity activity){
 
-        bottomBar = (BottomBar) findViewById(R.id.bottomBar);;
+        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
 
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override

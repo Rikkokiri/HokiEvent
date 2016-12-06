@@ -1,22 +1,44 @@
 package com.virginiatech.piraj.hokievent;
 
+import org.json.JSONObject;
+
 /**
- * Class that applications
+ * Created by Pilvi Rajala (piraj) on 05/12/16.
  */
 
 public class Communicator {
 
-    public Communicator(){
+    private static final int GET = 0;
+    private static final int POST = 1;
+
+    private static final String URL = "http://71.62.121.1/index.php?";
+
+    /**
+     * Get user based on the email address
+     * @param email
+     */
+    public void getUser(ResponseRetriever retriever, String email){
+
+        String url = URL + "email=" + email;
+        new ServerCall(retriever, GET).execute(url);
 
     }
 
-    public User getUser(String email){
+    /**
+     * Get event
+     */
+    public void getEvent(ResponseRetriever retriever){
 
-        String url = "http://71.62.121.1/index.php?email="+email;
-
-
-
-        return null;
+        //String url =
+        new ServerCall(retriever, GET).execute();
     }
+
+    /**
+     * TODO
+     */
+    public void addUser(){
+
+    }
+
 
 }
