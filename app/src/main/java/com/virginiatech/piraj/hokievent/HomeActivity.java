@@ -39,17 +39,11 @@ public class HomeActivity extends AppCompatActivity {
         //TEST DATA
         eventList = new ArrayList<HokiEvent>();
 
-        HokiEvent e0 = new HokiEvent("Epic all-nighter", "The most epic all-nighter of all time", "139 Clover Valley Circle, Blacksburg, VA 24060, USA", "December 6th 2016", "Forever", "No tags");
-        HokiEvent e1 = new HokiEvent("name", "desc", "beijing", "startDate", "startTime", "interests");
-        HokiEvent e2 = new HokiEvent("name2", "desc2", "moscow", "startDat2e", "startTime2", "interests2");
-        HokiEvent e3 = new HokiEvent("name3", "des3c", "london", "startDate3", "startTim3e", "interests3");
-        HokiEvent e4 = new HokiEvent("name4", "des4c", "paris", "startDat4e", "startTim4e", "interests4");
-
+        HokiEvent e0 = new HokiEvent("Epic all-nighter", "The most epic all-nighter of all time", "139 Clover Valley Circle, Blacksburg, VA 24060, USA", "December 6th 2016", "Forever", "Academics");
+        HokiEvent e1 = new HokiEvent("Christian's Birthday", "I turn 28.  DESPAIR", "139 Clover Valley Circle, Blacksburg, VA 24060, USA", "December 11th 2016", "12:00 AM", "no one");
         eventList.add(e0);
         eventList.add(e1);
-        eventList.add(e2);
-        eventList.add(e3);
-        eventList.add(e4);
+
 
 
         recyclerView = (RecyclerView) findViewById(R.id.cardList);

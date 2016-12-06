@@ -64,6 +64,32 @@ public class JSONHelper {
         return json;
     }
 
+    public static User createUser(JSONObject userJSON){
+
+        User newUser = null;
+
+        if(userJSON != null){
+
+            try {
+                String firstName = userJSON.getString(FIRTS_NAME_JSON);
+                String middleName = userJSON.getString(MIDDLE_NAME_JSON);
+                String lastName = userJSON.getString(LAST_NAME_JSON);
+                String email = userJSON.getString(EMAIL_JSON);
+                String phone = userJSON.getString(PHONE_NUMBER_JSON);
+                String interests = userJSON.getString(INTERESTS_JSON);
+
+                newUser = new User(firstName, middleName, lastName, email, phone, interests);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        return newUser;
+
+    }
+
     public static JSONObject createEventJSON(HokiEvent event){
 
         JSONObject json = new JSONObject();
@@ -100,9 +126,9 @@ public class JSONHelper {
     public static ArrayList<HokiEvent> getAllEvents(JSONArray jsonArray){
 
         ArrayList<HokiEvent> events = new ArrayList<HokiEvent>();
-
+        System.out.println("jsonArray Null? " + jsonArray.equals(null));
         if (jsonArray != null) {
-
+            System.out.println("jsonArray Length " + jsonArray.length());
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject eventJSON = null;

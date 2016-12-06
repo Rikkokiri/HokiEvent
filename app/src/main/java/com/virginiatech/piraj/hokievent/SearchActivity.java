@@ -13,7 +13,9 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
@@ -69,27 +71,16 @@ public class SearchActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             //TODO Perform the search by doing calls to the server
-            APICaller api = new APICaller();
-            JSONArray array;
-
-            ArrayList<HokiEvent> events = new ArrayList<HokiEvent>();
-
-            try{
 
 
-                array = api.APIgetEventAll();
 
 
-            } catch (Exception e)
-            {
-                System.out.print(e);
-            }
 
-
+            //System.out.println("events outsdie " + events.toString());
 
 
             Intent startResultsActivity = new Intent(v.getContext(), SearchResultsActivity.class);
-            startResultsActivity.putParcelableArrayListExtra(HokiEvent.EVENT, events);
+            //startResultsActivity.putParcelableArrayListExtra(HokiEvent.EVENT, events);
             startActivity(startResultsActivity);
 
         }

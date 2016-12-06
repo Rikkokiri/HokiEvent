@@ -59,7 +59,6 @@ public class APICaller  {
     public void APIgetEventAll(Context context) throws IOException, JSONException {
         mCallback = (TaskCompleted) context;
         new getEventAll().execute();
-        //return new JSONArray(response);
     }
 
     public void APIpostUser(JSONObject jObject) throws IOException {
