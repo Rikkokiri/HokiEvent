@@ -64,6 +64,10 @@ public class APICaller  {
         new postJoinEvent().execute(jObject);
     }
 
+    public void APIputUser(JSONObject jObject) throws IOException {
+        new putUser().execute(jObject);
+    }
+
     private class getUser extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... email) {
@@ -258,4 +262,40 @@ public class APICaller  {
             return null;
         }
     }
+
+        private class putUser extends AsyncTask<JSONObject, Void, Void> {
+            @Override
+            protected Void doInBackground(JSONObject...j) {
+                OutputStream output = null;
+                try {
+                    URL url = new URL(address + "put/user.php");
+                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                    urlConnection.setDoOutput(true);
+                    urlConnection.setConnectTimeout(15000);
+                    urlConnection.setRequestMethod("PUT");
+                    urlConnection.setRequestProperty("Content-Type", "application/json");
+                    urlConnection.connect();
+
+                    output = urlConnection.getOutputStream();
+                    output.write(j[0].toString().getBytes());
+                    output.flush();
+
+                    System.out.println(urlConnection.getResponseCode());
+                    BufferedReader br = new BufferedReader(new InputStreamReader(
+                            (urlConnection.getInputStream())));
+
+                    String output1;
+                    System.out.println("Output from Server .... \n");
+                    while ((output1 = br.readLine()) != null) {
+                        System.out.println(output);
+                    }
+
+
+                    urlConnection.disconnect();
+                } catch (Exception e) {
+                    System.out.println("ERROR: " + e);
+                }
+                return null;
+            }
+        }
     }
