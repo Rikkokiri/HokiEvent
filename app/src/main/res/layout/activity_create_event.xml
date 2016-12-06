@@ -67,11 +67,13 @@
                         android:id="@+id/startDate"
                         style="@style/TextfieldBaseStyle"
                         android:layout_weight="1"
+                        android:layout_marginRight="10dp"
                         android:inputType="date" />
 
                     <EditText
                         android:id="@+id/endDate"
                         style="@style/TextfieldBaseStyle"
+                        android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:inputType="date" />
                 </TableRow>
@@ -97,6 +99,7 @@
                     <EditText
                         android:id="@+id/endTime"
                         style="@style/TextfieldBaseStyle"
+                        android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:inputType="time" />
 
