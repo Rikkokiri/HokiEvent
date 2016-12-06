@@ -82,6 +82,10 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         interestsView.setText("Select interests");
 
+        APICaller api = new APICaller();
+        try { api.APIpostUser(new JSONObject("{\"userEmail\":\"kyz@vt.edu\",\"firstName\":\"Kevin\",\"lastName\":\"Zhang\",\"phoneNumber\":\"540-776-3851\",\"interests\":\"Food, Gaming\"}"));}
+        catch(Exception e) {System.out.println(e);}
+
         //TODO Add functionality to button listeners
 
     }
@@ -135,7 +139,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             );
 
             //TODO Communicate with server and send it the new user entry
-            new Communicator().addUser(user);
+            //new Communicator().addUser(user);
 
             Intent startHomeActivity = new Intent(view.getContext(), HomeActivity.class);
 

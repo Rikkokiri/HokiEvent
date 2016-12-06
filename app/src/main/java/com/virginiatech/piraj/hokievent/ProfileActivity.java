@@ -21,7 +21,7 @@ import org.w3c.dom.Text;
  *
  * @version 2016.12.XX
  */
-public class ProfileActivity extends AppCompatActivity implements ResponseRetriever {
+public class ProfileActivity extends AppCompatActivity {
 
     private BottomBar bottomBar;
 
@@ -52,9 +52,6 @@ public class ProfileActivity extends AppCompatActivity implements ResponseRetrie
         // --- Edit profile button ---
         editProfileButton = (Button) findViewById(R.id.editProfileButton);
         editProfileButton.setOnClickListener(editProfileListener);
-
-        //TODO Pull the user's data from the server?
-        new Communicator().getUser(this, "kyz@vt.edu");
 
         //TODO Populate text views with data pulled from the server
         if(user != null) {
@@ -137,15 +134,4 @@ public class ProfileActivity extends AppCompatActivity implements ResponseRetrie
                 break;
         }
     }
-
-    @Override
-    public void getResponse(JSONObject jsonObject) {
-
-        if(jsonObject != null){
-            interestsField.setText(jsonObject.toString());
-        } else {
-            interestsField.setText("JSON NULL");
-        }
-    }
-
 }
