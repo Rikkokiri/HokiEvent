@@ -120,6 +120,16 @@ public class CreateAccountActivity extends AppCompatActivity {
         @Override
         public void onClick(View view){
 
+            if (firstNameField.getText().toString().equals("") ||
+                    middleNameField.getText().toString().equals("") ||
+                    lastNameField.getText().toString().equals("") ||
+                    emailField.getText().toString().equals("") ||
+                    phoneNumberField.getText().toString().equals("") ||
+                    passwordField.getText().toString().equals("") )
+            {
+                messageView.setText("Please fill in all fields");
+                return;
+            }
 
 
             if (!emailField.getText().toString().equals(confirmEmailField.getText().toString()))
@@ -145,13 +155,13 @@ public class CreateAccountActivity extends AppCompatActivity {
 
             //TODO Send server new user entry.  Retrieve new userID from server.
 
-            user.setUserID(0);
+            user.setUserID(0 + "");
 
             try {
 
                 File dir = getFilesDir();
                 File file = new File(dir, User.USER_FILE);
-                boolean deleted = file.delete();
+                file.delete();
 
                 FileOutputStream fos = openFileOutput(User.USER_FILE, Context.MODE_PRIVATE);
 

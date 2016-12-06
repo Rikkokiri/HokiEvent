@@ -62,7 +62,7 @@ public class ProfileActivity extends AppCompatActivity {
         //TODO Pull the user's data from the server?
 
         //TODO Populate text views with data pulled from the server
-        //displayUserInfo(user);
+        displayUserInfo();
 
         //TODO Populate pull the interests from the server and show them
 
@@ -72,7 +72,6 @@ public class ProfileActivity extends AppCompatActivity {
      * Fill in the TextViews showing the user's name, phone number and email
      */
     private void displayUserInfo(){
-
 
         try {
 
@@ -119,7 +118,6 @@ public class ProfileActivity extends AppCompatActivity {
             Intent editProfileIntent = new Intent(view.getContext(), EditProfileActivity.class);
 
             //TODO: Should we pass the user to the new activity or request user data from there?
-            editProfileIntent.putExtra(User.USER, user);
             startActivity(editProfileIntent);
         }
     };
