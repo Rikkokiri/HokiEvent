@@ -2,14 +2,11 @@ package com.virginiatech.piraj.hokievent;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.support.annotation.IdRes;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -19,6 +16,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
 import java.io.IOException;
 import java.util.List;
@@ -44,6 +42,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
 
     // --- Bottom bar ---
     BottomBar bottomBar;
+    private boolean activityLaunched = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,8 +164,14 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
      */
     private void buildBottomBar(Activity activity, Bundle savedInstanceState){
 
+        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
 
-
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                navigate(tabId);
+            }
+        });
     }
 
     /**
@@ -177,8 +182,13 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
 
         switch (menuID){
             case R.id.action_home:
-                Intent goHomeIntent = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(goHomeIntent);
+                //This boolean check is here to stop the app from throwing the user back to home view from profile view
+                if(activityLaunched) {
+                    Intent goHomeIntent = new Intent(getApplicationContext(), HomeActivity.class);
+                    startActivity(goHomeIntent);
+                } else {
+                    activityLaunched = true;
+                }
                 break;
 
             case R.id.action_create_event:
@@ -209,7 +219,6 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-
 
         event = savedInstanceState.getParcelable(HokiEvent.EVENT);
 
