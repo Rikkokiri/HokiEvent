@@ -7,12 +7,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 public class SearchActivity extends AppCompatActivity {
 
+    //Navigation bar
     private BottomBar bottomBar;
+
+    //Search inputs
+    private EditText tagsInput;
+    private EditText dateInput;
+    private EditText timeInput;
+    private EditText distanceInput;
 
     private Button searchButton;
     private boolean activityLaunched = false;
@@ -25,12 +34,28 @@ public class SearchActivity extends AppCompatActivity {
         //Build bottom navigation
         buildBottomBar(this, savedInstanceState);
 
+        //Find components by Id
+        findById();
+
         //Search button
-        searchButton = (Button) findViewById(R.id.searchButton);
         searchButton.setOnClickListener(searchHandler);
 
     }
 
+
+    /**
+     *
+     */
+    private void findById(){
+
+        searchButton = (Button) findViewById(R.id.searchButton);
+
+        tagsInput = (EditText) findViewById(R.id.search_tags_input);
+        dateInput = (EditText) findViewById(R.id.search_input_date);
+        timeInput = (EditText) findViewById(R.id.search_input_time);
+        distanceInput = (EditText) findViewById(R.id.search_input_distance);
+
+    }
 
     /**
      * Listener for search button
