@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import org.json.JSONObject;
@@ -31,6 +32,8 @@ public class ProfileActivity extends AppCompatActivity implements ResponseRetrie
     private TextView interestsField;
 
     private User user = null;
+
+    private boolean activityLaunched = false;
 
     private Button editProfileButton;
 
@@ -54,7 +57,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseRetrie
         editProfileButton.setOnClickListener(editProfileListener);
 
         //TODO Pull the user's data from the server?
-        new Communicator().getUser(this, "kyz@vt.edu");
+        //new Communicator().getUser(this, "kyz@vt.edu");
 
         //TODO Populate text views with data pulled from the server
         if(user != null) {
@@ -108,6 +111,13 @@ public class ProfileActivity extends AppCompatActivity implements ResponseRetrie
             }
         });
 
+        bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
+            @Override
+            public void onTabReSelected(@IdRes int tabId) {
+                navigate(tabId);
+            }
+        });
+
     }
 
     /**
@@ -118,8 +128,12 @@ public class ProfileActivity extends AppCompatActivity implements ResponseRetrie
 
         switch (menuID){
             case R.id.action_home:
-                Intent goHomeIntent = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(goHomeIntent);
+                if(activityLaunched) {
+                    Intent goHomeIntent = new Intent(getApplicationContext(), HomeActivity.class);
+                    startActivity(goHomeIntent);
+                } else {
+                    activityLaunched = true;
+                }
                 break;
 
             case R.id.action_create_event:
