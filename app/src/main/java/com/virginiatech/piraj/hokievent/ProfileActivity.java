@@ -1,11 +1,13 @@
 package com.virginiatech.piraj.hokievent;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.PhoneNumberUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,6 +15,13 @@ import android.widget.TextView;
 import com.roughike.bottombar.BottomBar;
 
 import org.w3c.dom.Text;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 /**
  *
@@ -62,14 +71,43 @@ public class ProfileActivity extends AppCompatActivity {
     /**
      * Fill in the TextViews showing the user's name, phone number and email
      */
-    private void displayUserInfo(User user){
-        //Show name
-        fullNameField.setText(user.getFirstName() + " " + user.getMiddleName() + " " + user.getLastName());
-        //Show phone number
-        phoneNumberField.setText(user.getPhoneNumber());
-        //Show email
-        emailField.setText(user.getUserEmail());
-        interestsField.setText(user.getInterests());
+    private void displayUserInfo(){
+
+
+        try {
+
+
+            FileInputStream fin = openFileInput(User.USER_FILE);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
+
+            String id = reader.readLine();
+            String first = reader.readLine();
+            String middle = reader.readLine();
+            String last = reader.readLine();
+            String email = reader.readLine();
+            String phone = reader.readLine();
+            String interests = reader.readLine();
+            String password = reader.readLine();
+
+            //Show name
+            fullNameField.setText(first + " " + middle + " " + last);
+            //Show phone number
+            phoneNumberField.setText(phone);
+            //Show email
+            emailField.setText(email);
+            interestsField.setText(interests);
+
+            reader.close();
+
+
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+
+
     }
 
     /**
@@ -124,4 +162,10 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        displayUserInfo();
+        super.onRestoreInstanceState(savedInstanceState);
+    }
 }

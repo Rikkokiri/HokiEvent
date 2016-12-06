@@ -58,7 +58,7 @@ public class CreateEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
 
-        dateFormatter = new SimpleDateFormat("MMM d, ''yy", Locale.US); //"EEE, MMM d, ''yy"
+        dateFormatter = new SimpleDateFormat("MMM d, yyyy", Locale.US); //"EEE, MMM d, ''yy"
         //dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         timeFormatter = new SimpleDateFormat("h:mm a", Locale.US);
 
@@ -69,6 +69,8 @@ public class CreateEventActivity extends AppCompatActivity {
 
         buildDatepicking();
         buildTimepicking();
+
+        tags = "";
         
     }
 
@@ -96,7 +98,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
         enterTags.setOnClickListener(selectTagsListener);
         cancel.setOnClickListener(cancelListener);
-        //next.setOnClickListener(nextListener);
+        next.setOnClickListener(nextListener);
 
     }
 
@@ -250,7 +252,7 @@ public class CreateEventActivity extends AppCompatActivity {
     };
 
     /**
-     * Listener for Sign up -button
+     * Listener for next -button
      */
 
     //TODO figure out how we're doing location.
@@ -310,11 +312,11 @@ public class CreateEventActivity extends AppCompatActivity {
             System.out.println("CreateEventActivity received: " + tags);
             if (tags.equals(""))
             {
-                messageView.setText("No tags selected");
+                tagsList.setText("No tags selected");
             }
             else
             {
-                messageView.setText(tags);
+                tagsList.setText(tags);
             }
         }
     }

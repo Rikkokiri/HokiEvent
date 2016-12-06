@@ -20,7 +20,6 @@
         <!-- Name -->
         <TextView
             android:id="@+id/profileFullName"
-            android:text="Sammy Zacharias Sample"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"/>
@@ -28,7 +27,6 @@
         <!-- Phone number -->
         <TextView
             android:id="@+id/profilePhonenumber"
-            android:text="909-789-8967"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"/>
@@ -36,7 +34,6 @@
         <!-- Email address -->
         <TextView
             android:id="@+id/profileEmail"
-            android:text="samsam@vt.edu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"/>

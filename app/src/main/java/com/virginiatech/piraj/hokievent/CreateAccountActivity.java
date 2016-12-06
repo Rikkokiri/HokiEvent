@@ -1,5 +1,6 @@
 package com.virginiatech.piraj.hokievent;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
@@ -127,16 +138,62 @@ public class CreateAccountActivity extends AppCompatActivity {
                     middleNameField.getText().toString(),
                     lastNameField.getText().toString(),
                     emailField.getText().toString(),
-                    Integer.parseInt(phoneNumberField.getText().toString()),
+                    phoneNumberField.getText().toString(),
                     interests,
                     passwordField.getText().toString()
             );
 
-            //TODO Communicate with server and send it the new user entry
+            //TODO Send server new user entry.  Retrieve new userID from server.
+
+            user.setUserID(0);
+
+            try {
+
+                File dir = getFilesDir();
+                File file = new File(dir, User.USER_FILE);
+                boolean deleted = file.delete();
+
+                FileOutputStream fos = openFileOutput(User.USER_FILE, Context.MODE_PRIVATE);
+
+                OutputStreamWriter writer = new OutputStreamWriter(fos);
+
+                writer.write(user.getUserID() + "\n");
+                writer.write(user.getFirstName() + "\n");
+                writer.write(user.getMiddleName() + "\n");
+                writer.write(user.getLastName() + "\n");
+                writer.write(user.getUserEmail() + "\n");
+                writer.write(user.getPhoneNumber() + "\n");
+                writer.write(user.getInterests() + "\n");
+                writer.write(user.getPassword());
+
+                writer.flush();
+                writer.close();
+
+                FileInputStream fin = openFileInput(User.USER_FILE);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
+
+                String line = reader.readLine();
+
+                while (line != null)
+                {
+                    System.out.println(line);
+                    line = reader.readLine();
+                }
+
+                reader.close();
+
+
+
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+
+
 
             Intent startHomeActivity = new Intent(view.getContext(), HomeActivity.class);
 
-            startHomeActivity.putExtra(User.USER, user);
+            startHomeActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
             startActivity(startHomeActivity);
 
@@ -150,8 +207,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         @Override
         public void onClick(View view){
             //Go back to log in/sign up screen
-            Intent returnToLogin = new Intent(view.getContext(), LoginActivity.class);
-            startActivity(returnToLogin);
+            finish();
         }
     };
 
