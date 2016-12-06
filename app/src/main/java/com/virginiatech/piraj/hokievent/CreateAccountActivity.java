@@ -167,7 +167,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             );
 
 
-            //TODO Send server new user entry.  Retrieve new userID from server.
+            //Send server new user entry
             JSONObject json = new JSONObject();
 
             try {

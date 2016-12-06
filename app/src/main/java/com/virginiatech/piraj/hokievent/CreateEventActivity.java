@@ -296,6 +296,8 @@ public class CreateEventActivity extends AppCompatActivity {
                     startTimeField.getText().toString(),
                     tags);
 
+            //Send server new event entry
+
 
             Intent startConfirmEventActivity = new Intent(view.getContext(), EventDetailsActivity.class);
 
