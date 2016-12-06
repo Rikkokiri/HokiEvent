@@ -93,7 +93,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
         try {
 
-
             FileInputStream fin = openFileInput(User.USER_FILE);
             BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
 
@@ -189,8 +188,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
 
                 reader.close();
-
-
 
             } catch (IOException e)
             {
