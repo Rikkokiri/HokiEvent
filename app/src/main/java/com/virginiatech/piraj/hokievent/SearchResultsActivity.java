@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.TaskCompletionSource;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -42,25 +43,9 @@ public class SearchResultsActivity extends AppCompatActivity {
 /*
         APICaller api = new APICaller();
         JSONArray array;
-
+*/
         ArrayList<HokiEvent> events = new ArrayList<HokiEvent>();
 
-        try{
-
-            array = api.APIgetEventAll();
-
-            System.out.println("blag: " + array.toString());
-            events = JSONHelper.getAllEvents(array);
-
-            //System.out.println("events inside" + events.toString());
-        } catch (JSONException e)
-        {
-            System.out.print("EXCEPTIOANL: " + e);
-        }
-        catch (IOException e)
-        {
-            System.out.print("EXCEPTIOANL: " + e);
-        }*/
 
         //TEST DATA
         eventList = new ArrayList<HokiEvent>();
@@ -87,7 +72,6 @@ public class SearchResultsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(eAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
 
         //TEST
 
