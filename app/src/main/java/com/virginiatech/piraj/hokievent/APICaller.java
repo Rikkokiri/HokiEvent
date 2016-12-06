@@ -1,6 +1,7 @@
 package com.virginiatech.piraj.hokievent;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -21,7 +22,9 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.concurrent.ExecutionException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -41,15 +44,22 @@ public class APICaller  {
 
     final private String address = "http://71.62.121.1/";
     private String response;
+    private TaskCompleted mCallback;
 
-    public JSONObject APIgetUser(String email) throws IOException, JSONException {
-        new getUser().execute(email);
-        return new JSONObject(response);
+    public interface TaskCompleted {
+        public void onTaskComplete(String result);
     }
 
-    public JSONArray APIgetEventAll() throws IOException, JSONException {
+    public void APIgetUser(String email, Context context) throws IOException, JSONException{
+        mCallback = (TaskCompleted) context;
+        new getUser().execute(email);
+        //return new JSONObject(response);
+    }
+
+    public void APIgetEventAll(Context context) throws IOException, JSONException {
+        mCallback = (TaskCompleted) context;
         new getEventAll().execute();
-        return new JSONArray(response);
+        //return new JSONArray(response);
     }
 
     public void APIpostUser(JSONObject jObject) throws IOException {
@@ -106,11 +116,7 @@ public class APICaller  {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            //System.out.println(s);
-            if (s != null)
-                Log.v("sina", s); // !! DataFromWebService is null because AsyncTask hasn't done its task
-            else
-                Log.v("sing", "null");
+            mCallback.onTaskComplete(s);
             }
         }
 
@@ -149,10 +155,7 @@ public class APICaller  {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            if (s != null)
-                Log.v("sina", s); // !! DataFromWebService is null because AsyncTask hasn't done its task
-            else
-                Log.v("sing", "null");
+            mCallback.onTaskComplete(s);
         }
     }
 

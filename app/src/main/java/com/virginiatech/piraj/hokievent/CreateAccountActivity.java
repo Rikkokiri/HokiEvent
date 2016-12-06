@@ -24,7 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class CreateAccountActivity extends AppCompatActivity {
+public class CreateAccountActivity extends AppCompatActivity implements APICaller.TaskCompleted {
 
     // --- Textfields ---
     private EditText firstNameField;
@@ -95,7 +95,10 @@ public class CreateAccountActivity extends AppCompatActivity {
         interestsView.setText("Select interests");
 
         //TODO Add functionality to button listeners
-
+        try {
+            APICaller api = new APICaller();
+            api.APIgetEventAll(this);
+        } catch (Exception e) { System.out.println(e); }
     }
 
     /**
@@ -287,4 +290,8 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onTaskComplete(String result) {
+        System.out.println(result);
+    }
 }
