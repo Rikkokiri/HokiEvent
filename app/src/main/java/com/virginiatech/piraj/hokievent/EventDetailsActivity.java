@@ -57,7 +57,13 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         //TODO Pull data from the "server" and write it into TextViews
         //this.event = ...
 
-        this.event = new HokiEvent("Epic all-nighter", "The most epic all-nighter of all time", "139 Clover Valley Circle, Blacksburg, VA 24060, USA", "December 6th 2016", "Forever", "No tags");
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        if (bundle != null)
+        {
+            event = bundle.getParcelable(HokiEvent.EVENT);
+        }
 
         if(event != null){
             showEventInfo();

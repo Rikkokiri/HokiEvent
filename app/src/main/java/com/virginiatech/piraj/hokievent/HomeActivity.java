@@ -35,11 +35,13 @@ public class HomeActivity extends AppCompatActivity {
         //TEST
         eventList = new ArrayList<HokiEvent>();
 
+        HokiEvent e0 = new HokiEvent("Epic all-nighter", "The most epic all-nighter of all time", "139 Clover Valley Circle, Blacksburg, VA 24060, USA", "December 6th 2016", "Forever", "No tags");
         HokiEvent e1 = new HokiEvent("name", "desc", "loc", "startDate", "startTime", "interests");
         HokiEvent e2 = new HokiEvent("name2", "desc2", "loc2", "startDat2e", "startTime2", "interests2");
         HokiEvent e3 = new HokiEvent("name3", "des3c", "lo3c", "startDate3", "startTim3e", "interests3");
         HokiEvent e4 = new HokiEvent("name4", "des4c", "loc4", "startDat4e", "startTim4e", "interests4");
 
+        eventList.add(e0);
         eventList.add(e1);
         eventList.add(e2);
         eventList.add(e3);
