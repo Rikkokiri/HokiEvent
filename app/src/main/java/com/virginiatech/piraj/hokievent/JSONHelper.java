@@ -100,9 +100,9 @@ public class JSONHelper {
     public static ArrayList<HokiEvent> getAllEvents(JSONArray jsonArray){
 
         ArrayList<HokiEvent> events = new ArrayList<HokiEvent>();
-
+        System.out.println("jsonArray Null? " + jsonArray.equals(null));
         if (jsonArray != null) {
-
+            System.out.println("jsonArray Length " + jsonArray.length());
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject eventJSON = null;

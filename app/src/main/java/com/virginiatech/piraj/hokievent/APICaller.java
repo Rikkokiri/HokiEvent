@@ -49,6 +49,7 @@ public class APICaller  {
 
     public JSONArray APIgetEventAll() throws IOException, JSONException {
         new getEventAll().execute();
+        //System.out.println(response);
         return new JSONArray(response);
     }
 

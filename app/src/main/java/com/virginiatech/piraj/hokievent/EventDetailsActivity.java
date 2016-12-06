@@ -167,32 +167,32 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         if (owned)
         {
             leftButton.setText("Cancel Event");
-            leftButton.setOnClickListener(cancelListener);
+            //leftButton.setOnClickListener(cancelListener);
             rightButton.setText("Edit Event");
-            rightButton.setOnClickListener(editListener);
+            //rightButton.setOnClickListener(editListener);
         }
         else
         {
             if (saved)
             {
                 leftButton.setText("Discard Event");
-                leftButton.setOnClickListener(discardListener);
+                //leftButton.setOnClickListener(discardListener);
             }
             else
             {
                 leftButton.setText("Save Event");
-                leftButton.setOnClickListener(saveListener);
+                //leftButton.setOnClickListener(saveListener);
             }
 
             if (joined)
             {
                 rightButton.setText("Leave Event");
-                rightButton.setOnClickListener(leaveListener);
+                //rightButton.setOnClickListener(leaveListener);
             }
             else
             {
                 rightButton.setText("Join Event");
-                rightButton.setOnClickListener(joinListener);
+                //rightButton.setOnClickListener(joinListener);
             }
 
         }

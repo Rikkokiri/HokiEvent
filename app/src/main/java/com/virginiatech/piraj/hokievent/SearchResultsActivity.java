@@ -35,7 +35,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         eventList = intent.getParcelableArrayListExtra(HokiEvent.EVENT);
-
+/*
         //TEST DATA
         eventList = new ArrayList<HokiEvent>();
 
@@ -49,7 +49,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         eventList.add(e1);
         eventList.add(e2);
         eventList.add(e3);
-        eventList.add(e4);
+        eventList.add(e4);*/
 
 
         recyclerView = (RecyclerView) findViewById(R.id.cardList);
