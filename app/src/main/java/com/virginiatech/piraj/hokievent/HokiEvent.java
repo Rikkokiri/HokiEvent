@@ -104,6 +104,14 @@ public class HokiEvent implements Parcelable {
         return interests;
     }
 
+    public void setEventEndDate(String endDate){
+        this.eventEndDate = endDate;
+    }
+
+    public void setEventEndTime(String endTime){
+        this.eventEndTime = endTime;
+    }
+
     @Override
     public int describeContents() {
         return 0;
