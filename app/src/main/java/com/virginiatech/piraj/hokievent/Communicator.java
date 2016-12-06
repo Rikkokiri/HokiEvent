@@ -11,7 +11,7 @@ public class Communicator {
     private static final int GET = 0;
     private static final int POST = 1;
 
-    private static final String URL = "http://71.62.121.1/index.php?";
+    private static final String URL = "http://71.62.121.1/index.php?"; //FIX THIS
 
     /**
      * Get user based on the email address
@@ -19,7 +19,8 @@ public class Communicator {
      */
     public void getUser(ResponseRetriever retriever, String email){
 
-        String url = URL + "email=" + email;
+        //String url = URL + "email=" + email;
+        String url = "http://71.62.121.1/get/user.php?email="+email;
         new ServerCall(retriever, GET).execute(url);
 
     }

@@ -69,8 +69,9 @@ public class ServerCall extends AsyncTask<String, String, JSONObject> {
                 in.close();
                 //return sb.toString();
 
-                //TODO
-                return null;
+                //Return JSONObject
+                return new JSONObject(sb.toString());
+
 
             } catch(Exception e){
                 //return new String("Exception: " + e.getMessage());
@@ -114,7 +115,9 @@ public class ServerCall extends AsyncTask<String, String, JSONObject> {
                 }
 
                 //return sb.toString();
-                return null;
+
+                //Return JSONObject
+                return new JSONObject(sb.toString());
 
             } catch(Exception e){
                 //return new String("Exception: " + e.getMessage());

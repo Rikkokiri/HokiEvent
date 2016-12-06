@@ -6,19 +6,21 @@ import android.support.annotation.IdRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.roughike.bottombar.BottomBar;
 
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 /**
  *
  * @version 2016.12.XX
  */
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements ResponseRetriever {
 
     private BottomBar bottomBar;
 
@@ -51,6 +53,8 @@ public class ProfileActivity extends AppCompatActivity {
         editProfileButton.setOnClickListener(editProfileListener);
 
         //TODO Pull the user's data from the server?
+
+        new Communicator().getUser(this, "kyz@vt.edu");
 
         //TODO Populate text views with data pulled from the server
         //displayUserInfo(user);
@@ -121,6 +125,17 @@ public class ProfileActivity extends AppCompatActivity {
             case R.id.action_profile:
                 //Do nothing
                 break;
+        }
+    }
+
+    @Override
+    public void getResponse(JSONObject jsonObject) {
+
+        if(jsonObject != null){
+            //interestsField.setText("EditProfile" + "JSONObject isn't null");
+            interestsField.setText(jsonObject.toString());
+        } else {
+            interestsField.setText("JSON NULL");
         }
     }
 
