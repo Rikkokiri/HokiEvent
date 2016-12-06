@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
 import org.json.JSONObject;
 import org.w3c.dom.Text;
@@ -39,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseRetrie
         setContentView(R.layout.activity_profile);
 
         //Build bottom navigation
-        //buildBottomBar(this, savedInstanceState);
+        buildBottomBar(this);
 
         // --- TextViews for displaying the user information ---
         fullNameField = (TextView) findViewById(R.id.profileFullName);
@@ -53,11 +54,12 @@ public class ProfileActivity extends AppCompatActivity implements ResponseRetrie
         editProfileButton.setOnClickListener(editProfileListener);
 
         //TODO Pull the user's data from the server?
-
         new Communicator().getUser(this, "kyz@vt.edu");
 
         //TODO Populate text views with data pulled from the server
-        //displayUserInfo(user);
+        if(user != null) {
+            displayUserInfo(user);
+        }
 
         //TODO Populate pull the interests from the server and show them
 
@@ -94,9 +96,17 @@ public class ProfileActivity extends AppCompatActivity implements ResponseRetrie
      * Build navigation bar located on the bottom of the screen.
      *
      * @param activity
-     * @param savedInstanceState
      */
-    private void buildBottomBar(Activity activity, Bundle savedInstanceState){
+    private void buildBottomBar(Activity activity){
+
+        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                navigate(tabId);
+            }
+        });
 
     }
 
@@ -132,7 +142,6 @@ public class ProfileActivity extends AppCompatActivity implements ResponseRetrie
     public void getResponse(JSONObject jsonObject) {
 
         if(jsonObject != null){
-            //interestsField.setText("EditProfile" + "JSONObject isn't null");
             interestsField.setText(jsonObject.toString());
         } else {
             interestsField.setText("JSON NULL");

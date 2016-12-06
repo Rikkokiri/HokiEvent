@@ -1,5 +1,9 @@
 package com.virginiatech.piraj.hokievent;
 
+import android.util.Log;
+import android.util.StringBuilderPrinter;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -8,19 +12,46 @@ import org.json.JSONObject;
 
 public class ParsingHelper {
 
+    //For parsing user data
+    private static String USER_ID = "userID";
+    private static String FIRST_NAME = "firstName";
+    private static String LAST_NAME = "lastName";
+    private static String EMAIL = "email";
+    private static String PHONENUMBER = "phoneNumber";
+    private static String INTERESTS = "interests";
+
+    //For parsing event data
+
+
     public User parseUser(JSONObject jsonObject){
 
-        //String firstName = jsonObject.getJSONObject("");
-        //String middleName =
+        User user = null;
 
+        try {
+            String firstName = jsonObject.getString(FIRST_NAME);
 
-        //return new User();
-        return null;
+            //TODO middleName
+            String middleName = "Middle name";
+
+            String lastName = jsonObject.getString(LAST_NAME);
+
+            String email = jsonObject.getString(EMAIL);
+            String phoneNumber = jsonObject.getString(PHONENUMBER);
+            String[] interests = jsonObject.getString(INTERESTS).split(",");
+
+            user = new User(firstName, middleName, lastName, email, phoneNumber)
+
+        } catch (JSONException exception){
+            Log.i("ParsingHelper: ", exception.getMessage());
+            return null;
+        }
+
+        return user;
     }
 
     public HokiEvent parseEvent(JSONObject jsonObject){
 
-        //String eventName =
+        //String eventName = jsonObject.getString("firstName");
         //String eventDesc
         //String eventLoc
         //String eventStartTime =
