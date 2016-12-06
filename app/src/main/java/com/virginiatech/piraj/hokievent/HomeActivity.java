@@ -6,19 +6,25 @@ import android.support.annotation.IdRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeActivity extends AppCompatActivity {
 
+    ArrayList<HokiEvent> eventList;
 
     private BottomBar bottomBar;
     private static String CURRENT_TAB = "current_tab";
 
-    private RecyclerView eventListView;
+    private RecyclerView recyclerView;
+    private EventAdapter eAdapter;
     
     
     @Override
@@ -26,12 +32,36 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        eventListView = (RecyclerView) findViewById(R.id.cardList);
-        eventListView.setHasFixedSize(true);
+        //TEST
+        eventList = new ArrayList<HokiEvent>();
+
+        HokiEvent e1 = new HokiEvent("name", "desc", "loc", "startDate", "startTime", "interests");
+        HokiEvent e2 = new HokiEvent("name2", "desc2", "loc2", "startDat2e", "startTime2", "interests2");
+        HokiEvent e3 = new HokiEvent("name3", "des3c", "lo3c", "startDate3", "startTim3e", "interests3");
+        HokiEvent e4 = new HokiEvent("name4", "des4c", "loc4", "startDat4e", "startTim4e", "interests4");
+
+        eventList.add(e1);
+        eventList.add(e2);
+        eventList.add(e3);
+        eventList.add(e4);
+
+
+        recyclerView = (RecyclerView) findViewById(R.id.cardList);
+        recyclerView.setHasFixedSize(true);
+        eAdapter = new EventAdapter(eventList);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        eventListView.setLayoutManager(llm);
-        
+        recyclerView.setLayoutManager(llm);
+        recyclerView.setAdapter(eAdapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
+        //TEST
+
+
+
+
+
         //Build the bottom navigation
         buildBottomBar(this);
 

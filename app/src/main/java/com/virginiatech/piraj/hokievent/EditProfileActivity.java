@@ -81,7 +81,7 @@ public class EditProfileActivity extends AppCompatActivity {
         messageView = (TextView) findViewById(R.id.editProfileButton);
 
         // --- Buttons ---
-        editInterestsButton = (Button) findViewById(R.id.editInterestsButton);
+        editInterestsButton = (Button) findViewById(R.id.selectInterestsButton);
         saveChangesButton = (Button) findViewById(R.id.saveChangesButton);
 
         editInterestsButton.setOnClickListener(editInterestsListener);

@@ -1,5 +1,6 @@
 package com.virginiatech.piraj.hokievent;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,11 +18,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
     private List<HokiEvent> eventList;
 
+
     public static class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         protected TextView eventName;
         protected TextView eventDate;
         protected TextView eventTags;
-        private HokiEvent event;
+
+        protected HokiEvent event;
 
         private static final String EVENT_KEY = "event";
 
@@ -37,6 +40,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         @Override
         public void onClick(View view) {
             Intent startEventDetailsActivity = new Intent(view.getContext(), EventDetailsActivity.class);
+
+            startEventDetailsActivity.putExtra(HokiEvent.EVENT, event);
+
+            view.getContext().startActivity(startEventDetailsActivity);
         }
     }
 
@@ -58,6 +65,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         eventViewHolder.eventDate.setText(event.getEventStartDate());
 
         eventViewHolder.eventTags.setText(event.getInterests());
+
+        eventViewHolder.event = event;
     }
 
     @Override
