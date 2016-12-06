@@ -110,13 +110,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseRetrie
                 navigate(tabId);
             }
         });
-
-        bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
-            @Override
-            public void onTabReSelected(@IdRes int tabId) {
-                navigate(tabId);
-            }
-        });
+        
 
     }
 
