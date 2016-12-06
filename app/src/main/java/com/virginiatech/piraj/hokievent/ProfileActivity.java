@@ -110,7 +110,6 @@ public class ProfileActivity extends AppCompatActivity implements ResponseRetrie
                 navigate(tabId);
             }
         });
-        
 
     }
 
@@ -122,6 +121,7 @@ public class ProfileActivity extends AppCompatActivity implements ResponseRetrie
 
         switch (menuID){
             case R.id.action_home:
+                //This boolean check is here to stop the app from throwing the user back to home view from profile view
                 if(activityLaunched) {
                     Intent goHomeIntent = new Intent(getApplicationContext(), HomeActivity.class);
                     startActivity(goHomeIntent);
