@@ -27,7 +27,7 @@ import java.io.OutputStreamWriter;
  * @version 2016.11.24
  */
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends Activity implements APICaller.TaskCompleted   {
 
     // --- Textfields & buttons ---
     private EditText emailField;
@@ -37,6 +37,8 @@ public class LoginActivity extends Activity {
 
     private Button loginButton;
     private Button createAccountButton;
+
+    User user;
 
     //TODO Forgot password
 
@@ -69,12 +71,12 @@ public class LoginActivity extends Activity {
         @Override
         public void onClick(View view) {
 
-            User user = null;
+            user = null;
 
             APICaller api = new APICaller();
             try {
-                JSONObject json = api.APIgetUser(emailField.getText().toString());
-                user = JSONHelper.createUser(json);
+                api.APIgetUser(emailField.getText().toString(), view.getContext());
+
             }
             catch (JSONException e)
             {
@@ -86,61 +88,6 @@ public class LoginActivity extends Activity {
             }
 
 
-            if (user == null) //TODO Temporarily skip login and just move to home activity
-            {
-                loginFailed.setText("Invalid email/password");
-                return;
-            }
-
-            try {
-
-                File dir = getFilesDir();
-                File file = new File(dir, User.USER_FILE);
-                file.delete();
-
-                FileOutputStream fos = openFileOutput(User.USER_FILE, Context.MODE_PRIVATE);
-
-                OutputStreamWriter writer = new OutputStreamWriter(fos);
-
-                writer.write(user.getUserEmail() + "\n");
-                writer.write(user.getUserID() + "\n");
-                writer.write(user.getFirstName() + "\n");
-                writer.write(user.getMiddleName() + "\n");
-                writer.write(user.getLastName() + "\n");
-                writer.write(user.getPhoneNumber() + "\n");
-                writer.write(user.getInterests() + "\n");
-                writer.write(user.getPassword());
-
-                writer.flush();
-                writer.close();
-
-                FileInputStream fin = openFileInput(User.USER_FILE);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
-
-                String line = reader.readLine();
-
-                while (line != null)
-                {
-                    System.out.println(line);
-                    line = reader.readLine();
-                }
-
-                reader.close();
-
-
-
-            } catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-
-
-
-            //Create intent for starting create account activity
-            Intent startHomeIntent = new Intent(view.getContext(), HomeActivity.class);
-
-            //Start the CreateAccountActivity
-            startActivity(startHomeIntent);
 
         }
     };
@@ -160,4 +107,80 @@ public class LoginActivity extends Activity {
         }
     };
 
+    @Override
+    public void onTaskComplete(String result) {
+
+
+
+        try {
+            JSONObject json = new JSONObject(result);
+            user = JSONHelper.createUser(json);
+        }
+        catch (JSONException e)
+        {
+            System.out.println(e.toString());
+        }
+
+        if (user == null) //TODO Temporarily skip login and just move to home activity
+        {
+            loginFailed.setText("Invalid email/password");
+            return;
+        }
+
+        try {
+
+            File dir = getFilesDir();
+            File file = new File(dir, User.USER_FILE);
+            file.delete();
+
+            FileOutputStream fos = openFileOutput(User.USER_FILE, Context.MODE_PRIVATE);
+
+            OutputStreamWriter writer = new OutputStreamWriter(fos);
+
+            writer.write(user.getUserEmail() + "\n");
+            writer.write(user.getUserID() + "\n");
+            writer.write(user.getFirstName() + "\n");
+            writer.write(user.getMiddleName() + "\n");
+            writer.write(user.getLastName() + "\n");
+            writer.write(user.getPhoneNumber() + "\n");
+            writer.write(user.getInterests() + "\n");
+            writer.write(user.getPassword());
+
+            writer.flush();
+            writer.close();
+
+            FileInputStream fin = openFileInput(User.USER_FILE);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
+
+            String line = reader.readLine();
+
+            while (line != null)
+            {
+                System.out.println(line);
+                line = reader.readLine();
+            }
+
+            reader.close();
+
+
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+        //Create intent for starting create account activity
+        Intent startHomeIntent = new Intent(this, HomeActivity.class);
+
+        //Start the CreateAccountActivity
+        startActivity(startHomeIntent);
+
+
+
+    }
 }

@@ -81,11 +81,11 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         }
 
         if(event != null){
-            getRelationships();
+            //getRelationships();
             showEventInfo();
         }
 
-        setUpButtons();
+        //setUpButtons();
 
         // --- Map ---
         mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
