@@ -1,39 +1,71 @@
 package com.virginiatech.piraj.hokievent;
 
-import android.content.Context;
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.TextView;
-
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.Iterator;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
+import javax.net.ssl.HttpsURLConnection;
+
 /**
  *
  */
-
 public class ServerCall extends AsyncTask<String, String, JSONObject> {
 
+    private static final String GET_URL = "http://71.62.121.1/index.php?";
+    private static final String POST_URL = "";
+    private static final int GET = 0;
+    private static final int POST = 1;
+
     private int byGetOrPost = 0;
+    private ResponseRetriever responseRetriever;
+
+    private JSONObject jsonObject;
 
 
-    //flag 0 means get and 1 means post.(By default it is get.)
-    public ServerCall(int flag) {
+    //Flag 0 means get and 1 means post.(By default it is get.)
+
+    /**
+     * For GET
+     *
+     * @param responseRetriever
+     * @param flag
+     */
+    public ServerCall(ResponseRetriever responseRetriever, int flag) {
+        this.responseRetriever = responseRetriever;
         byGetOrPost = flag;
+    }
+
+    /**
+     * For POST
+     *
+     * @param flag
+     * @param jsonObject
+     */
+    public ServerCall(int flag, JSONObject jsonObject){
+        this.byGetOrPost = flag;
+        this.jsonObject = jsonObject;
     }
 
     @Override
     protected void onPreExecute(){
+        super.onPreExecute();
     }
 
 
@@ -67,8 +99,9 @@ public class ServerCall extends AsyncTask<String, String, JSONObject> {
                 in.close();
                 //return sb.toString();
 
-                //TODO
-                return null;
+                //Return JSONObject
+                return new JSONObject(sb.toString());
+
 
             } catch(Exception e){
                 //return new String("Exception: " + e.getMessage());
@@ -80,52 +113,120 @@ public class ServerCall extends AsyncTask<String, String, JSONObject> {
 
         // ------------ POST ------------
         else{
-            try{
-                String username = (String) params[0];
-                //String password = (String)arg0[1];
+            try {
 
-                String link="http://myphpmysqlweb.hostei.com/loginpost.php";
+                String link = (String) params[0];
 
-                //TODO
-                String data  = URLEncoder.encode("username", "UTF-8") + "=" +
-                        URLEncoder.encode(username, "UTF-8");
+                URL url = new URL(link); // here is your URL path
 
-                URL url = new URL(link);
-                URLConnection conn = url.openConnection();
+                JSONObject postDataParams = new JSONObject();
+                postDataParams.put("name", "abc");
+                postDataParams.put("email", "abc@gmail.com");
+                Log.e("params",postDataParams.toString());
 
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(15000 /* milliseconds */);
+                conn.setConnectTimeout(15000 /* milliseconds */);
+                conn.setRequestMethod("POST");
+                conn.setDoInput(true);
                 conn.setDoOutput(true);
-                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
 
-                wr.write( data );
-                wr.flush();
+                OutputStream os = conn.getOutputStream();
 
-                BufferedReader reader = new BufferedReader(new
-                        InputStreamReader(conn.getInputStream()));
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
 
-                StringBuilder sb = new StringBuilder();
-                String line = null;
+                writer.write(getPostDataString(jsonObject));
 
-                // Read Server Response
-                while((line = reader.readLine()) != null) {
-                    sb.append(line);
-                    break;
+                writer.flush();
+                writer.close();
+                os.close();
+
+                int responseCode=conn.getResponseCode();
+
+                if (responseCode == HttpsURLConnection.HTTP_OK) {
+
+                    BufferedReader in=new BufferedReader(
+                            new InputStreamReader(
+                                    conn.getInputStream()));
+                    StringBuffer sb = new StringBuffer("");
+                    String line="";
+
+                    while((line = in.readLine()) != null) {
+
+                        sb.append(line);
+                        break;
+                    }
+
+                    in.close();
+                    Log.i("ServerCall: ", sb.toString());
+                    //return sb.toString();
+                    return null;
+
                 }
-
-                //return sb.toString();
-                return null;
-
-            } catch(Exception e){
+                else {
+                    //return new String("false : "+responseCode);
+                    Log.i("ServerCall: ", "False: " + responseCode);
+                    return null;
+                }
+            }
+            catch(Exception e){
                 //return new String("Exception: " + e.getMessage());
-                Log.i("ServerCall: ", "Exception " + e.getMessage());
+                Log.i("ServerCall: ", "Exception: " + e.getMessage());
                 return null;
             }
+
         }
     }
+
 
     @Override
     protected void onPostExecute(JSONObject result){
 
-        //TODO Do we need this for anything?
+        if(byGetOrPost == GET) {
+            responseRetriever.getResponse(result);
+        }
 
+        if(byGetOrPost == POST){
+            //TODO What to do on post?
+            Log.i("ServerCall", "POST SUCCESFUL"); //TODO Remove?
+        }
     }
+
+
+    /**
+     * Encode the url string of JSONObject
+     * https://www.studytutorial.in/android-httpurlconnection-post-and-get-request-tutorial
+     *
+     * @param params
+     * @return
+     * @throws Exception
+     */
+    public String getPostDataString(JSONObject params) throws Exception {
+
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+
+        Iterator<String> itr = params.keys();
+
+        while(itr.hasNext()){
+            String key= itr.next();
+            Object value = params.get(key);
+
+            if (first) {
+                first = false;
+            }
+            else {
+                result.append("&");
+            }
+
+            result.append(URLEncoder.encode(key, "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(value.toString(), "UTF-8"));
+        }
+
+        return result.toString();
+    }
+
+
 }

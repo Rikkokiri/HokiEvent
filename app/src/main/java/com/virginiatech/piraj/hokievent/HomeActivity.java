@@ -44,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
      */
     private void buildBottomBar(Activity activity){
 
-        bottomBar = (BottomBar) findViewById(R.id.bottomBar);;
+        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
 
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
@@ -72,8 +72,10 @@ public class HomeActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_search:
-                Intent searchIntent = new Intent(getApplicationContext(), SearchActivity.class);
-                startActivity(searchIntent);
+                //Intent searchIntent = new Intent(getApplicationContext(), SearchActivity.class);
+                //startActivity(searchIntent);
+                Intent eventDetailsIntent = new Intent(getApplicationContext(), EventDetailsActivity.class);
+                startActivity(eventDetailsIntent);
                 break;
 
             case R.id.action_profile:

@@ -7,13 +7,18 @@ import android.support.annotation.IdRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.PhoneNumberUtils;
+
+
+import android.util.Log;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
@@ -27,7 +32,7 @@ import java.io.OutputStreamWriter;
  *
  * @version 2016.12.XX
  */
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements ResponseRetriever {
 
     private BottomBar bottomBar;
 
@@ -46,7 +51,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         //Build bottom navigation
-        //buildBottomBar(this, savedInstanceState);
+        buildBottomBar(this);
 
         // --- TextViews for displaying the user information ---
         fullNameField = (TextView) findViewById(R.id.profileFullName);
@@ -60,9 +65,12 @@ public class ProfileActivity extends AppCompatActivity {
         editProfileButton.setOnClickListener(editProfileListener);
 
         //TODO Pull the user's data from the server?
+        new Communicator().getUser(this, "kyz@vt.edu");
 
         //TODO Populate text views with data pulled from the server
+
         displayUserInfo();
+
 
         //TODO Populate pull the interests from the server and show them
 
@@ -126,9 +134,17 @@ public class ProfileActivity extends AppCompatActivity {
      * Build navigation bar located on the bottom of the screen.
      *
      * @param activity
-     * @param savedInstanceState
      */
-    private void buildBottomBar(Activity activity, Bundle savedInstanceState){
+    private void buildBottomBar(Activity activity){
+
+        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                navigate(tabId);
+            }
+        });
 
     }
 
@@ -161,9 +177,21 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     @Override
+
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
 
         displayUserInfo();
         super.onRestoreInstanceState(savedInstanceState);
     }
+
+    public void getResponse(JSONObject jsonObject) {
+
+        if(jsonObject != null){
+            interestsField.setText(jsonObject.toString());
+        } else {
+            interestsField.setText("JSON NULL");
+        }
+    }
+
+
 }

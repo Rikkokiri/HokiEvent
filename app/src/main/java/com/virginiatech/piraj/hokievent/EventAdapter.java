@@ -54,7 +54,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     public void onBindViewHolder(EventViewHolder eventViewHolder, int i) {
         HokiEvent event = eventList.get(i);
         eventViewHolder.eventName.setText(event.getEventName());
+
         eventViewHolder.eventDate.setText(event.getEventStartDate());
+
         eventViewHolder.eventTags.setText(event.getInterests());
     }
 

@@ -20,6 +20,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
+import org.json.JSONObject;
+
+
 public class CreateAccountActivity extends AppCompatActivity {
 
     // --- Textfields ---
@@ -153,6 +156,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                     passwordField.getText().toString()
             );
 
+
             //TODO Send server new user entry.  Retrieve new userID from server.
 
             user.setUserID(0 + "");
@@ -199,6 +203,10 @@ public class CreateAccountActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+
+
+            //TODO Communicate with server and send it the new user entry
+            new Communicator().addUser(user);
 
 
             Intent startHomeActivity = new Intent(view.getContext(), HomeActivity.class);
@@ -268,4 +276,5 @@ public class CreateAccountActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
 
     }
+
 }

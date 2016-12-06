@@ -3,6 +3,8 @@ package com.virginiatech.piraj.hokievent;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.annotation.IdRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +12,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 import com.roughike.bottombar.BottomBar;
+
+import java.io.IOException;
+import java.util.List;
 
 public class EventDetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -31,6 +38,8 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
     private MapFragment mapFragment;
     private GoogleMap map;
 
+    private HokiEvent event = null;
+
     // --- Bottom bar ---
     BottomBar bottomBar;
 
@@ -39,20 +48,62 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_details);
 
-        //buildBottomBar(this, savedInstanceState);
+        buildBottomBar(this, savedInstanceState);
 
+        //Find view components
+        findById();
+
+        //TODO Pull data from the "server" and write it into TextViews
+        //this.event = ...
+
+        this.event = new HokiEvent("Epic all-nighter", "The most epic all-nighter of all time", "139 Clover Valley Circle, Blacksburg, VA 24060, USA", "December 6th 2016", "Forever", "No tags");
+
+        if(event != null){
+            showEventInfo();
+        }
+
+        // --- Map ---
+        mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+
+        // Use getMapAsync() to set the callback on the fragment.
+        mapFragment.getMapAsync(this);
+
+    }
+
+
+    private void findById(){
         eventName = (TextView) findViewById(R.id.eventName);
         eventDate = (TextView) findViewById(R.id.eventDate);
         eventTime = (TextView) findViewById(R.id.eventTime);
         eventAddress = (TextView) findViewById(R.id.eventAddress);
         eventDescription = (TextView) findViewById(R.id.eventDescription);
 
-        //TODO Pull data from the "server" and write it into TextViews
+    }
 
-        // --- Map ---
-        mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
-        // Use getMapAsync() to set the callback on the fragment.
-        mapFragment.getMapAsync(this);
+    private void showEventInfo(){
+
+        //Event title
+        eventName.setText(event.getEventName());
+
+        if(event.getEventEndDate() != null){
+            //Multiday event
+            eventDate.setText("From " + event.getEventStartDate() + " to " + event.getEventEndDate());
+        } else {
+            eventDate.setText(event.getEventStartDate());
+        }
+
+        if(event.getEventEndTime() != null){
+            //Has end time
+            eventTime.setText("From " + event.getEventStartTime() + " to " + event.getEventEndTime());
+        } else {
+            eventTime.setText(event.getEventStartTime());
+        }
+
+        //Event address
+        eventAddress.setText(event.getEventLoc());
+
+        //Event description
+        eventDescription.setText(event.getEventDesc());
 
     }
 
@@ -65,6 +116,29 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         map = googleMap;
 
         setLocationMarker();
+
+        if(event == null){
+
+            //TODO Handle the situation where we don't have address
+
+        } else {
+            Geocoder geocoder = new Geocoder(this);
+            List<Address> addresses = null;
+
+            try {
+                addresses = geocoder.getFromLocationName(event.getEventLoc(), 1);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (addresses.size() > 0) {
+                double latitude = addresses.get(0).getLatitude();
+                double longitude = addresses.get(0).getLongitude();
+
+                map.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude) , 14.0f) );
+            }
+        }
     }
 
     /**
