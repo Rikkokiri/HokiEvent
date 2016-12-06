@@ -32,6 +32,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
     private TextView eventTime;
     private TextView eventAddress;
     private TextView eventDescription;
+    private TextView eventTags;
 
     //TODO More elements...
 
@@ -84,6 +85,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         eventTime = (TextView) findViewById(R.id.eventTime);
         eventAddress = (TextView) findViewById(R.id.eventAddress);
         eventDescription = (TextView) findViewById(R.id.eventDescription);
+        eventTags = (TextView) findViewById(R.id.tags);
 
     }
 

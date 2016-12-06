@@ -77,7 +77,7 @@ public class EditProfileActivity extends AppCompatActivity {
         lastNameField = (EditText) findViewById(R.id.lastNameField);
         phonenumberField = (EditText) findViewById(R.id.phonenumberField);
 
-        interestsList = (TextView) findViewById(R.id.phonenumberField);
+        interestsList = (TextView) findViewById(R.id.editInterestsList);
         messageView = (TextView) findViewById(R.id.editProfileButton);
 
         // --- Buttons ---
