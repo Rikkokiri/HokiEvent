@@ -306,6 +306,10 @@ public class CreateEventActivity extends AppCompatActivity {
                     startTimeField.getText().toString(),
                     tags);
 
+            if(endTimeField.getText() != null){
+
+            }
+
             //Send server new event entry
             JSONObject json = new JSONObject();
 
@@ -316,6 +320,14 @@ public class CreateEventActivity extends AppCompatActivity {
                 if(newEvent.getEventEndDate() != null){
                     json.put(EVENT_ENDDATE_JSON, newEvent.getEventEndDate());
                 }
+
+                json.put(EVENT_STARTTIME_JSON, newEvent.getEventStartTime());
+                if(newEvent.getEventEndTime() != null){
+                    json.put(EVENT_ENDTIME_JSON, newEvent.getEventEndTime());
+                }
+
+                json.put(EVENT_LOC_JSON, newEvent.getEventLoc());
+
 
             } catch (JSONException exception){
                 //TODO Handle exception

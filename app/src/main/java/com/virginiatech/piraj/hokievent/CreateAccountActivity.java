@@ -59,16 +59,6 @@ public class CreateAccountActivity extends AppCompatActivity {
     static final String PASS = "pass";
     static final String CONFIRM_PASS = "confirm pass";
 
-    //JSON keys
-    private static final String FIRTS_NAME_JSON = "firstName";
-    private static final String MIDDLE_NAME_JSON = "middleName";
-    private static final String LAST_NAME_JSON = "lastName";
-    private static final String EMAIL_JSON = "userEmail";
-    private static final String PHONE_NUMBER_JSON = "phoneNumber";
-    private static final String INTERESTS_JSON = "interests";
-    private static final String PASSWORD_JSON = "password";
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -166,28 +156,19 @@ public class CreateAccountActivity extends AppCompatActivity {
                     passwordField.getText().toString()
             );
 
-
             //Send server new user entry
-            JSONObject json = new JSONObject();
+            JSONObject json = new JSONHelper().createUserJSON(user);
 
-            try {
-                json.put(FIRTS_NAME_JSON, user.getFirstName());
-                json.put(MIDDLE_NAME_JSON, user.getMiddleName());
-                json.put(LAST_NAME_JSON, user.getMiddleName());
-                json.put(EMAIL_JSON, user.getUserEmail());
-                json.put(PHONE_NUMBER_JSON, user.getPhoneNumber());
-                json.put(INTERESTS_JSON, user.getInterests());
-                json.put(PASSWORD_JSON, user.getPassword());
-
-            } catch (JSONException exception){
-                //TODO Handle exception
+            if(json != null) {
+                APICaller api = new APICaller();
+                try {
+                    api.APIpostUser(json);
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
             }
-
-            APICaller api = new APICaller();
-            try {
-                api.APIpostUser(json);
-            } catch(Exception e) {
-                System.out.println(e);
+            else {
+                //TODO Handle the case where the JSON couldn't be created ???
             }
 
             try {
