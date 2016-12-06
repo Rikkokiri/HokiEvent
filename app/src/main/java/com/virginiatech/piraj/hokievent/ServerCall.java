@@ -55,12 +55,11 @@ public class ServerCall extends AsyncTask<String, String, JSONObject> {
     /**
      * For POST
      *
-     * @param responseRetriever
      * @param flag
      * @param jsonObject
      */
-    public ServerCall(ResponseRetriever responseRetriever, int flag, JSONObject jsonObject){
-        this(responseRetriever, flag);
+    public ServerCall(int flag, JSONObject jsonObject){
+        this.byGetOrPost = flag;
         this.jsonObject = jsonObject;
     }
 

@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 public class CreateAccountActivity extends AppCompatActivity {
 
     // --- Textfields ---
@@ -133,6 +135,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             );
 
             //TODO Communicate with server and send it the new user entry
+            new Communicator().addUser(user);
 
             Intent startHomeActivity = new Intent(view.getContext(), HomeActivity.class);
 
@@ -202,4 +205,5 @@ public class CreateAccountActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
 
     }
+
 }

@@ -52,7 +52,7 @@ public class Communicator {
      * format of JSON needed for post:
      * {"userEmail":"bob@vt.edu","firstName":"Bob","lastName":"Jones","phoneNumber":"888-888-8888","interests":"Gaming, Food, Military"}
      */
-    public void addUser(ResponseRetriever retriever, User user){
+    public void addUser(User user){
 
         String url = "71.62.121.1/post/user.php";
 
@@ -74,7 +74,7 @@ public class Communicator {
         }
 
         if(jsonObject != null) {
-            new ServerCall(retriever, POST, jsonObject).execute(url);
+            new ServerCall(POST, jsonObject).execute(url);
         }
         else {
             //TODO Error!
