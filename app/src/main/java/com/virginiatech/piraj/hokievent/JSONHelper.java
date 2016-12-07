@@ -123,47 +123,71 @@ public class JSONHelper {
         return json;
     }
 
+    /**
+     * Parse a list of HokiEvent objects from a JSONArray
+     *
+     * @param jsonArray
+     * @return
+     */
     public static ArrayList<HokiEvent> getAllEvents(JSONArray jsonArray){
 
         ArrayList<HokiEvent> events = new ArrayList<HokiEvent>();
-        System.out.println("jsonArray Null? " + jsonArray.equals(null));
+
         if (jsonArray != null) {
             System.out.println("jsonArray Length " + jsonArray.length());
             for (int i = 0; i < jsonArray.length(); i++) {
 
-                JSONObject eventJSON = null;
                 try {
+                    HokiEvent newEvent = getEvent(jsonArray.getJSONObject(i));
 
-                    eventJSON = jsonArray.getJSONObject(i);
-                    String eventName = eventJSON.getString(EVENT_NAME_JSON);
-                    String eventDesc = eventJSON.getString(EVENT_DESC_JSON);
-                    String eventLoc = eventJSON.getString(EVENT_LOC_JSON);
-                    String eventStartDate = eventJSON.getString(EVENT_STARTDATE_JSON);
-                    String eventStartTime = eventJSON.getString(EVENT_ENDTIME_JSON);
-                    String eventTags = eventJSON.getString(EVENT_TAGS_JSON);
-                    String ownerEmail = eventJSON.getString(EVENT_OWNER_EMAIL);
-
-                    HokiEvent newEvent = new HokiEvent(eventName, eventDesc, eventLoc, eventStartDate, eventStartTime, eventTags);
-                    newEvent.setOwnerEmail(ownerEmail);
-
-                    if(eventJSON.getString(EVENT_ENDDATE_JSON) != null){
-                        newEvent.setEventEndDate(eventJSON.getString(EVENT_ENDDATE_JSON));
+                    //If an event was succesfully parsed from a JSONObject, add it to the eventlist
+                    if(newEvent != null){
+                        events.add(newEvent);
                     }
-
-                    if(eventJSON.getString(EVENT_ENDTIME_JSON) != null){
-                        newEvent.setEventEndTime(eventJSON.getString(EVENT_ENDTIME_JSON));
-                    }
-
-                    events.add(newEvent);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         }
-
         return events;
+    }
+
+    /**
+     * Parse a HokiEvent from a JSONObject
+     *
+     * @param eventJSON
+     * @return
+     */
+    public static HokiEvent getEvent(JSONObject eventJSON){
+
+        try {
+
+            String eventName = eventJSON.getString(EVENT_NAME_JSON);
+            String eventDesc = eventJSON.getString(EVENT_DESC_JSON);
+            String eventLoc = eventJSON.getString(EVENT_LOC_JSON);
+            String eventStartDate = eventJSON.getString(EVENT_STARTDATE_JSON);
+            String eventStartTime = eventJSON.getString(EVENT_ENDTIME_JSON);
+            String eventTags = eventJSON.getString(EVENT_TAGS_JSON);
+            String ownerEmail = eventJSON.getString(EVENT_OWNER_EMAIL);
+
+            HokiEvent newEvent = new HokiEvent(eventName, eventDesc, eventLoc, eventStartDate, eventStartTime, eventTags);
+            newEvent.setOwnerEmail(ownerEmail);
+
+            if(eventJSON.getString(EVENT_ENDDATE_JSON) != null){
+                newEvent.setEventEndDate(eventJSON.getString(EVENT_ENDDATE_JSON));
+            }
+
+            if(eventJSON.getString(EVENT_ENDTIME_JSON) != null){
+                newEvent.setEventEndTime(eventJSON.getString(EVENT_ENDTIME_JSON));
+            }
+
+            return newEvent;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
