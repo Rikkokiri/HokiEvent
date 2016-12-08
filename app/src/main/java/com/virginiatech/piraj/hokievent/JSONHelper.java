@@ -95,7 +95,7 @@ public class JSONHelper {
         return newUser;
 
     }
-
+    
     /**
      * Put the information from a HokiEvent object to a JSONObject
      *
@@ -141,12 +141,12 @@ public class JSONHelper {
      * @param jsonArray
      * @return
      */
-    public static ArrayList<HokiEvent> getAllEvents(JSONArray jsonArray){
+    public static ArrayList<HokiEvent> getEvents(JSONArray jsonArray){
 
         ArrayList<HokiEvent> events = new ArrayList<HokiEvent>();
 
         if (jsonArray != null) {
-            System.out.println("jsonArray Length " + jsonArray.length());
+
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 try {
