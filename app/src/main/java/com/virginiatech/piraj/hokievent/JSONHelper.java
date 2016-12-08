@@ -40,7 +40,7 @@ public class JSONHelper {
     /**
      * Create JSON Object based on a User object
      *
-     * @param user User object that the JSON Object is going to be created from
+     * @param user User object that the JSONObject is going to be created from
      * @return The created JSON Object
      */
     public static JSONObject createUserJSON(User user){
@@ -64,7 +64,13 @@ public class JSONHelper {
         return json;
     }
 
-    public static User createUser(JSONObject userJSON){
+    /**
+     * Parse a User object from a JSONObject
+     *
+     * @param userJSON JSONObject that contains the information that will be stored in the User object that the method creates
+     * @return User object created from the information stored in the parameter userJSON
+     */
+    public static User getUser(JSONObject userJSON){
 
         User newUser = null;
 
@@ -90,6 +96,12 @@ public class JSONHelper {
 
     }
 
+    /**
+     * Put the information from a HokiEvent object to a JSONObject
+     *
+     * @param event
+     * @return
+     */
     public static JSONObject createEventJSON(HokiEvent event){
 
         JSONObject json = new JSONObject();
