@@ -46,6 +46,9 @@ public class APICaller  {
     private String response;
     private TaskCompleted mCallback;
 
+    /**
+     * Interface that is used to access results from some AsyncTasks
+     */
     public interface TaskCompleted {
         public void onTaskComplete(String result);
     }

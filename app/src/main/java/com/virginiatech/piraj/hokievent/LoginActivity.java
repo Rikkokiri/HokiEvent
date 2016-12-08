@@ -87,8 +87,6 @@ public class LoginActivity extends Activity implements APICaller.TaskCompleted  
                 System.out.println(e.toString());
             }
 
-
-
         }
     };
 
@@ -110,15 +108,12 @@ public class LoginActivity extends Activity implements APICaller.TaskCompleted  
     @Override
     public void onTaskComplete(String result) {
 
-
-
         try {
             JSONObject json = new JSONObject(result);
-            user = JSONHelper.createUser(json);
+            user = JSONHelper.getUser(json);
         }
-        catch (JSONException e)
-        {
-            System.out.println(e.toString());
+        catch (JSONException e) {
+            e.printStackTrace();
         }
 
         if (user == null) //TODO Temporarily skip login and just move to home activity
