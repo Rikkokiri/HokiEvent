@@ -56,7 +56,6 @@ public class APICaller  {
     public void APIgetUser(String email, Context context) throws IOException, JSONException{
         mCallback = (TaskCompleted) context;
         new getUser().execute(email);
-        //return new JSONObject(response);
     }
 
     public void APIgetEventAll(Context context) throws IOException, JSONException {
