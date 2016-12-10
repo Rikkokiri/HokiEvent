@@ -27,7 +27,7 @@ import java.io.OutputStreamWriter;
  * @version 2016.11.24
  */
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends Activity implements TaskCompleted {
 
     // --- Textfields & buttons ---
     private EditText emailField;
@@ -104,6 +104,8 @@ public class LoginActivity extends Activity {
         }
     };
 
+
+    @Override
     public void onTaskComplete(String result) {
 
         try {
