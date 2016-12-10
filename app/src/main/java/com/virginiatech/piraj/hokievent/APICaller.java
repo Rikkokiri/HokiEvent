@@ -46,6 +46,9 @@ public class APICaller  {
     private String response;
     private TaskCompleted mCallback;
 
+    /**
+     * Interface that is used to access results from some AsyncTasks
+     */
     public interface TaskCompleted {
         public void onTaskComplete(String result);
     }
@@ -53,7 +56,6 @@ public class APICaller  {
     public void APIgetUser(String email, Context context) throws IOException, JSONException{
         mCallback = (TaskCompleted) context;
         new getUser().execute(email);
-        //return new JSONObject(response);
     }
 
     public void APIgetEventAll(Context context) throws IOException, JSONException {

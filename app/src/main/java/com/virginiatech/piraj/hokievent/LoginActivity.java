@@ -76,7 +76,7 @@ public class LoginActivity extends Activity implements APICaller.TaskCompleted  
             APICaller api = new APICaller();
             try {
                 api.APIgetUser(emailField.getText().toString(), view.getContext());
-
+                //The result of this call is received in onTaskComplete
             }
             catch (JSONException e)
             {
@@ -86,8 +86,6 @@ public class LoginActivity extends Activity implements APICaller.TaskCompleted  
             {
                 System.out.println(e.toString());
             }
-
-
 
         }
     };
@@ -107,22 +105,24 @@ public class LoginActivity extends Activity implements APICaller.TaskCompleted  
         }
     };
 
+    /**
+     * TODO Javadoc
+     *
+     * @param result
+     */
     @Override
     public void onTaskComplete(String result) {
 
-
-
         try {
             JSONObject json = new JSONObject(result);
-            user = JSONHelper.createUser(json);
+            user = JSONHelper.getUser(json);
         }
-        catch (JSONException e)
-        {
-            System.out.println(e.toString());
+        catch (JSONException e) {
+            e.printStackTrace();
         }
 
-        if (user == null) //TODO Temporarily skip login and just move to home activity
-        {
+        if (user == null) {
+            System.out.println("LoginActivity: LOGIN FAILED");
             loginFailed.setText("Invalid email/password");
             return;
         }
@@ -131,8 +131,9 @@ public class LoginActivity extends Activity implements APICaller.TaskCompleted  
 
             File dir = getFilesDir();
             File file = new File(dir, User.USER_FILE);
-            file.delete();
+            //file.delete();
 
+            //FileOutputStream fos = openFileOutput(User.USER_FILE, Context.MODE_PRIVATE);
             FileOutputStream fos = openFileOutput(User.USER_FILE, Context.MODE_PRIVATE);
 
             OutputStreamWriter writer = new OutputStreamWriter(fos);
@@ -162,25 +163,15 @@ public class LoginActivity extends Activity implements APICaller.TaskCompleted  
 
             reader.close();
 
-
-
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-
-
 
         //Create intent for starting create account activity
         Intent startHomeIntent = new Intent(this, HomeActivity.class);
 
         //Start the CreateAccountActivity
         startActivity(startHomeIntent);
-
-
 
     }
 }
