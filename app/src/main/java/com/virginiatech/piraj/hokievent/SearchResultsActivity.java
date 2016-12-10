@@ -20,7 +20,7 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SearchResultsActivity extends AppCompatActivity {
+public class SearchResultsActivity extends AppCompatActivity implements TaskCompleted {
 
     ArrayList<HokiEvent> eventList;
 
@@ -40,14 +40,12 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         eventList = intent.getParcelableArrayListExtra(HokiEvent.EVENT);
-/*
-        APICaller api = new APICaller();
-        JSONArray array;
-*/
+
         ArrayList<HokiEvent> events = new ArrayList<HokiEvent>();
 
 
         //TEST DATA
+        /*
         eventList = new ArrayList<HokiEvent>();
 
         HokiEvent e0 = new HokiEvent("Epic all-nighter", "The most epic all-nighter of all time", "139 Clover Valley Circle, Blacksburg, VA 24060, USA", "December 6th 2016", "Forever", "Academics", "kyz@vt.edu");
@@ -62,32 +60,39 @@ public class SearchResultsActivity extends AppCompatActivity {
         eventList.add(e2);
         eventList.add(e3);
         eventList.add(e4);
+*/
 
+        recyclerView = (RecyclerView) findViewById(R.id.resultList);
 
-        recyclerView = (RecyclerView) findViewById(R.id.cardList);
         recyclerView.setHasFixedSize(true);
-        eAdapter = new EventAdapter(eventList);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(llm);
-        recyclerView.setAdapter(eAdapter);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        //TEST
+        APICaller api = new APICaller(this);
 
-
-        if (eventList.size() == 0)
+        try
         {
-            message.setText("No events found");
+            api.APIgetEventAll();
         }
-        else
+        catch (Exception e)
         {
-            message.setText("");
+
         }
 
 
     }
 
+    /**
+     *
+     */
+    private void updateNoEventsMessage(){
+        if (eventList.size() == 0)
+        {
+            message.setText("You have no events!");
+        }
+        else
+        {
+            message.setText("");
+        }
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -102,6 +107,31 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         super.onRestoreInstanceState(savedInstanceState);
     }
+    /**
+     * Get the resuls from APICaller's method APIgetEventAll
+     *
+     * @param result
+     */
+    @Override
+    public void onTaskComplete(String result) {
+        try {
+            JSONArray jsonArray = new JSONArray(result);
+            eventList = JSONHelper.getEvents(jsonArray);
 
+            eAdapter = new EventAdapter(eventList);
+            LinearLayoutManager llm = new LinearLayoutManager(this);
+            llm.setOrientation(LinearLayoutManager.VERTICAL);
+            recyclerView.setLayoutManager(llm);
+            recyclerView.setAdapter(eAdapter);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+            updateNoEventsMessage();
+
+            eAdapter.notifyDataSetChanged();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -41,8 +41,6 @@ public class CreateEventActivity extends AppCompatActivity {
     private Button cancel;
 
     // --- Time and date ---
-    private DatePicker datePicker;
-    private TimePicker timePicker;
     private Calendar calendar;
     private SimpleDateFormat dateFormatter;
     private SimpleDateFormat timeFormatter;

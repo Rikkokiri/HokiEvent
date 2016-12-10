@@ -102,6 +102,25 @@ public class CreateAccountActivity extends AppCompatActivity implements TaskComp
         } catch (Exception e) { System.out.println("THE PROBLEM IS: " + e + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); }
     }
 
+
+    public void sendData(User user)
+    {
+        //Send server new user entry
+        JSONObject json = new JSONHelper().createUserJSON(user);
+
+        if(json != null) {
+            APICaller api = new APICaller(this);
+            try {
+                api.APIpostUser(json);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+        else {
+            //TODO Handle the case where the JSON couldn't be created ???
+        }
+    }
+
     /**
      * Listener for Select interests -button
      */
@@ -160,20 +179,7 @@ public class CreateAccountActivity extends AppCompatActivity implements TaskComp
                     passwordField.getText().toString()
             );
 
-            //Send server new user entry
-            JSONObject json = new JSONHelper().createUserJSON(user);
 
-            if(json != null) {
-                APICaller api = new APICaller(getApplicationContext());
-                try {
-                    api.APIpostUser(json);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-            }
-            else {
-                //TODO Handle the case where the JSON couldn't be created ???
-            }
 
             try {
 
@@ -219,9 +225,7 @@ public class CreateAccountActivity extends AppCompatActivity implements TaskComp
 
 
 
-            //TODO Communicate with server and send it the new user entry
-            //new Communicator().addUser(user);
-
+            sendData(user);
 
             Intent startHomeActivity = new Intent(view.getContext(), HomeActivity.class);
 
@@ -293,6 +297,6 @@ public class CreateAccountActivity extends AppCompatActivity implements TaskComp
 
     @Override
     public void onTaskComplete(String result) {
-        System.out.println(result);
+
     }
 }

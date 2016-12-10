@@ -59,7 +59,7 @@ public class APICaller  {
         new login().execute();
     }
 
-    public void APIgetUser(String email, Context context) throws IOException, JSONException {
+     public void APIgetUser(String email, Context context) throws IOException, JSONException{
         mCallback = (TaskCompleted) context;
         new getUser().execute(email);
     }

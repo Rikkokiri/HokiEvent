@@ -31,6 +31,7 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
     private TextView eventDateTime;
     private TextView eventAddress;
     private TextView eventDescription;
+    private TextView eventTags;
 
     private Button back;
     private Button finish;
@@ -52,22 +53,10 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_event);
 
-        eventName = (TextView) findViewById(R.id.confirmEventName);
-        eventDateTime = (TextView) findViewById(R.id.confirmEventDateTime);
-        eventAddress = (TextView) findViewById(R.id.confirmEventAddress);
-        eventDescription = (TextView) findViewById(R.id.confirmEventDescription);
-
-        back = (Button) findViewById(R.id.backToCreateEvent);
-        back.setOnClickListener(backListener);
-
-        finish = (Button) findViewById(R.id.finishEventCreation);
-        finish.setOnClickListener(finishListener);
-
-        //TODO Pull data from the "server" and write it into TextViews
+        findById();
 
         Bundle extras = getIntent().getExtras();
-        if (extras != null)
-        {
+        if (extras != null) {
             event = extras.getParcelable(HokiEvent.EVENT);
         }
 
@@ -77,9 +66,59 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
         // Use getMapAsync() to set the callback on the fragment.
         mapFragment.getMapAsync(this);
 
+        showEventInfo();
+    }
+
+    private void showEventInfo()
+    {
+
+        //Event title
+        eventName.setText(event.getEventName());
+
+        if(event.getEventEndDate() != null){
+            //Multiday event
+            eventDateTime.setText("From " + event.getEventStartDate() + " to " + event.getEventEndDate());
+        } else {
+            eventDateTime.setText(event.getEventStartDate());
+        }
+
+        if(event.getEventEndTime() != null){
+            //Has end time
+            eventDateTime.setText("From " + event.getEventStartTime() + " to " + event.getEventEndTime());
+        } else {
+            eventDateTime.setText(event.getEventStartTime());
+        }
+
+        //Event address
+        eventAddress.setText(event.getEventLoc());
+
+        //Event description
+        eventDescription.setText(event.getEventDesc());
+
+        eventTags.setText(event.getInterests());
+
 
 
     }
+
+    private void findById(){
+        eventName = (TextView) findViewById(R.id.confirmEventName);
+        eventDateTime = (TextView) findViewById(R.id.confirmEventDateTime);
+        eventAddress = (TextView) findViewById(R.id.confirmEventAddress);
+        eventDescription = (TextView) findViewById(R.id.confirmEventDescription);
+        eventDescription = (TextView) findViewById(R.id.confirmEventDescription);
+        eventTags = (TextView) findViewById(R.id.confirmEventTags);
+
+        back = (Button) findViewById(R.id.backToCreateEvent);
+        back.setOnClickListener(backListener);
+
+        finish = (Button) findViewById(R.id.finishEventCreation);
+        finish.setOnClickListener(finishListener);
+
+    }
+
+
+
 
     /**
      * Listener for Sign up -button
@@ -89,20 +128,7 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
         public void onClick(View view){
 
             //Send server new event entry
-            JSONObject eventJSON = new JSONHelper().createEventJSON(event);
 
-            if(eventJSON != null) {
-                APICaller api = new APICaller(getApplicationContext());
-                try {
-
-                    api.APIpostEvent(eventJSON);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-            }
-            else {
-                //TODO Handle the case where the JSON couldn't be created ???
-            }
 
             Intent startHomeActivity = new Intent(view.getContext(), HomeActivity.class);
 
@@ -121,6 +147,24 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
             finish();
         }
     };
+
+    public void sendData()
+    {
+        JSONObject eventJSON = new JSONHelper().createEventJSON(event);
+
+        if(eventJSON != null) {
+            APICaller api = new APICaller(getApplicationContext());
+            try {
+
+                api.APIpostEvent(eventJSON);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+        else {
+            //TODO Handle the case where the JSON couldn't be created ???
+        }
+    }
 
     /**
      * Use the onMapReady(GoogleMap) callback method to get a handle to the GoogleMap object.
@@ -176,8 +220,17 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
 
+
+        outState.putParcelable(HokiEvent.EVENT, event);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        event = savedInstanceState.getParcelable(HokiEvent.EVENT);
+        showEventInfo();
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override

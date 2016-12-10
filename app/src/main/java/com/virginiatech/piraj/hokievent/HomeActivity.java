@@ -20,7 +20,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity implements APICaller.TaskCompleted {
+public class HomeActivity extends AppCompatActivity implements TaskCompleted {
 
     ArrayList<HokiEvent> eventList;
 
@@ -44,23 +44,30 @@ public class HomeActivity extends AppCompatActivity implements APICaller.TaskCom
         eventList = new ArrayList<HokiEvent>();
 
 
+
+        /*
+
         HokiEvent e0 = new HokiEvent("Epic all-nighter", "The most epic all-nighter of all time", "139 Clover Valley Circle, Blacksburg, VA 24060, USA", "December 6th 2016", "Forever", "Academics", "kyz@vt.edu");
         HokiEvent e1 = new HokiEvent("Christian's Birthday", "I turn 28.  DESPAIR", "139 Clover Valley Circle, Blacksburg, VA 24060, USA", "December 11th 2016", "12:00 AM", "no one", "k4b0odls@vt.edu");
 
         eventList.add(e0);
         eventList.add(e1);
-        
+        */
 
         recyclerView = (RecyclerView) findViewById(R.id.cardList);
-        recyclerView.setHasFixedSize(true);
-        eAdapter = new EventAdapter(eventList);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(llm);
-        recyclerView.setAdapter(eAdapter);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        updateNoEventsMessage();
+        recyclerView.setHasFixedSize(true);
+
+        APICaller api = new APICaller(this);
+
+        try
+        {
+            api.APIgetEventAll();
+        }
+        catch (Exception e)
+        {
+
+        }
 
     }
 
@@ -149,6 +156,13 @@ public class HomeActivity extends AppCompatActivity implements APICaller.TaskCom
         try {
             JSONArray jsonArray = new JSONArray(result);
             eventList = JSONHelper.getEvents(jsonArray);
+
+            eAdapter = new EventAdapter(eventList);
+            LinearLayoutManager llm = new LinearLayoutManager(this);
+            llm.setOrientation(LinearLayoutManager.VERTICAL);
+            recyclerView.setLayoutManager(llm);
+            recyclerView.setAdapter(eAdapter);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
 
             updateNoEventsMessage();
 
