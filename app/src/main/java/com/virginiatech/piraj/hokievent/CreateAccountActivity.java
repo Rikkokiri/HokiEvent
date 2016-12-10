@@ -24,7 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class CreateAccountActivity extends AppCompatActivity implements APICaller.TaskCompleted {
+public class CreateAccountActivity extends AppCompatActivity implements TaskCompleted {
 
     // --- Textfields ---
     private EditText firstNameField;
@@ -96,9 +96,10 @@ public class CreateAccountActivity extends AppCompatActivity implements APICalle
 
         //TODO Add functionality to button listeners
         try {
-            APICaller api = new APICaller();
-            api.APIgetEventAll(this);
-        } catch (Exception e) { System.out.println(e); }
+            APICaller api = new APICaller(this);
+            api.APIgetEventAll();
+            //System.out.println(api.APIgetEventAll().toString());
+        } catch (Exception e) { System.out.println("THE PROBLEM IS: " + e + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); }
     }
 
     /**
@@ -163,7 +164,7 @@ public class CreateAccountActivity extends AppCompatActivity implements APICalle
             JSONObject json = new JSONHelper().createUserJSON(user);
 
             if(json != null) {
-                APICaller api = new APICaller();
+                APICaller api = new APICaller(getApplicationContext());
                 try {
                     api.APIpostUser(json);
                 } catch (Exception e) {

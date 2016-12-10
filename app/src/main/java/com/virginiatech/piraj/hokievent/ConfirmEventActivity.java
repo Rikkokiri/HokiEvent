@@ -23,7 +23,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.List;
 
-public class ConfirmEventActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class ConfirmEventActivity extends AppCompatActivity implements OnMapReadyCallback, TaskCompleted {
 
     //TODO eventID ?
 
@@ -96,7 +96,7 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
             JSONObject eventJSON = new JSONHelper().createEventJSON(event);
 
             if(eventJSON != null) {
-                APICaller api = new APICaller();
+                APICaller api = new APICaller(getApplicationContext());
                 try {
 
                     api.APIpostEvent(eventJSON);
@@ -184,4 +184,8 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
 
     }
 
+    @Override
+    public void onTaskComplete(String result) {
+
+    }
 }

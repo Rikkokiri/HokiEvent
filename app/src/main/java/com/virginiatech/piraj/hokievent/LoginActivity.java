@@ -27,7 +27,7 @@ import java.io.OutputStreamWriter;
  * @version 2016.11.24
  */
 
-public class LoginActivity extends Activity implements APICaller.TaskCompleted   {
+public class LoginActivity extends Activity {
 
     // --- Textfields & buttons ---
     private EditText emailField;
@@ -73,19 +73,14 @@ public class LoginActivity extends Activity implements APICaller.TaskCompleted  
 
             user = null;
 
-            APICaller api = new APICaller();
+            APICaller api = new APICaller(getApplicationContext());
             try {
-                api.APIgetUser(emailField.getText().toString(), view.getContext());
+                api.APIgetUser(emailField.getText().toString());
 
-            }
-            catch (JSONException e)
-            {
+            } catch (Exception e) {
                 System.out.println(e.toString());
             }
-            catch (IOException e)
-            {
-                System.out.println(e.toString());
-            }
+
 
 
 
@@ -106,7 +101,7 @@ public class LoginActivity extends Activity implements APICaller.TaskCompleted  
             startActivity(startCreateAccountIntent);
         }
     };
-
+/*
     @Override
     public void onTaskComplete(String result) {
 
@@ -182,5 +177,5 @@ public class LoginActivity extends Activity implements APICaller.TaskCompleted  
 
 
 
-    }
+    }*/
 }

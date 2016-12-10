@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.google.android.gms.tasks.Task;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -43,22 +45,26 @@ import javax.net.ssl.HttpsURLConnection;
 public class APICaller  {
 
     final private String address = "http://71.62.121.1/";
-    private String response;
+    public String response = "";
+    public boolean done = false;
+    private Context mContext;
     private TaskCompleted mCallback;
 
-    public interface TaskCompleted {
-        public void onTaskComplete(String result);
+    public APICaller(Context c) {
+        mContext = c;
+        mCallback = (TaskCompleted) mContext;
     }
 
-    public void APIgetUser(String email, Context context) throws IOException, JSONException{
-        mCallback = (TaskCompleted) context;
-        new getUser().execute(email);
-        //return new JSONObject(response);
+    public JSONObject APIgetUser(String email) throws IOException, JSONException, InterruptedException, ExecutionException{
+        new getUser().execute(email).get();
+        return new JSONObject(response);
     }
 
-    public void APIgetEventAll(Context context) throws IOException, JSONException {
-        mCallback = (TaskCompleted) context;
+    public void APIgetEventAll() throws IOException, JSONException {
         new getEventAll().execute();
+        //System.out.println("RESPONSE: " + response + "~~~~~~~~~~~~~~~~~~~~");
+        //return new JSONArray(response);
+        //return new JSONArray("");
     }
 
     public void APIpostUser(JSONObject jObject) throws IOException {
@@ -114,8 +120,9 @@ public class APICaller  {
 
         @Override
         protected void onPostExecute(String s) {
+            //super.onPostExecute(s);
+            response = s;
             super.onPostExecute(s);
-            mCallback.onTaskComplete(s);
             }
         }
 
