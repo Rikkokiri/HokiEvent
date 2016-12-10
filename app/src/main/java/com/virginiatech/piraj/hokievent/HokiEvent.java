@@ -29,15 +29,15 @@ public class HokiEvent implements Parcelable {
 
     public static final String EVENT = "event";
 
-    public HokiEvent(String name, String desc, String loc, String startDate, String startTime, String endTime, String endDate, String tags)
+    public HokiEvent(String name, String desc, String loc, String startDate, String startTime, String endTime, String endDate, String tags, String owner)
     {
-        this(name, desc, loc, startTime, startDate, tags );
+        this(name, desc, loc, startTime, startDate, tags, owner);
 
         eventEndTime = endTime;
         eventEndDate = endDate;
     }
 
-    public HokiEvent(String name, String desc, String loc, String date, String time, String tags)
+    public HokiEvent(String name, String desc, String loc, String date, String time, String tags, String owner)
     {
         eventName = name;
         eventDesc = desc;
@@ -45,6 +45,7 @@ public class HokiEvent implements Parcelable {
         eventStartTime = time;
         eventStartDate = date;
         interests = tags;
+        ownerEmail = owner;
     }
 
     protected HokiEvent(Parcel in) {

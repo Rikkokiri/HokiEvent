@@ -183,7 +183,7 @@ public class JSONHelper {
             String eventTags = eventJSON.getString(EVENT_TAGS_JSON);
             String ownerEmail = eventJSON.getString(EVENT_OWNER_EMAIL);
 
-            HokiEvent newEvent = new HokiEvent(eventName, eventDesc, eventLoc, eventStartDate, eventStartTime, eventTags);
+            HokiEvent newEvent = new HokiEvent(eventName, eventDesc, eventLoc, eventStartDate, eventStartTime, eventTags, ownerEmail);
             newEvent.setOwnerEmail(ownerEmail);
 
             if(eventJSON.getString(EVENT_ENDDATE_JSON) != null){

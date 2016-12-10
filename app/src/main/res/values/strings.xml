@@ -79,4 +79,23 @@
     <!-- Search results -->
     <string name="searchResultsTitle">Search Results</string>
 
+
+    <!-- Tags -->
+    <string-array name="taglist">
+        <item name="tag-academics">Academics</item>
+        <item name="tag-animals">Animals</item>
+        <item name="tag-art">Art</item>
+        <item name="tag-culture">Culture</item>
+        <item name="tag-family">Family</item>
+        <item name="tag-film-tv">Film/TV</item>
+        <item name="tag-food">Food</item>
+        <item name="tag-gaming">Gaming</item>
+        <item name="tag-literature">Literature</item>
+        <item name="tag-military">Military</item>
+        <item name="tag-music">Music</item>
+        <item name="tag-nature">Nature</item>
+        <item name="tag-sports">Sports</item>
+        <item name="tag-travel">Travel</item>
+    </string-array>
+
 </resources>

@@ -75,15 +75,19 @@ public class LoginActivity extends Activity {
 
             APICaller api = new APICaller(getApplicationContext());
             try {
-                api.APIgetUser(emailField.getText().toString());
-
-            } catch (Exception e) {
+                api.APIgetUser(emailField.getText().toString(), view.getContext());
+                //The result of this call is received in onTaskComplete
+            }
+            catch (JSONException e)
+            {
+                System.out.println(e.toString());
+            }
+            catch (IOException e)
+            {
                 System.out.println(e.toString());
             }
 
-
-
-
+>>>>>>> origin/master
         }
     };
 
@@ -101,23 +105,19 @@ public class LoginActivity extends Activity {
             startActivity(startCreateAccountIntent);
         }
     };
-/*
     @Override
     public void onTaskComplete(String result) {
 
-
-
         try {
             JSONObject json = new JSONObject(result);
-            user = JSONHelper.createUser(json);
+            user = JSONHelper.getUser(json);
         }
-        catch (JSONException e)
-        {
-            System.out.println(e.toString());
+        catch (JSONException e) {
+            e.printStackTrace();
         }
 
-        if (user == null) //TODO Temporarily skip login and just move to home activity
-        {
+        if (user == null) {
+            System.out.println("LoginActivity: LOGIN FAILED");
             loginFailed.setText("Invalid email/password");
             return;
         }
@@ -126,8 +126,9 @@ public class LoginActivity extends Activity {
 
             File dir = getFilesDir();
             File file = new File(dir, User.USER_FILE);
-            file.delete();
+            //file.delete();
 
+            //FileOutputStream fos = openFileOutput(User.USER_FILE, Context.MODE_PRIVATE);
             FileOutputStream fos = openFileOutput(User.USER_FILE, Context.MODE_PRIVATE);
 
             OutputStreamWriter writer = new OutputStreamWriter(fos);
@@ -157,25 +158,14 @@ public class LoginActivity extends Activity {
 
             reader.close();
 
-
-
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-
-
 
         //Create intent for starting create account activity
         Intent startHomeIntent = new Intent(this, HomeActivity.class);
 
         //Start the CreateAccountActivity
         startActivity(startHomeIntent);
-
-
-
-    }*/
+}
 }

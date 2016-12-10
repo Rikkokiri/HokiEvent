@@ -162,5 +162,26 @@ public class User implements Parcelable{
 
     public void setSavedEvents(String savedEvents) { this.savedEvents = savedEvents; }
 
+    @Override
+    public String toString(){
+
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("USER - Name: ");
+        builder.append(firstName);
+        builder.append(middleName);
+        builder.append(lastName);
+
+        builder.append(" - EMAIL: ");
+        builder.append(userEmail);
+
+        builder.append(" - NUMBER: ");
+        builder.append(phoneNumber);
+
+        builder.append(" - INTERESTS: ");
+        builder.append(interests);
+
+        return builder.toString();
+    }
 
 }

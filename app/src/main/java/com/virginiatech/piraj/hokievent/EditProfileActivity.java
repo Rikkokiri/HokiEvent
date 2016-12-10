@@ -95,11 +95,11 @@ public class EditProfileActivity extends AppCompatActivity {
             FileInputStream fin = openFileInput(User.USER_FILE);
             BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
 
+            String email = reader.readLine();
             String id = reader.readLine();
             String first = reader.readLine();
             String middle = reader.readLine();
             String last = reader.readLine();
-            String email = reader.readLine();
             String phone = reader.readLine();
             interests = reader.readLine();
             String password = reader.readLine();
@@ -164,7 +164,7 @@ public class EditProfileActivity extends AppCompatActivity {
         @Override
         public void onClick(View view){
 
-            //TODO Update new user data on server
+
 
             user.setFirstName(firstNameField.getText().toString());
             user.setMiddleName(middleNameField.getText().toString());
@@ -214,6 +214,8 @@ public class EditProfileActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+            //TODO Update new user data on server
+
             finish();
 
 
@@ -224,8 +226,13 @@ public class EditProfileActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        //TODO Only ask for confirmation is user changed values in any fields
-        confirmExit();
+        if (!user.getFirstName().equals(firstNameField.getText().toString()) ||
+            !user.getMiddleName().equals(middleNameField.getText().toString()) ||
+            !user.getLastName().equals(lastNameField.getText().toString())   ||
+            !user.getPhoneNumber().equals(phonenumberField.getText().toString())   ||
+            !user.getInterests().equals(interests)) {
+            confirmExit();
+        }
     }
 
     /**
@@ -234,8 +241,8 @@ public class EditProfileActivity extends AppCompatActivity {
     public void confirmExit(){
         new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Closing Activity")
-                .setMessage("Are you sure you want to close this activity?")
+                .setTitle("Discard changes")
+                .setMessage("Are sure you want to discard your changes?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener()
                 {
                     @Override

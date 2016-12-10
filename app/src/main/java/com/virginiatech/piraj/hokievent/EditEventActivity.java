@@ -1,19 +1,10 @@
 package com.virginiatech.piraj.hokievent;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.icu.text.TimeZoneFormat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
@@ -22,10 +13,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
-public class CreateEventActivity extends AppCompatActivity {
+public class EditEventActivity extends AppCompatActivity {
 
     private EditText eventNameField;
 
@@ -37,7 +33,7 @@ public class CreateEventActivity extends AppCompatActivity {
     private TextView messageView;
 
     private Button enterTags;
-    private Button next;
+    private Button done;
     private Button cancel;
 
     // --- Time and date ---
@@ -63,7 +59,7 @@ public class CreateEventActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_event);
+        setContentView(R.layout.activity_edit_event);
 
         dateFormatter = new SimpleDateFormat("MMM d, yyyy", Locale.US); //"EEE, MMM d, ''yy"
         //dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
@@ -86,10 +82,10 @@ public class CreateEventActivity extends AppCompatActivity {
      */
     private void findViewsById(){
 
-        eventNameField = (EditText) findViewById(R.id.createEventName);
-        eventDescriptionField = (EditText) findViewById(R.id.createEventDescription);
+        eventNameField = (EditText) findViewById(R.id.editEventName);
+        eventDescriptionField = (EditText) findViewById(R.id.editEventDescription);
 
-        eventLocationField = (EditText) findViewById(R.id.createEventLocation);
+        eventLocationField = (EditText) findViewById(R.id.editEventLocation);
 
         startDateField = (EditText) findViewById(R.id.startDate);
         endDateField = (EditText) findViewById(R.id.endDate);
@@ -98,14 +94,14 @@ public class CreateEventActivity extends AppCompatActivity {
         endTimeField = (EditText) findViewById(R.id.endTime);
 
         tagsList = (TextView) findViewById(R.id.tagsList);
-        messageView = (TextView) findViewById(R.id.createAccountMessage);
-        enterTags = (Button) findViewById(R.id.createEventTagsButton);
-        next = (Button) findViewById(R.id.createEventNextButton);
-        cancel = (Button) findViewById(R.id.createEventCancelButton);
+        messageView = (TextView) findViewById(R.id.editEventMessage);
+        enterTags = (Button) findViewById(R.id.editEventTagsButton);
+        done = (Button) findViewById(R.id.editEventDoneButton);
+        cancel = (Button) findViewById(R.id.editEventCancelButton);
 
         enterTags.setOnClickListener(selectTagsListener);
         cancel.setOnClickListener(cancelListener);
-        next.setOnClickListener(nextListener);
+        done.setOnClickListener(doneListener);
 
     }
 
@@ -262,7 +258,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
     //TODO figure out how we're doing location.
 
-    private View.OnClickListener nextListener = new View.OnClickListener(){
+    private View.OnClickListener doneListener = new View.OnClickListener(){
         @Override
         public void onClick(View view){
 
@@ -292,7 +288,6 @@ public class CreateEventActivity extends AppCompatActivity {
                 return;
             }
 
-
             String email = "no email";
 
             try {
@@ -303,6 +298,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
                 email = reader.readLine();
 
+
                 reader.close();
 
 
@@ -311,6 +307,8 @@ public class CreateEventActivity extends AppCompatActivity {
             {
                 e.printStackTrace();
             }
+
+
 
             HokiEvent newEvent = new HokiEvent(
                     eventNameField.getText().toString(),
@@ -321,7 +319,6 @@ public class CreateEventActivity extends AppCompatActivity {
                     tags, email);
 
 
-
             if(endDateField.getText().length() > 0){
                 newEvent.setEventEndDate(endDateField.getText().toString());
             }
@@ -330,11 +327,15 @@ public class CreateEventActivity extends AppCompatActivity {
                 newEvent.setEventEndTime(endTimeField.getText().toString());
             }
 
-            Intent startConfirmEventActivity = new Intent(view.getContext(), ConfirmEventActivity.class);
+            //TODO tell server to edit event.
 
-            startConfirmEventActivity.putExtra(HokiEvent.EVENT, newEvent);
+            Intent output = new Intent();
+            output.putExtra(HokiEvent.EVENT, newEvent);
+            setResult(RESULT_OK, output);
 
-            startActivity(startConfirmEventActivity);
+            System.out.println("InterestsActivity returns: " + output.getParcelableExtra(HokiEvent.EVENT));
+
+            finish();
 
         }
     };

@@ -52,8 +52,6 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_event);
 
-        //buildBottomBar(this, savedInstanceState);
-
         eventName = (TextView) findViewById(R.id.confirmEventName);
         eventDateTime = (TextView) findViewById(R.id.confirmEventDateTime);
         eventAddress = (TextView) findViewById(R.id.confirmEventAddress);
@@ -89,8 +87,6 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
     private View.OnClickListener finishListener = new View.OnClickListener(){
         @Override
         public void onClick(View view){
-
-
 
             //Send server new event entry
             JSONObject eventJSON = new JSONHelper().createEventJSON(event);

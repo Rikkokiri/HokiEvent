@@ -55,9 +55,16 @@ public class APICaller  {
         mCallback = (TaskCompleted) mContext;
     }
 
-    public JSONObject APIgetUser(String email) throws IOException, JSONException, InterruptedException, ExecutionException{
-        new getUser().execute(email).get();
-        return new JSONObject(response);
+    /**
+     * Interface that is used to access results from some AsyncTasks
+     */
+    public interface TaskCompleted {
+        public void onTaskComplete(String result);
+    }
+
+    public void APIgetUser(String email, Context context) throws IOException, JSONException{
+        mCallback = (TaskCompleted) context;
+        new getUser().execute(email);
     }
 
     public void APIgetEventAll() throws IOException, JSONException {
