@@ -7,14 +7,19 @@ import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
+
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 
 public class SearchActivity extends AppCompatActivity {
@@ -31,13 +36,13 @@ public class SearchActivity extends AppCompatActivity {
     private SimpleDateFormat dateFormatter;
     private SimpleDateFormat timeFormatter;
 
-    private EditText startDateField;
-    private EditText endDateField;
+    private EditText startDateInput;
+    private EditText endDateInput;
     private DatePickerDialog startDatePicker;
     private DatePickerDialog endDatePicker;
 
-    private EditText startTimeField;
-    private EditText endTimeField;
+    private EditText startTimeInput;
+    private EditText endTimeInput;
     private TimePickerDialog startTimePicker;
     private TimePickerDialog endTimePicker;
 
@@ -46,8 +51,10 @@ public class SearchActivity extends AppCompatActivity {
 
     // --- Strings ---
     private String tags; //Used to store tags that are searched
-    private static final String DATE = "date";
-    private static final String TIME = "time";
+    private static final String START_DATE = "start date";
+    private static final String END_DATE = "end date";
+    private static final String START_TIME = "start time";
+    private static final String END_TIME = "end time";
     private static final String DISTANCE = "distance";
 
 
@@ -59,8 +66,19 @@ public class SearchActivity extends AppCompatActivity {
         //Build bottom navigation
         buildBottomBar(this, savedInstanceState);
 
+        dateFormatter = new SimpleDateFormat("MMM d, yyyy", Locale.US); //"EEE, MMM d, ''yy"
+        //dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        timeFormatter = new SimpleDateFormat("h:mm a", Locale.US);
+
         //Find components by Id
         findById();
+
+        buildDatepicking();
+        buildTimepicking();
+
+        tagsInput.setFocusable(false);
+        tagsInput.setClickable(true);
+        tagsInput.setOnClickListener(selectTagsListener);
 
         //Search button
         searchButton.setOnClickListener(searchHandler);
@@ -77,9 +95,80 @@ public class SearchActivity extends AppCompatActivity {
         tagsInput = (EditText) findViewById(R.id.search_tags_input);
         distanceInput = (EditText) findViewById(R.id.search_input_distance);
 
-        tagsInput.setFocusable(false);
-        tagsInput.setClickable(true);
-        tagsInput.setOnClickListener(selectTagsListener);
+        startDateInput = (EditText) findViewById(R.id.startDate);
+        endDateInput = (EditText) findViewById(R.id.endDate);
+
+        startTimeInput = (EditText) findViewById(R.id.startTime);
+        endTimeInput = (EditText) findViewById(R.id.endTime);
+
+    }
+
+
+    /**
+     * Build DatePickers for start and end date
+     */
+    private void buildDatepicking(){
+
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        startDateInput.setFocusable(false);
+        startDateInput.setClickable(true);
+
+        endDateInput.setFocusable(false);
+        endDateInput.setClickable(true);
+
+        // --- DatePickers ---
+        startDatePicker = new DatePickerDialog(this, startDateListener, year, month, day);
+        endDatePicker = new DatePickerDialog(this, endDateListener, year, month, day);
+
+        startDateInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startDatePicker.show();
+            }
+        });
+
+        endDateInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                endDatePicker.show();
+            }
+        });
+
+    }
+
+    /**
+     * Build TimePickers for start and end time
+     */
+    private void buildTimepicking(){
+
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        startTimeInput.setFocusable(false);
+        startTimeInput.setClickable(true);
+
+        endTimeInput.setFocusable(false);
+        endTimeInput.setClickable(true);
+
+        startTimePicker = new TimePickerDialog(this, startTimeListener, hour, minute, DateFormat.is24HourFormat(this));
+        endTimePicker = new TimePickerDialog(this, endTimeListener, hour, minute, DateFormat.is24HourFormat(this));
+
+        startTimeInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startTimePicker.show();
+            }
+        });
+
+        endTimeInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                endTimePicker.show();
+            }
+        });
 
     }
 
@@ -143,6 +232,97 @@ public class SearchActivity extends AppCompatActivity {
     };
 
 
+
+    /**
+     * Listener for DatePickerDialog used to pick start date of the event
+     */
+    private DatePickerDialog.OnDateSetListener startDateListener = new DatePickerDialog.OnDateSetListener(){
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            Calendar newDate = Calendar.getInstance();
+            newDate.set(year, monthOfYear, dayOfMonth);
+            startDateInput.setText(dateFormatter.format(newDate.getTime()));
+        }
+    };
+
+    /**
+     * Listener for DatePickerDialog used to pick end date of the event
+     */
+    private DatePickerDialog.OnDateSetListener endDateListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            Calendar newDate = Calendar.getInstance();
+            newDate.set(year, monthOfYear, dayOfMonth);
+            endDateInput.setText(dateFormatter.format(newDate.getTime()));
+        }
+    };
+
+    /**
+     * Listener for TimePickerDialog used to pick the start time of the event
+     */
+    private TimePickerDialog.OnTimeSetListener startTimeListener = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+
+            Calendar newTime = Calendar.getInstance();
+            newTime.set(Calendar.HOUR_OF_DAY, hour);
+            newTime.set(Calendar.MINUTE, minute);
+
+            startTimeInput.setText(timeFormatter.format(newTime.getTime()));
+        }
+    };
+
+    /**
+     * Listener for TimePickerDialog used to pick the end time of the event
+     */
+    private TimePickerDialog.OnTimeSetListener endTimeListener = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+
+            Calendar newTime = Calendar.getInstance();
+            newTime.set(Calendar.HOUR_OF_DAY, hour);
+            newTime.set(Calendar.MINUTE, minute);
+
+            endTimeInput.setText(timeFormatter.format(newTime.getTime()));
+        }
+    };
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState){
+
+        startDateInput.setText(savedInstanceState.getString(START_DATE));
+        endDateInput.setText(savedInstanceState.getString(END_DATE));
+
+        startTimeInput.setText(savedInstanceState.getString(START_TIME));
+        endTimeInput.setText(savedInstanceState.getString(END_TIME));
+
+        distanceInput.setText(savedInstanceState.getString(DISTANCE));
+        tags = savedInstanceState.getString(InterestsActivity.INTEREST);
+
+        super.onRestoreInstanceState(savedInstanceState);
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        outState.putString(START_DATE, startDateInput.getText().toString());
+        outState.putString(END_DATE, endDateInput.getText().toString());
+
+        outState.putString(START_TIME, startTimeInput.getText().toString());
+        outState.putString(END_TIME, endTimeInput.getText().toString());
+
+        outState.putString(DISTANCE, distanceInput.getText().toString());
+        outState.putString(InterestsActivity.INTEREST, tags);
+
+        super.onSaveInstanceState(outState);
+    }
+
+    // - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o -
+    // - o - o - o - o - o - o - o - o - o NAVIGATION BAR  - o - o - o -
+    // - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o -
+
     /**
      * Build navigation bar located on the bottom of the screen.
      *
@@ -194,26 +374,4 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState){
-
-        tags = savedInstanceState.getString(InterestsActivity.INTEREST);
-        dateInput.setText(savedInstanceState.getString(DATE));
-        timeInput.setText(savedInstanceState.getString(TIME));
-        distanceInput.setText(savedInstanceState.getString(DISTANCE));
-
-        super.onRestoreInstanceState(savedInstanceState);
-
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-
-        outState.putString(DATE, dateInput.getText().toString());
-        outState.putString(TIME, timeInput.getText().toString());
-        outState.putString(DISTANCE, distanceInput.getText().toString());
-        outState.putString(InterestsActivity.INTEREST, tags);
-
-        super.onSaveInstanceState(outState);
-    }
 }
