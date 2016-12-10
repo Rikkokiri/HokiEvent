@@ -35,7 +35,6 @@ public class InterestsActivity extends AppCompatActivity {
     private ToggleButton animals;
 
     // --- Buttons ---
-
     private Button done;
 
     // --- CONSTANTS ---
@@ -227,23 +226,16 @@ public class InterestsActivity extends AppCompatActivity {
         System.out.println("InterestsActivity builds: " + string);
 
         return string;
-
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        // Necessary to restore the BottomBar's state, otherwise we would
-        // lose the current tab on orientation change.
-
-
         outState.putString(INTEREST, buildInterests());
-
         super.onSaveInstanceState(outState);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-
         setButtons(savedInstanceState.getString(INTEREST));
         super.onRestoreInstanceState(savedInstanceState);
 

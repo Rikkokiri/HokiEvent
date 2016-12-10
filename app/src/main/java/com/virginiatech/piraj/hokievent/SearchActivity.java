@@ -2,6 +2,7 @@ package com.virginiatech.piraj.hokievent;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +27,10 @@ public class SearchActivity extends AppCompatActivity {
     private boolean activityLaunched = false;
 
     // --- Strings ---
-    private static final String TAGS = "tags";
+    private String tags; //Used to store tags that are searched
+    private static final String DATE = "date";
+    private static final String TIME = "time";
+    private static final String DISTANCE = "distance";
 
 
     @Override
@@ -59,20 +63,45 @@ public class SearchActivity extends AppCompatActivity {
 
         tagsInput.setFocusable(false);
         tagsInput.setClickable(true);
+        tagsInput.setOnClickListener(selectTagsListener);
 
     }
 
     /**
      * Listener for tagsInput, open view for selecting tags
      */
-    private View.OnClickListener tagsHandler = new View.OnClickListener() {
+    private View.OnClickListener selectTagsListener = new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
 
+            Intent selectTagsIntent = new Intent(view.getContext(), InterestsActivity.class);
+            selectTagsIntent.putExtra(InterestsActivity.INTEREST, tags);
 
+            startActivityForResult(selectTagsIntent, 0);
 
         }
     };
+
+    /**
+     * Get the results from selecting tags
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+
+        if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
+            tags = data.getStringExtra(InterestsActivity.INTEREST);
+
+            if (tags.equals("")) {
+                tagsInput.setText("");
+            }
+            else {
+                tagsInput.setText(tags);
+            }
+        }
+    }
 
     /**
      * Listener for search button
@@ -150,10 +179,25 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState){
+
+        tags = savedInstanceState.getString(InterestsActivity.INTEREST);
+        dateInput.setText(savedInstanceState.getString(DATE));
+        timeInput.setText(savedInstanceState.getString(TIME));
+        distanceInput.setText(savedInstanceState.getString(DISTANCE));
+
+        super.onRestoreInstanceState(savedInstanceState);
+
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
+
+        outState.putString(DATE, dateInput.getText().toString());
+        outState.putString(TIME, timeInput.getText().toString());
+        outState.putString(DISTANCE, distanceInput.getText().toString());
+        outState.putString(InterestsActivity.INTEREST, tags);
+
         super.onSaveInstanceState(outState);
-
-
-
     }
 }
