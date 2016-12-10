@@ -41,33 +41,77 @@
                 android:layout_height="wrap_content"
                 />
 
-            <!-- .o.o.o.o. Date .o.o.o.o. -->
+            <!-- .o.o.o.o.o.o.o.o.o. Time & Date .o.o.o.o.o.o.o.o.o. -->
 
-            <TextView
-                android:text="@string/searchDateTitle"
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:stretchColumns="2"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/tableLayout">
 
-            <!-- TODO Input date: DatePicker? -->
-            <EditText
-                android:id="@+id/search_input_date"
-                style="@style/TextfieldBaseStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
-            <!-- .o.o.o.o. Time .o.o.o.o. -->
+                <!-- Date and time -->
 
-            <TextView
-                android:text="@string/searchTimeTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                <TableRow>
+                    <TextView
+                        android:text="@string/searchStartDate"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"/>
 
-            <!-- TODO Input time: TimePicker? -->
-            <EditText
-                android:id="@+id/search_input_time"
-                style="@style/TextfieldBaseStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="@string/searchEndDate"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+
+                        android:layout_weight="1"/>
+                </TableRow>
+
+                <TableRow>
+                    <!-- TODO Use DatePicker and TimePicker? -->
+                    <EditText
+                        android:id="@+id/startDate"
+                        style="@style/TextfieldBaseStyle"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:inputType="date" />
+
+                    <EditText
+                        android:id="@+id/endDate"
+                        style="@style/TextfieldBaseStyle"
+                        android:layout_weight="1"
+                        android:inputType="date" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="@string/searchStartTime"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:text="@string/searchEndTime"
+                        android:layout_weight="1"/>
+                </TableRow>
+
+                <TableRow>
+                    <EditText
+                        android:id="@+id/startTime"
+                        style="@style/TextfieldBaseStyle"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:inputType="time" />
+
+                    <EditText
+                        android:id="@+id/endTime"
+                        style="@style/TextfieldBaseStyle"
+                        android:layout_weight="1"
+                        android:inputType="time" />
+
+                </TableRow>
+
+            </TableLayout>
 
             <!-- .o.o.o.o. Distance .o.o.o.o. -->
 

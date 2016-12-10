@@ -1,6 +1,8 @@
 package com.virginiatech.piraj.hokievent;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,9 @@ import android.widget.EditText;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -19,9 +24,22 @@ public class SearchActivity extends AppCompatActivity {
 
     //Search inputs
     private EditText tagsInput;
-    private EditText dateInput;
-    private EditText timeInput;
     private EditText distanceInput;
+
+    // --- Time and date ---
+    private Calendar calendar;
+    private SimpleDateFormat dateFormatter;
+    private SimpleDateFormat timeFormatter;
+
+    private EditText startDateField;
+    private EditText endDateField;
+    private DatePickerDialog startDatePicker;
+    private DatePickerDialog endDatePicker;
+
+    private EditText startTimeField;
+    private EditText endTimeField;
+    private TimePickerDialog startTimePicker;
+    private TimePickerDialog endTimePicker;
 
     private Button searchButton;
     private boolean activityLaunched = false;
@@ -57,8 +75,6 @@ public class SearchActivity extends AppCompatActivity {
 
         searchButton = (Button) findViewById(R.id.searchButton);
         tagsInput = (EditText) findViewById(R.id.search_tags_input);
-        dateInput = (EditText) findViewById(R.id.search_input_date);
-        timeInput = (EditText) findViewById(R.id.search_input_time);
         distanceInput = (EditText) findViewById(R.id.search_input_distance);
 
         tagsInput.setFocusable(false);

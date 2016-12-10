@@ -71,8 +71,10 @@
     <string name="searchActivityTitle">Search Events</string>
 
     <string name="searchTagsTitle">Input Tags</string>
-    <string name="searchDateTitle">Input Date</string>
-    <string name="searchTimeTitle">Select Time</string>
+    <string name="searchStartDate">Input Start Date</string>
+    <string name="searchEndDate">Input End Date</string>
+    <string name="searchStartTime">Select Start Time</string>
+    <string name="searchEndTime">Select End Time</string>
     <string name="searchDistanceTitle">Select Distance</string>
     <string name="searchButton">Search</string>
 
