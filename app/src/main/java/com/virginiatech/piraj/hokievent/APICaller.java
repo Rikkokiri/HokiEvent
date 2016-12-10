@@ -55,14 +55,7 @@ public class APICaller  {
         mCallback = (TaskCompleted) mContext;
     }
 
-    /**
-     * Interface that is used to access results from some AsyncTasks
-     */
-    public interface TaskCompleted {
-        public void onTaskComplete(String result);
-    }
-
-    public void APIgetUser(String email, Context context) throws IOException, JSONException{
+     public void APIgetUser(String email, Context context) throws IOException, JSONException{
         mCallback = (TaskCompleted) context;
         new getUser().execute(email);
     }

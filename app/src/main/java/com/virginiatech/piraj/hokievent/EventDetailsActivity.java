@@ -63,9 +63,6 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_details);
 
-        leftButton = (Button) findViewById(R.id.leftButton);
-        rightButton = (Button) findViewById(R.id.rightButton);
-
         buildBottomBar(this, savedInstanceState);
 
         //Find view components
@@ -108,8 +105,8 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         eventDescription = (TextView) findViewById(R.id.eventDescription);
         eventTags = (TextView) findViewById(R.id.tags);
 
-        //leftButton = (Button) findViewById(R.id.leftButton);
-        //rightButton = (Button) findViewById(R.id.rightButton);
+        leftButton = (Button) findViewById(R.id.leftButton);
+        rightButton = (Button) findViewById(R.id.rightButton);
 
     }
 

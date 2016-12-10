@@ -152,13 +152,13 @@ public class SearchActivity extends AppCompatActivity {
     private void buildBottomBar(Activity activity, Bundle savedInstanceState){
 
         bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-
+/*
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
                 navigate(tabId);
             }
-        });
+        };*/
     }
 
     /**
