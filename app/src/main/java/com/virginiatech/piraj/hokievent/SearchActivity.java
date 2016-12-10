@@ -2,21 +2,14 @@ package com.virginiatech.piraj.hokievent;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -31,6 +24,10 @@ public class SearchActivity extends AppCompatActivity {
 
     private Button searchButton;
     private boolean activityLaunched = false;
+
+    // --- Strings ---
+    private static final String TAGS = "tags";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +52,27 @@ public class SearchActivity extends AppCompatActivity {
     private void findById(){
 
         searchButton = (Button) findViewById(R.id.searchButton);
-
         tagsInput = (EditText) findViewById(R.id.search_tags_input);
         dateInput = (EditText) findViewById(R.id.search_input_date);
         timeInput = (EditText) findViewById(R.id.search_input_time);
         distanceInput = (EditText) findViewById(R.id.search_input_distance);
 
+        tagsInput.setFocusable(false);
+        tagsInput.setClickable(true);
+
     }
+
+    /**
+     * Listener for tagsInput, open view for selecting tags
+     */
+    private View.OnClickListener tagsHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+
+
+        }
+    };
 
     /**
      * Listener for search button
@@ -142,8 +153,7 @@ public class SearchActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        // Necessary to restore the BottomBar's state, otherwise we would
-        // lose the current tab on orientation change.
-        //bottomBar.onSaveInstanceState(outState);
+
+
     }
 }
