@@ -1,12 +1,15 @@
 package com.virginiatech.piraj.hokievent;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.support.annotation.IdRes;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -60,13 +63,13 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_details);
 
+        leftButton = (Button) findViewById(R.id.leftButton);
+        rightButton = (Button) findViewById(R.id.rightButton);
+
         buildBottomBar(this, savedInstanceState);
 
         //Find view components
         findById();
-
-        //TODO Pull data from the "server" and write it into TextViews
-        //this.event = ...
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -81,11 +84,11 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         }
 
         if(event != null){
-            //getRelationships();
+            getRelationships();
             showEventInfo();
         }
 
-        //setUpButtons();
+        setUpButtons();
 
         // --- Map ---
         mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
@@ -118,7 +121,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
             BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
 
             String email = reader.readLine();
-
+            System.out.println("email: " + email);
             if (event.getOwnerEmail().equals(email))
             {
                 owned = true;
@@ -131,6 +134,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
             e.printStackTrace();
         }
     }
+
 
 
     private void showEventInfo(){
@@ -167,35 +171,118 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         if (owned)
         {
             leftButton.setText("Cancel Event");
-            //leftButton.setOnClickListener(cancelListener);
+            leftButton.setOnClickListener(cancelListener);
             rightButton.setText("Edit Event");
-            //rightButton.setOnClickListener(editListener);
+            rightButton.setOnClickListener(editListener);
         }
         else
         {
             if (saved)
             {
-                leftButton.setText("Discard Event");
-                //leftButton.setOnClickListener(discardListener);
+                leftButton.setText("Un-Save Event");
+                leftButton.setOnClickListener(unSaveListener);
             }
             else
             {
                 leftButton.setText("Save Event");
-                //leftButton.setOnClickListener(saveListener);
+                leftButton.setOnClickListener(saveListener);
             }
 
             if (joined)
             {
                 rightButton.setText("Leave Event");
-                //rightButton.setOnClickListener(leaveListener);
+                rightButton.setOnClickListener(leaveListener);
             }
             else
             {
                 rightButton.setText("Join Event");
-                //rightButton.setOnClickListener(joinListener);
+                rightButton.setOnClickListener(joinListener);
             }
 
         }
+    }
+
+    private View.OnClickListener cancelListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            new AlertDialog.Builder(v.getContext())
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("Canceling Event")
+                    .setMessage("Are you sure you want to cancel this event?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            //TODO cancel teh goddamn event
+
+                            finish();
+                        }
+
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        }
+    };
+
+    private View.OnClickListener editListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Intent editEventIntent = new Intent(v.getContext(), EditEventActivity.class);
+
+            startActivityForResult(editEventIntent, 0);
+
+        }
+    };
+
+    private View.OnClickListener saveListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            //TODO tell server to add this to user's list of saved events;
+            saved = true;
+            setUpButtons();
+        }
+    };
+
+    private View.OnClickListener unSaveListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            //TODO tell server to add this to user's list of saved events;
+            saved = false;
+            setUpButtons();
+        }
+    };
+
+    private View.OnClickListener joinListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            //TODO tell server to add this to user's list of saved events;
+            joined = true;
+            setUpButtons();
+        }
+    };
+
+    private View.OnClickListener leaveListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            //TODO tell server to add this to user's list of saved events;
+            joined = false;
+            setUpButtons();
+        }
+    };
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
+            event = data.getParcelableExtra(HokiEvent.EVENT);
+            System.out.println("CreateAccountActivity received: " + event);
+        }
+
+        showEventInfo();
     }
 
     /**

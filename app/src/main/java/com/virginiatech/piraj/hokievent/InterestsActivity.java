@@ -53,7 +53,7 @@ public class InterestsActivity extends AppCompatActivity {
 
         // DONE -button
         doneButton = (Button) findViewById(R.id.doneSelecting);
-        doneButton.setOnClickListener(doneSelectingListener);
+        doneButton.setOnClickListener(doneListener);
         
         Intent intent = getIntent();
         oldInterests = intent.getStringExtra(INTEREST);
@@ -75,28 +75,9 @@ public class InterestsActivity extends AppCompatActivity {
         travel = (ToggleButton) findViewById(R.id.travel);
         animals = (ToggleButton) findViewById(R.id.animals);
         
-        done = (Button) findViewById(R.id.doneSelecting);
-        
-        done.setOnClickListener(doneListener);
-        
         setButtons(oldInterests);
 
     }
-
-
-    private View.OnClickListener doneSelectingListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            //TODO Save which interests where selected
-
-            //TODO Return to Create Account view
-            Intent returnToCreateAccount = new Intent(view.getContext(), CreateAccountActivity.class);
-            startActivity(returnToCreateAccount);
-
-        }
-    };
-
 
     /**
      * Listener for Done button

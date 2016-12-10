@@ -114,7 +114,7 @@ public class LoginActivity extends Activity implements APICaller.TaskCompleted  
 
         try {
             JSONObject json = new JSONObject(result);
-            user = JSONHelper.createUser(json);
+            user = JSONHelper.getUser(json);
         }
         catch (JSONException e)
         {

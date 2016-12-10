@@ -50,11 +50,11 @@ public class SearchResultsActivity extends AppCompatActivity {
         //TEST DATA
         eventList = new ArrayList<HokiEvent>();
 
-        HokiEvent e0 = new HokiEvent("Epic all-nighter", "The most epic all-nighter of all time", "139 Clover Valley Circle, Blacksburg, VA 24060, USA", "December 6th 2016", "Forever", "Academics");
-        HokiEvent e1 = new HokiEvent("Fashion Show", "People dress up in ridiculous outfits", "paris", "December 10", "10 AM", "Culture, Sports");
-        HokiEvent e2 = new HokiEvent("Christian's Birthday", "I turn 28.  DESPAIR", "139 Clover Valley Circle, Blacksburg, VA 24060, USA", "December 11th 2016", "12:00 AM", "no one");
-        HokiEvent e3 = new HokiEvent("Christmas", "The most wonderful time of the year", "North Pole", "December 25 2016", "12:00 AM", "Family, Food");
-        HokiEvent e4 = new HokiEvent("New Year", "Go to hell, 2016", "New York City", "January 1, 217", "12:00 AM", "Culture, Family, Food");
+        HokiEvent e0 = new HokiEvent("Epic all-nighter", "The most epic all-nighter of all time", "139 Clover Valley Circle, Blacksburg, VA 24060, USA", "December 6th 2016", "Forever", "Academics", "kyz@vt.edu");
+        HokiEvent e1 = new HokiEvent("Fashion Show", "People dress up in ridiculous outfits", "paris", "December 10", "10 AM", "Culture, Sports", "fake@email.com");
+        HokiEvent e2 = new HokiEvent("Christian's Birthday", "I turn 28.  DESPAIR", "139 Clover Valley Circle, Blacksburg, VA 24060, USA", "December 11th 2016", "12:00 AM", "no one","k4b0odls@vt.edu");
+        HokiEvent e3 = new HokiEvent("Christmas", "The most wonderful time of the year", "North Pole", "December 25 2016", "12:00 AM", "Family, Food", "k4b0odls@vt.edu");
+        HokiEvent e4 = new HokiEvent("New Year", "Go to hell, 2016", "New York City", "January 1, 217", "12:00 AM", "Culture, Family, Food", "fake@email.com");
 
 
         eventList.add(e0);
