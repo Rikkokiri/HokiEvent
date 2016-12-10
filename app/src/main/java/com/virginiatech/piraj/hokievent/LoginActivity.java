@@ -86,8 +86,6 @@ public class LoginActivity extends Activity {
             {
                 System.out.println(e.toString());
             }
-
->>>>>>> origin/master
         }
     };
 
@@ -105,7 +103,7 @@ public class LoginActivity extends Activity {
             startActivity(startCreateAccountIntent);
         }
     };
-    @Override
+
     public void onTaskComplete(String result) {
 
         try {

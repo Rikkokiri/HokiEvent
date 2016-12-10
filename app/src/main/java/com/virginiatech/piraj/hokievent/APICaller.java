@@ -55,23 +55,17 @@ public class APICaller  {
         mCallback = (TaskCompleted) mContext;
     }
 
-    /**
-     * Interface that is used to access results from some AsyncTasks
-     */
-    public interface TaskCompleted {
-        public void onTaskComplete(String result);
+    public void APIlogin(JSONObject j) throws IOException, JSONException {
+        new login().execute();
     }
 
-    public void APIgetUser(String email, Context context) throws IOException, JSONException{
+    public void APIgetUser(String email, Context context) throws IOException, JSONException {
         mCallback = (TaskCompleted) context;
         new getUser().execute(email);
     }
 
     public void APIgetEventAll() throws IOException, JSONException {
         new getEventAll().execute();
-        //System.out.println("RESPONSE: " + response + "~~~~~~~~~~~~~~~~~~~~");
-        //return new JSONArray(response);
-        //return new JSONArray("");
     }
 
     public void APIpostUser(JSONObject jObject) throws IOException {
@@ -90,12 +84,50 @@ public class APICaller  {
         new putUser().execute(jObject);
     }
 
+    private class login extends AsyncTask<Void, Void, String> {
+        @Override
+        protected String doInBackground(Void... avoid) {
+            InputStream input = null;
+            try {
+                URL url = new URL(address + "get/index.php");
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+                urlConnection.setConnectTimeout(15000);
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setChunkedStreamingMode(0);
+                urlConnection.connect();
+
+                input = urlConnection.getInputStream();
+                final int bufferSize = 1024;
+                final char[] buffer = new char[bufferSize];
+                final StringBuilder out = new StringBuilder();
+                Reader in = new InputStreamReader(input, "UTF-8");
+                for (; ; ) {
+                    int rsz = in.read(buffer, 0, buffer.length);
+                    if (rsz < 0)
+                        break;
+                    out.append(buffer, 0, rsz);
+                }
+                urlConnection.disconnect();
+                return out.toString();
+            } catch (Exception e) {
+                System.out.println("ERROR: " + e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            mCallback.onTaskComplete(s);
+        }
+    }
+
     private class getUser extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... email) {
             InputStream input = null;
             try {
-                //System.out.println(address+ "get/user.php?email=" + email[0]);
                 URL url = new URL(address + "get/user.php?email=" + email[0]);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
