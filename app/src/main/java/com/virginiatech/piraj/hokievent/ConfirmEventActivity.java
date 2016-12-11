@@ -19,6 +19,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.roughike.bottombar.BottomBar;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.List;
@@ -106,6 +107,9 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
 
     }
 
+    /**
+     * Find layout components by id
+     */
     private void findById(){
 
         eventName = (TextView) findViewById(R.id.confirmEventName);
