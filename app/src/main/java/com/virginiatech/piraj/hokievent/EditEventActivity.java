@@ -55,6 +55,8 @@ public class EditEventActivity extends AppCompatActivity {
 
     private String tags;
 
+    private HokiEvent event;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +76,54 @@ public class EditEventActivity extends AppCompatActivity {
         buildTimepicking();
 
         tags = "";
+
+        //Get the event information passed from the previous activity
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            event = extras.getParcelable(HokiEvent.EVENT);
+        }
+
+        //Show the event information
+        if(event != null) {
+            showInfo();
+        }
         
+    }
+
+    /**
+     * Display the information regarding the event to be edited
+     */
+    private void showInfo(){
+
+        //Event name
+        eventNameField.setText(event.getEventName());
+
+        // --- Time and date (start and end) ---
+
+        startDateField.setText(event.getEventStartDate());
+
+        if(event.getEventEndDate() != null){
+            endDateField.setText(event.getEventEndDate());
+        }
+
+        startTimeField.setText(event.getEventStartTime());
+
+        if(event.getEventEndTime() != null){
+            endTimeField.setText(event.getEventEndTime());
+        }
+
+        //Address
+        if(event.getEventLoc() != null){
+            eventLocationField.setText(event.getEventLoc());
+        }
+
+        //Description
+        eventDescriptionField.setText(event.getEventDesc());
+
+        //Tags
+        tags = event.getInterests();
+        tagsList.setText(tags);
+
     }
 
     /**

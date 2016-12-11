@@ -22,6 +22,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -53,6 +55,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
     private GoogleMap map;
 
     private HokiEvent event = null;
+    private String userEmail = "";
 
     // --- Bottom bar ---
     BottomBar bottomBar;
@@ -121,10 +124,16 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
 
             String email = reader.readLine();
             System.out.println("email: " + email);
-            if (event.getOwnerEmail().equals(email))
-            {
+
+            userEmail = email;
+
+            if (event.getOwnerEmail().equals(email)) {
                 owned = true;
             }
+
+            //TODO Get rest of the relationships?
+            //TODO: Saved
+            //TODO: Joined
 
             reader.close();
 
@@ -201,6 +210,9 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         }
     }
 
+    /**
+     * Listener for Cancel event -button
+     */
     private View.OnClickListener cancelListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -224,50 +236,82 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         }
     };
 
+    /**
+     * Listener for Edit event -button
+     */
     private View.OnClickListener editListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
             Intent editEventIntent = new Intent(v.getContext(), EditEventActivity.class);
 
+            //Pass the event to the EditEventActivity
+            editEventIntent.putExtra(HokiEvent.EVENT, event);
+
             startActivityForResult(editEventIntent, 0);
 
         }
     };
 
+    /**
+     * Listener for Save event -button
+     */
     private View.OnClickListener saveListener = new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
 
             //TODO tell server to add this to user's list of saved events;
+            APICaller api = new APICaller(view.getContext());
+
             saved = true;
             setUpButtons();
         }
     };
 
+    /**
+     * Listener for Unsave event -button
+     */
     private View.OnClickListener unSaveListener = new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
 
-            //TODO tell server to add this to user's list of saved events;
+            //TODO tell server to remove this event from user's list of saved events;
+            APICaller api = new APICaller(view.getContext());
+
             saved = false;
             setUpButtons();
         }
     };
 
+    /**
+     * Listener for Join event -button
+     */
     private View.OnClickListener joinListener = new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
 
-            //TODO tell server to add this to user's list of saved events;
+            //Tell server to add user to this event
+            APICaller api = new APICaller(view.getContext());
+
+            JSONObject json  = new JSONHelper().eventMembership(userEmail, event.getEventName());
+
+            try {
+                api.APIpostJoinEvent(json);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             joined = true;
             setUpButtons();
         }
     };
 
+    /**
+     * Listener for Leave event -button
+     */
     private View.OnClickListener leaveListener = new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
 
             //TODO tell server to add this to user's list of saved events;
             joined = false;
@@ -278,7 +322,6 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
             event = data.getParcelableExtra(HokiEvent.EVENT);
-            System.out.println("CreateAccountActivity received: " + event);
         }
 
         showEventInfo();
@@ -349,6 +392,8 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
 
         switch (menuID){
             case R.id.action_home:
+                System.out.println("HEADING HOME!");
+
                 //This boolean check is here to stop the app from throwing the user back to home view from profile view
                 if(activityLaunched) {
                     Intent goHomeIntent = new Intent(getApplicationContext(), HomeActivity.class);
