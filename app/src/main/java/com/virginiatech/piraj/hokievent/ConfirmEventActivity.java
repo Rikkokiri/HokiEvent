@@ -26,7 +26,8 @@ import java.util.List;
 public class ConfirmEventActivity extends AppCompatActivity implements OnMapReadyCallback, TaskCompleted {
 
     private TextView eventName;
-    private TextView eventDateTime;
+    private TextView eventDate;
+    private TextView eventTime;
     private TextView eventAddress;
     private TextView eventDescription;
     private TextView eventTags;
@@ -70,16 +71,16 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
 
         if(event.getEventEndDate() != null){
             //Multiday event
-            eventDateTime.setText("From " + event.getEventStartDate() + " to " + event.getEventEndDate());
+            eventDate.setText("From " + event.getEventStartDate() + " to " + event.getEventEndDate());
         } else {
-            eventDateTime.setText(event.getEventStartDate());
+            eventDate.setText(event.getEventStartDate());
         }
 
         if(event.getEventEndTime() != null){
             //Has end time
-            eventDateTime.setText("From " + event.getEventStartTime() + " to " + event.getEventEndTime());
+            eventTime.setText("From " + event.getEventStartTime() + " to " + event.getEventEndTime());
         } else {
-            eventDateTime.setText("From " + event.getEventStartTime() + " on");
+            eventTime.setText("From " + event.getEventStartTime() + " on");
         }
 
         //Event address
@@ -95,7 +96,8 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
     private void findById(){
 
         eventName = (TextView) findViewById(R.id.confirmEventName);
-        eventDateTime = (TextView) findViewById(R.id.confirmEventDateTime);
+        eventDate = (TextView) findViewById(R.id.confirmEventDate);
+        eventTime = (TextView) findViewById(R.id.confirmEventTime);
         eventAddress = (TextView) findViewById(R.id.confirmEventAddress);
         eventDescription = (TextView) findViewById(R.id.confirmEventDescription);
         eventTags = (TextView) findViewById(R.id.confirmEventTags);
