@@ -51,10 +51,10 @@ public class SearchActivity extends AppCompatActivity {
 
     // --- Strings ---
     private String tags; //Used to store tags that are searched
-    private static final String START_DATE = "start date";
-    private static final String END_DATE = "end date";
-    private static final String START_TIME = "start time";
-    private static final String END_TIME = "end time";
+    private static final String START_DATE = "start_date";
+    private static final String END_DATE = "end_date";
+    private static final String START_TIME = "start_time";
+    private static final String END_TIME = "end_time";
     private static final String DISTANCE = "distance";
 
 
@@ -64,11 +64,13 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         //Build bottom navigation
-        buildBottomBar(this, savedInstanceState);
+        buildBottomBar(this);
 
         dateFormatter = new SimpleDateFormat("MMM d, yyyy", Locale.US); //"EEE, MMM d, ''yy"
         //dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         timeFormatter = new SimpleDateFormat("h:mm a", Locale.US);
+
+        calendar = Calendar.getInstance();
 
         //Find components by Id
         findById();
@@ -91,11 +93,11 @@ public class SearchActivity extends AppCompatActivity {
         tagsInput = (EditText) findViewById(R.id.search_tags_input);
         distanceInput = (EditText) findViewById(R.id.search_input_distance);
 
-        startDateInput = (EditText) findViewById(R.id.startDate);
-        endDateInput = (EditText) findViewById(R.id.endDate);
+        startDateInput = (EditText) findViewById(R.id.searchStartDate);
+        endDateInput = (EditText) findViewById(R.id.searchEndDate);
 
-        startTimeInput = (EditText) findViewById(R.id.startTime);
-        endTimeInput = (EditText) findViewById(R.id.endTime);
+        startTimeInput = (EditText) findViewById(R.id.searchStartTime);
+        endTimeInput = (EditText) findViewById(R.id.searchEndTime);
 
         tagsInput.setFocusable(false);
         tagsInput.setClickable(true);
@@ -326,18 +328,17 @@ public class SearchActivity extends AppCompatActivity {
      * Build navigation bar located on the bottom of the screen.
      *
      * @param activity
-     * @param savedInstanceState
      */
-    private void buildBottomBar(Activity activity, Bundle savedInstanceState){
+    private void buildBottomBar(Activity activity){
 
         bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-/*
+
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
                 navigate(tabId);
             }
-        };*/
+        });
     }
 
     /**

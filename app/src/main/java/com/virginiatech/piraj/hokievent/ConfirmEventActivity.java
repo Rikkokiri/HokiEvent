@@ -153,16 +153,19 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
         JSONObject eventJSON = new JSONHelper().createEventJSON(event);
 
         if(eventJSON != null) {
-            APICaller api = new APICaller(getApplicationContext());
-            try {
 
+            APICaller api = new APICaller(this);
+
+            try {
                 api.APIpostEvent(eventJSON);
+
             } catch (Exception e) {
                 System.out.println(e);
             }
         }
         else {
             //TODO Handle the case where the JSON couldn't be created ???
+            throw new IllegalArgumentException("Event JSON couldn't be created!");
         }
     }
 
@@ -205,22 +208,8 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
     }
 
 
-    /**
-     *
-     */
-    private void setLocationMarker(){
-
-        if(map != null){
-
-            //TODO
-
-        }
-    }
-
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-
 
         outState.putParcelable(HokiEvent.EVENT, event);
         super.onSaveInstanceState(outState);
@@ -233,8 +222,13 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
         super.onRestoreInstanceState(savedInstanceState);
     }
 
+
+    // - o - o - o - o - o - TASK COMPLEMETED  - o - o - o - o - o -
+
     @Override
     public void onTaskComplete(String result) {
+
+        //TODO
 
     }
 }
