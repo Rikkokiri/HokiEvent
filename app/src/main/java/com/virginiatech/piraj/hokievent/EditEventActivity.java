@@ -2,8 +2,10 @@ package com.virginiatech.piraj.hokievent;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -357,7 +359,11 @@ public class EditEventActivity extends AppCompatActivity implements TaskComplete
     private View.OnClickListener cancelListener = new View.OnClickListener() {
         @Override
         public void onClick(View view){
-            finish();
+            if(changesMade()){
+                confirmExit();
+            } else {
+                finish();
+            }
         }
     };
 
@@ -449,6 +455,11 @@ public class EditEventActivity extends AppCompatActivity implements TaskComplete
         }
     };
 
+    /**
+     * Send data to the server.
+     *
+     * @param newEvent
+     */
     public void sendData(HokiEvent newEvent)
     {
         //Send server new user entry
@@ -480,6 +491,63 @@ public class EditEventActivity extends AppCompatActivity implements TaskComplete
             {
                 tagsList.setText(tags);
             }
+        }
+    }
+
+    /**
+     * When the back button is pressed, if the user has made changes in input fields, show confirmation dialog.
+     * If user hasn't made any changes, return to previous activity normally.
+     */
+    @Override
+    public void onBackPressed() {
+        if(changesMade()){
+            confirmExit();
+        }
+        else {
+            finish();
+        }
+    }
+
+    /**
+     * Show confirmation dialog when user is about to leave the
+     */
+    public void confirmExit(){
+
+        new AlertDialog.Builder(this)
+                .setTitle("Discard changes")
+                .setMessage("Are sure you want to discard your changes?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    /**
+     * Checks whether the user made any changes to event information.
+     *
+     * @return True if the user didn't make any changes. Else false.
+     */
+    public boolean changesMade(){
+
+        if(event.getEventName().equals(eventNameField.getText().toString())
+                && event.getEventStartDate().equals(startDateField.getText().toString())
+                && event.getEventStartTime().equals(startTimeField.getText().toString())
+                && event.getEventEndDate().equals(endDateField.getText().toString())
+                && event.getEventEndTime().equals(endTimeField.getText().toString())
+                && event.getEventDesc().equals(eventDescriptionField.getText().toString())
+                && event.getEventLoc().equals(eventLocationField.getText().toString())
+                && event.getInterests().equals(tagsList.getText().toString())
+                ){
+            return false;
+        }
+        else {
+            return true;
         }
     }
 
