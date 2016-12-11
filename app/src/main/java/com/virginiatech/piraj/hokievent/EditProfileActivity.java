@@ -26,7 +26,7 @@ import org.json.JSONObject;
  *
  * @version 2016.12.05
  */
-public class EditProfileActivity extends AppCompatActivity {
+public class EditProfileActivity extends AppCompatActivity implements TaskCompleted{
 
     private EditText firstNameField;
     private EditText middleNameField;
@@ -56,6 +56,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         //Find componenets by id
         findById();
+
 
         //TODO Get user data from either previous activity or from the server?
 
@@ -102,11 +103,14 @@ public class EditProfileActivity extends AppCompatActivity {
             String last = reader.readLine();
             String phone = reader.readLine();
             interests = reader.readLine();
-            String password = reader.readLine();
+            //String password = reader.readLine();
+
 
             reader.close();
 
-            user = new User(first, middle, last, email, phone, interests, password);
+            user = new User(first, middle, last, email, phone, interests);
+
+            System.out.println("readData: " + user.toString());
 
             user.setUserID(id);
 
@@ -172,7 +176,7 @@ public class EditProfileActivity extends AppCompatActivity {
             user.setPhoneNumber(phonenumberField.getText().toString());
             user.setInterests(interests);
 
-
+            sendData(user);
 
             try {
 
@@ -184,44 +188,48 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 OutputStreamWriter writer = new OutputStreamWriter(fos);
 
+                writer.write(user.getUserEmail() + "\n");
                 writer.write(user.getUserID() + "\n");
                 writer.write(user.getFirstName() + "\n");
                 writer.write(user.getMiddleName() + "\n");
                 writer.write(user.getLastName() + "\n");
-                writer.write(user.getUserEmail() + "\n");
                 writer.write(user.getPhoneNumber() + "\n");
                 writer.write(user.getInterests() + "\n");
-                writer.write(user.getPassword());
+                System.out.println(user.getPassword());
+                //writer.write(user.getPassword());
 
                 writer.flush();
                 writer.close();
-
-                FileInputStream fin = openFileInput(User.USER_FILE);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
-
-                String line = reader.readLine();
-
-                while (line != null)
-                {
-                    System.out.println(line);
-                    line = reader.readLine();
-                }
-
-                reader.close();
-
             } catch (IOException e)
             {
                 e.printStackTrace();
             }
 
-            //TODO Update new user data on server
+
 
             finish();
-
 
         }
     };
 
+    public void sendData(User user)
+    {
+        //Send server new user entry
+        JSONObject json = new JSONHelper().createUserJSON(user);
+
+        System.out.println(json);
+        if(json != null) {
+            APICaller api = new APICaller(this);
+            try {
+                api.APIputUser(json);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+        else {
+            //TODO Handle the case where the JSON couldn't be created ???
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -263,6 +271,7 @@ public class EditProfileActivity extends AppCompatActivity {
         outState.putString(LAST_NAME, lastNameField.getText().toString());
         outState.putString(PHONE, phonenumberField.getText().toString());
         outState.putString(InterestsActivity.INTEREST, interests);
+        outState.putParcelable(User.USER, user);
 
         readData();
         super.onSaveInstanceState(outState);
@@ -276,10 +285,16 @@ public class EditProfileActivity extends AppCompatActivity {
         lastNameField.setText(savedInstanceState.getString(LAST_NAME));
         phonenumberField.setText(savedInstanceState.getString(PHONE));
         interests = (savedInstanceState.getString(InterestsActivity.INTEREST));
+        user = savedInstanceState.getParcelable(User.USER);
         readData();
 
         super.onRestoreInstanceState(savedInstanceState);
 
     }
 
+    @Override
+    public void onTaskComplete(String result) {
+
+
+    }
 }

@@ -198,7 +198,7 @@ public class CreateAccountActivity extends AppCompatActivity implements TaskComp
                 writer.write(user.getLastName() + "\n");
                 writer.write(user.getPhoneNumber() + "\n");
                 writer.write(user.getInterests() + "\n");
-                writer.write(user.getPassword());
+                //writer.write(user.getPassword());
 
                 writer.flush();
                 writer.close();
@@ -227,11 +227,7 @@ public class CreateAccountActivity extends AppCompatActivity implements TaskComp
 
             sendData(user);
 
-            Intent startHomeActivity = new Intent(view.getContext(), HomeActivity.class);
 
-            startHomeActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-            startActivity(startHomeActivity);
 
         }
     };
@@ -298,5 +294,10 @@ public class CreateAccountActivity extends AppCompatActivity implements TaskComp
     @Override
     public void onTaskComplete(String result) {
 
+        Intent startHomeActivity = new Intent(this, HomeActivity.class);
+
+        startHomeActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        startActivity(startHomeActivity);
     }
 }
