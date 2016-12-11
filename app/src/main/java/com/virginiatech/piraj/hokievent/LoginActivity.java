@@ -64,28 +64,32 @@ public class LoginActivity extends Activity implements TaskCompleted {
 
     }
 
+    private void sendLoginRequest()
+    {
+        user = null;
+
+        APICaller api = new APICaller(this);
+        try {
+            api.APIlogin(JSONHelper.login(emailField.getText().toString(), passwordField.getText().toString()));
+            //The result of this call is received in onTaskComplete
+        }
+        catch (JSONException e)
+        {
+            System.out.println(e.toString());
+        }
+        catch (IOException e)
+        {
+            System.out.println(e.toString());
+        }
+    }
     /**
      * Listener for login button
      */
     private View.OnClickListener loginHandler = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            sendLoginRequest();
 
-            user = null;
-
-            APICaller api = new APICaller(getApplicationContext());
-            try {
-                api.APIlogin(JSONHelper.login());
-                //The result of this call is received in onTaskComplete
-            }
-            catch (JSONException e)
-            {
-                System.out.println(e.toString());
-            }
-            catch (IOException e)
-            {
-                System.out.println(e.toString());
-            }
         }
     };
 
@@ -108,7 +112,7 @@ public class LoginActivity extends Activity implements TaskCompleted {
     @Override
     public void onTaskComplete(String result) {
 
-        if (result.equals("null"))
+        if (result == null)
         {
             System.out.println("LoginActivity: LOGIN FAILED");
             loginFailed.setText("Invalid email/password");

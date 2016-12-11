@@ -89,7 +89,7 @@ public class APICaller  {
         protected String doInBackground(Void... avoid) {
             InputStream input = null;
             try {
-                URL url = new URL(address + "get/index.php");
+                URL url = new URL(address + "index.php");
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
                 urlConnection.setConnectTimeout(15000);
