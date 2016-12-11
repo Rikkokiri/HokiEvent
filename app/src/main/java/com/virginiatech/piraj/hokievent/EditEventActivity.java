@@ -19,8 +19,10 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class EditEventActivity extends AppCompatActivity implements TaskCompleted {
@@ -42,6 +44,7 @@ public class EditEventActivity extends AppCompatActivity implements TaskComplete
     private DatePicker datePicker;
     private TimePicker timePicker;
     private Calendar calendar;
+
     private SimpleDateFormat dateFormatter;
     private SimpleDateFormat timeFormatter;
 
@@ -169,18 +172,42 @@ public class EditEventActivity extends AppCompatActivity implements TaskComplete
      */
     private void buildDatepicking(){
 
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
         startDateField.setFocusable(false);
         startDateField.setClickable(true);
 
         endDateField.setFocusable(false);
         endDateField.setClickable(true);
 
-        // --- DatePickers ---
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        // --- Set the start date field ---
+        try {
+            calendar.setTime(dateFormatter.parse(startDateField.getText().toString()));
+            year = calendar.get(Calendar.YEAR);
+            month = calendar.get(Calendar.MONTH);
+            day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         startDatePicker = new DatePickerDialog(this, startDateListener, year, month, day);
+
+        // --- Set the end date field ---
+        if(endDateField.getText() != null){
+            try {
+                calendar.setTime(dateFormatter.parse(endDateField.getText().toString()));
+                year = calendar.get(Calendar.YEAR);
+                month = calendar.get(Calendar.MONTH);
+                day = calendar.get(Calendar.DAY_OF_MONTH);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
         endDatePicker = new DatePickerDialog(this, endDateListener, year, month, day);
 
         startDateField.setOnClickListener(new View.OnClickListener() {
@@ -210,7 +237,30 @@ public class EditEventActivity extends AppCompatActivity implements TaskComplete
         endTimeField.setFocusable(false);
         endTimeField.setClickable(true);
 
+        // --- Set the start time field ---
+        try {
+            calendar.setTime(timeFormatter.parse(startTimeField.getText().toString()));
+            hour = calendar.get(Calendar.HOUR_OF_DAY);
+            minute = calendar.get(Calendar.MINUTE);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         startTimePicker = new TimePickerDialog(this, startTimeListener, hour, minute, DateFormat.is24HourFormat(this));
+
+        // --- Set the start time field ---
+        if(endTimeField.getText() != null){
+            try {
+                calendar.setTime(timeFormatter.parse(endTimeField.getText().toString()));
+                hour = calendar.get(Calendar.HOUR_OF_DAY);
+                minute = calendar.get(Calendar.MINUTE);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
         endTimePicker = new TimePickerDialog(this, endTimeListener, hour, minute, DateFormat.is24HourFormat(this));
 
         startTimeField.setOnClickListener(new View.OnClickListener() {
