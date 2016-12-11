@@ -75,7 +75,7 @@ public class LoginActivity extends Activity implements TaskCompleted {
 
             APICaller api = new APICaller(getApplicationContext());
             try {
-                api.APIgetUser(emailField.getText().toString(), view.getContext());
+                api.APIlogin(JSONHelper.login());
                 //The result of this call is received in onTaskComplete
             }
             catch (JSONException e)
@@ -108,6 +108,13 @@ public class LoginActivity extends Activity implements TaskCompleted {
     @Override
     public void onTaskComplete(String result) {
 
+        if (result.equals("null"))
+        {
+            System.out.println("LoginActivity: LOGIN FAILED");
+            loginFailed.setText("Invalid email/password");
+            return;
+        }
+
         try {
             JSONObject json = new JSONObject(result);
             user = JSONHelper.getUser(json);
@@ -116,11 +123,8 @@ public class LoginActivity extends Activity implements TaskCompleted {
             e.printStackTrace();
         }
 
-        if (user == null) {
-            System.out.println("LoginActivity: LOGIN FAILED");
-            loginFailed.setText("Invalid email/password");
-            return;
-        }
+        System.out.println("Login successful?: " + user);
+
 
         try {
 

@@ -170,11 +170,11 @@ public class CreateAccountActivity extends AppCompatActivity implements TaskComp
             }
 
             User user = new User(
-                    firstNameField.getText().toString(),
-                    middleNameField.getText().toString(),
-                    lastNameField.getText().toString(),
-                    emailField.getText().toString(),
-                    phoneNumberField.getText().toString(),
+                    firstNameField.getText().toString().trim(),
+                    middleNameField.getText().toString().trim(),
+                    lastNameField.getText().toString().trim(),
+                    emailField.getText().toString().trim(),
+                    phoneNumberField.getText().toString().trim(),
                     interests,
                     passwordField.getText().toString()
             );
