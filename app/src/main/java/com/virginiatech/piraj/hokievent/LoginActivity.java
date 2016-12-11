@@ -167,5 +167,5 @@ public class LoginActivity extends Activity implements TaskCompleted {
 
         //Start the CreateAccountActivity
         startActivity(startHomeIntent);
-}
+    }
 }
