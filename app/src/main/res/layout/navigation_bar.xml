@@ -11,7 +11,7 @@
 
         android:background="@color/colorPrimary"
         app:bb_inActiveTabColor="@color/white"
-        app:bb_activeTabColor="@color/white"
+        app:bb_activeTabColor="@color/colorAccent"
         app:bb_showShadow="true"
         />
 

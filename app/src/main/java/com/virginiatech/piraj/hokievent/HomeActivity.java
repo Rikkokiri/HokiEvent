@@ -85,51 +85,6 @@ public class HomeActivity extends AppCompatActivity implements TaskCompleted {
         }
     }
 
-    /**
-     * Build navigation bar located on the bottom of the screen.
-     *
-     * @param activity
-     */
-    private void buildBottomBar(Activity activity){
-
-        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
-            @Override
-            public void onTabSelected(@IdRes int tabId) {
-                navigate(tabId);
-            }
-        });
-
-    }
-
-    /**
-     *
-     * @param menuID
-     */
-    private void navigate(int menuID){
-
-        switch (menuID){
-            case R.id.action_home:
-                //Do nothing
-                break;
-
-            case R.id.action_create_event:
-                Intent createEventIntent = new Intent(getApplicationContext(), CreateEventActivity.class);
-                startActivity(createEventIntent);
-                break;
-
-            case R.id.action_search:
-                Intent searchIntent = new Intent(getApplicationContext(), SearchActivity.class);
-                startActivity(searchIntent);
-                break;
-
-            case R.id.action_profile:
-                Intent profileIntent = new Intent(getApplicationContext(), ProfileActivity.class);
-                startActivity(profileIntent);
-                break;
-        }
-    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -141,8 +96,10 @@ public class HomeActivity extends AppCompatActivity implements TaskCompleted {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
 
-        //TODO This doesn't work :-/
-        bottomBar.selectTabWithId(savedInstanceState.getInt(CURRENT_TAB));
+        if(bottomBar != null){
+            bottomBar.selectTabWithId(R.id.action_home);
+        }
+
         super.onRestoreInstanceState(savedInstanceState);
     }
 
@@ -170,6 +127,57 @@ public class HomeActivity extends AppCompatActivity implements TaskCompleted {
 
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+
+    // - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o
+    // - o - o - o - o - o - o - o - o NAVIGATION BAR  - o - o - o - o - o - o - o - o
+    // - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o
+    /**
+     * Build navigation bar located on the bottom of the screen.
+     *
+     * @param activity
+     */
+    private void buildBottomBar(Activity activity){
+
+        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                navigate(tabId);
+            }
+        });
+
+        bottomBar.selectTabWithId(R.id.action_home);
+    }
+
+    /**
+     *
+     * @param menuID
+     */
+    private void navigate(int menuID){
+
+        switch (menuID){
+            case R.id.action_home:
+                //Do nothing
+                break;
+
+            case R.id.action_create_event:
+                Intent createEventIntent = new Intent(getApplicationContext(), CreateEventActivity.class);
+                startActivity(createEventIntent);
+                break;
+
+            case R.id.action_search:
+                Intent searchIntent = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(searchIntent);
+                break;
+
+            case R.id.action_profile:
+                Intent profileIntent = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(profileIntent);
+                break;
         }
     }
 }

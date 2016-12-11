@@ -132,6 +132,23 @@ public class ProfileActivity extends AppCompatActivity {
         }
     };
 
+
+    @Override
+
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        if(bottomBar != null){
+            System.out.println("BOTTOMBAR IS NOT NULL!!!");
+            bottomBar.selectTabWithId(R.id.action_profile);
+        }
+
+        displayUserInfo();
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    // - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o
+    // - o - o - o - o - o - o - o - o NAVIGATION BAR  - o - o - o - o - o - o - o - o
+    // - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o
     /**
      * Build navigation bar located on the bottom of the screen.
      *
@@ -148,6 +165,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        bottomBar.selectTabWithId(R.id.action_profile);
     }
 
     /**
@@ -159,15 +177,12 @@ public class ProfileActivity extends AppCompatActivity {
         switch (menuID){
             case R.id.action_home:
                 //This boolean check is here to stop the app from throwing the user back to home view from profile view
-                /*
                 if(activityLaunched) {
                     Intent goHomeIntent = new Intent(getApplicationContext(), HomeActivity.class);
                     startActivity(goHomeIntent);
                 } else {
                     activityLaunched = true;
-                }*/
-                Intent goHomeIntent = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(goHomeIntent);
+                }
                 break;
 
             case R.id.action_create_event:
@@ -185,14 +200,5 @@ public class ProfileActivity extends AppCompatActivity {
                 break;
         }
     }
-
-    @Override
-
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-
-        displayUserInfo();
-        super.onRestoreInstanceState(savedInstanceState);
-    }
-
  
 }

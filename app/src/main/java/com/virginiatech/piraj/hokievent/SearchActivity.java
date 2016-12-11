@@ -292,6 +292,10 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState){
 
+        if(bottomBar != null){
+            bottomBar.selectTabWithId(R.id.action_search);
+        }
+
         startDateInput.setText(savedInstanceState.getString(START_DATE));
         endDateInput.setText(savedInstanceState.getString(END_DATE));
 
@@ -323,7 +327,6 @@ public class SearchActivity extends AppCompatActivity {
     // - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o
     // - o - o - o - o - o - o - o - o NAVIGATION BAR  - o - o - o - o - o - o - o - o
     // - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o
-
     /**
      * Build navigation bar located on the bottom of the screen.
      *
@@ -339,6 +342,8 @@ public class SearchActivity extends AppCompatActivity {
                 navigate(tabId);
             }
         });
+
+        bottomBar.selectTabWithId(R.id.action_search);
     }
 
     /**
