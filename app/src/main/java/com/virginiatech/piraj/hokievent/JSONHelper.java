@@ -95,7 +95,30 @@ public class JSONHelper {
         return newUser;
 
     }
-    
+
+    /**
+     * Put the login information to JSONObject
+     *
+     * @param email
+     * @param password
+     * @return
+     */
+    public static JSONObject login(String email, String password){
+
+        JSONObject json = new JSONObject();
+
+        try {
+            json.put(EMAIL_JSON, email.trim());
+            json.put(PASSWORD_JSON, password);
+
+        } catch (JSONException exception){
+            //TODO Handle exception
+            exception.printStackTrace();
+        }
+
+        return json;
+    }
+
     /**
      * Put the information from a HokiEvent object to a JSONObject
      *
