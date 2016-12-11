@@ -96,8 +96,11 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
 
     }
 
-
+    /**
+     * Find layout components by ID
+     */
     private void findById(){
+
         eventName = (TextView) findViewById(R.id.eventName);
         eventDate = (TextView) findViewById(R.id.eventDate);
         eventTime = (TextView) findViewById(R.id.eventTime);

@@ -25,8 +25,6 @@ import java.util.List;
 
 public class ConfirmEventActivity extends AppCompatActivity implements OnMapReadyCallback, TaskCompleted {
 
-    //TODO eventID ?
-
     private TextView eventName;
     private TextView eventDateTime;
     private TextView eventAddress;
@@ -36,17 +34,14 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
     private Button back;
     private Button finish;
 
-    //TODO More elements...
-
     //Map
     private MapFragment mapFragment;
     private GoogleMap map;
 
-
-
     // --- HokiEvent ---
 
     private HokiEvent event;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +55,6 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
             event = extras.getParcelable(HokiEvent.EVENT);
         }
 
-
         // --- Map ---
         mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         // Use getMapAsync() to set the callback on the fragment.
@@ -69,8 +63,7 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
         showEventInfo();
     }
 
-    private void showEventInfo()
-    {
+    private void showEventInfo() {
 
         //Event title
         eventName.setText(event.getEventName());
@@ -97,15 +90,13 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
 
         eventTags.setText(event.getInterests());
 
-
-
     }
 
     private void findById(){
+
         eventName = (TextView) findViewById(R.id.confirmEventName);
         eventDateTime = (TextView) findViewById(R.id.confirmEventDateTime);
         eventAddress = (TextView) findViewById(R.id.confirmEventAddress);
-        eventDescription = (TextView) findViewById(R.id.confirmEventDescription);
         eventDescription = (TextView) findViewById(R.id.confirmEventDescription);
         eventTags = (TextView) findViewById(R.id.confirmEventTags);
 
@@ -116,8 +107,6 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
         finish.setOnClickListener(finishListener);
 
     }
-
-
 
 
     /**
