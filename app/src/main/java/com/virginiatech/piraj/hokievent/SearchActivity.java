@@ -76,10 +76,6 @@ public class SearchActivity extends AppCompatActivity {
         buildDatepicking();
         buildTimepicking();
 
-        tagsInput.setFocusable(false);
-        tagsInput.setClickable(true);
-        tagsInput.setOnClickListener(selectTagsListener);
-
         //Search button
         searchButton.setOnClickListener(searchHandler);
 
@@ -101,6 +97,9 @@ public class SearchActivity extends AppCompatActivity {
         startTimeInput = (EditText) findViewById(R.id.startTime);
         endTimeInput = (EditText) findViewById(R.id.endTime);
 
+        tagsInput.setFocusable(false);
+        tagsInput.setClickable(true);
+        tagsInput.setOnClickListener(selectTagsListener);
     }
 
 
