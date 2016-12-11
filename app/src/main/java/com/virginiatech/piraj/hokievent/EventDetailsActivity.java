@@ -33,10 +33,7 @@ import java.util.List;
 
 public class EventDetailsActivity extends AppCompatActivity implements OnMapReadyCallback, TaskCompleted{
 
-    //TODO eventID ?
-
     private TextView eventName;
-    private TextView eventDate;
     private TextView eventTime;
     private TextView eventAddress;
     private TextView eventDescription;
@@ -48,8 +45,6 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
     private boolean owned;
     private boolean saved;
     private boolean joined;
-
-    //TODO More elements...
 
     //Map
     private MapFragment mapFragment;
@@ -126,7 +121,6 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
     private void findById(){
 
         eventName = (TextView) findViewById(R.id.eventName);
-        eventDate = (TextView) findViewById(R.id.eventDate);
         eventTime = (TextView) findViewById(R.id.eventTime);
         eventAddress = (TextView) findViewById(R.id.eventAddress);
         eventDescription = (TextView) findViewById(R.id.eventDescription);

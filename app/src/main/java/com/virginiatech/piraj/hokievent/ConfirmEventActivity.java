@@ -23,10 +23,13 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Activity that displays the user the event details they just entered in CreateEventActivity.
+ * User can review the details, publish the event or return to CreateEventActivity to edit the details.
+ */
 public class ConfirmEventActivity extends AppCompatActivity implements OnMapReadyCallback, TaskCompleted {
 
     private TextView eventName;
-    private TextView eventDate;
     private TextView eventTime;
     private TextView eventAddress;
     private TextView eventDescription;
@@ -66,27 +69,37 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
 
     private void showEventInfo() {
 
-        //Event title
+        // --- Event title ---
         eventName.setText(event.getEventName());
 
-        if(event.getEventEndDate() != null){
+        // --- Event date & time ---
+
+        String date;
+
+        if(event.getEventEndDate() != null && event.getEventEndDate().equals(event.getEventStartDate())){
             //Multiday event
-            eventDate.setText("From " + event.getEventStartDate() + " to " + event.getEventEndDate());
-        } else {
-            eventDate.setText(event.getEventStartDate());
+            date = "Starts " + event.getEventStartDate() + " at " + event.getEventStartTime() + "\n";
+            if(event.getEventEndTime() != null){
+                date += "Ends "+ event.getEventEndDate() + " at " + event.getEventEndTime();
+            } else {
+                date += "Ends " + event.getEventEndDate();
+            }
         }
 
-        if(event.getEventEndTime() != null){
-            //Has end time
-            eventTime.setText("From " + event.getEventStartTime() + " to " + event.getEventEndTime());
-        } else {
-            eventTime.setText("From " + event.getEventStartTime() + " on");
+        else {
+            date = event.getEventStartDate() + "\n" + event.getEventStartTime();
+            if(event.getEventEndTime() != null){
+                //Has end time
+                date += " to " + event.getEventEndTime();
+            }
         }
 
-        //Event address
+        eventTime.setText(date);
+
+        // --- Event address ---
         eventAddress.setText(event.getEventLoc());
 
-        //Event description
+        // --- Event description ---
         eventDescription.setText(event.getEventDesc());
 
         eventTags.setText(event.getInterests());
@@ -96,7 +109,6 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
     private void findById(){
 
         eventName = (TextView) findViewById(R.id.confirmEventName);
-        eventDate = (TextView) findViewById(R.id.confirmEventDate);
         eventTime = (TextView) findViewById(R.id.confirmEventTime);
         eventAddress = (TextView) findViewById(R.id.confirmEventAddress);
         eventDescription = (TextView) findViewById(R.id.confirmEventDescription);
