@@ -298,6 +298,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
                 email = reader.readLine();
 
+
                 reader.close();
 
             } catch (IOException e) {

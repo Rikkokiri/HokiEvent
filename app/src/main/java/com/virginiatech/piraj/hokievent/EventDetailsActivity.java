@@ -30,7 +30,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
-public class EventDetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class EventDetailsActivity extends AppCompatActivity implements OnMapReadyCallback, TaskCompleted{
 
     //TODO eventID ?
 
@@ -55,11 +55,16 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
     private GoogleMap map;
 
     private HokiEvent event = null;
-    private String userEmail = "";
+    private String email;
 
     // --- Bottom bar ---
     BottomBar bottomBar;
     private boolean activityLaunched = false;
+
+    public static final String JOIN = "join";
+    public static final String LEAVE = "leave";
+    public static final String SAVE = "save";
+    public static final String UNSAVE = "unsave";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +83,21 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         saved = false;
         joined = false;
 
+        try {
+
+            FileInputStream fin = openFileInput(User.USER_FILE);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
+
+            email = reader.readLine();
+            System.out.println("email: " + email);
+
+            reader.close();
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
         if (bundle != null)
         {
             event = bundle.getParcelable(HokiEvent.EVENT);
@@ -95,6 +115,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
 
         // Use getMapAsync() to set the callback on the fragment.
         mapFragment.getMapAsync(this);
+
 
     }
 
@@ -122,10 +143,8 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
             FileInputStream fin = openFileInput(User.USER_FILE);
             BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
 
-            String email = reader.readLine();
+            email = reader.readLine();
             System.out.println("email: " + email);
-
-            userEmail = email;
 
             if (event.getOwnerEmail().equals(email)) {
                 owned = true;
@@ -150,19 +169,28 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         //Event title
         eventName.setText(event.getEventName());
 
-        if(event.getEventEndDate() != null){
+        String date;
+
+        if(event.getEventEndDate() != null && event.getEventEndDate().equals(event.getEventStartDate())){
             //Multiday event
-            eventDate.setText("From " + event.getEventStartDate() + " to " + event.getEventEndDate());
-        } else {
-            eventDate.setText(event.getEventStartDate());
+            date = "Starts " + event.getEventStartDate() + " at " + event.getEventStartTime() + "\n";
+            if(event.getEventEndTime() != null){
+                date += "Ends "+ event.getEventEndDate() + " at " + event.getEventEndTime();
+            } else {
+                date += "Ends " + event.getEventEndDate();
+            }
+        }
+        else
+        {
+            date = event.getEventStartDate() + "\n" + event.getEventStartTime();
+            if(event.getEventEndTime() != null){
+                //Has end time
+                 date += " to " + event.getEventEndTime();
+            }
+
         }
 
-        if(event.getEventEndTime() != null){
-            //Has end time
-            eventTime.setText("From " + event.getEventStartTime() + " to " + event.getEventEndTime());
-        } else {
-            eventTime.setText(event.getEventStartTime());
-        }
+        eventTime.setText(date);
 
         //Event address
         eventAddress.setText(event.getEventLoc());
@@ -188,7 +216,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
             if (saved)
             {
                 leftButton.setText("Un-Save Event");
-                leftButton.setOnClickListener(unSaveListener);
+                leftButton.setOnClickListener(unsaveListener);
             }
             else
             {
@@ -210,9 +238,41 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         }
     }
 
-    /**
-     * Listener for Cancel event -button
-     */
+    
+    public void sendData(String mode)
+    {
+        //Send server new user entry
+        JSONObject json = new JSONHelper().eventMembership(event.getEventName(), email);
+
+        System.out.println(json);
+        if(json != null) {
+            APICaller api = new APICaller(this);
+            try {
+                switch (mode)
+                {
+                    case JOIN:
+                        api.APIpostJoinEvent(json);
+                        break;
+                    case LEAVE:
+                        api.APIpostLeaveEvent(json);
+                        break;
+                    case SAVE:
+                        api.APIpostSaveEvent(json);
+                        break;
+                    case UNSAVE:
+                        api.APIpostUnsaveEvent(json);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+        else {
+            //TODO Handle the case where the JSON couldn't be created ???
+        }
+    }
+
+
     private View.OnClickListener cancelListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -260,13 +320,12 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         @Override
         public void onClick(View view) {
 
-            //TODO tell server to add this to user's list of saved events;
-            APICaller api = new APICaller(view.getContext());
-
+            sendData(SAVE);
             saved = true;
             setUpButtons();
         }
     };
+
 
     /**
      * Listener for Unsave event -button
@@ -275,9 +334,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         @Override
         public void onClick(View view) {
 
-            //TODO tell server to remove this event from user's list of saved events;
-            APICaller api = new APICaller(view.getContext());
-
+            sendData(UNSAVE);
             saved = false;
             setUpButtons();
         }
@@ -290,17 +347,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         @Override
         public void onClick(View view) {
 
-            //Tell server to add user to this event
-            APICaller api = new APICaller(view.getContext());
-
-            JSONObject json  = new JSONHelper().eventMembership(userEmail, event.getEventName());
-
-            try {
-                api.APIpostJoinEvent(json);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            sendData(JOIN);
             joined = true;
             setUpButtons();
         }
@@ -313,7 +360,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         @Override
         public void onClick(View view) {
 
-            //TODO tell server to add this to user's list of saved events;
+            sendData(LEAVE);
             joined = false;
             setUpButtons();
         }
@@ -438,4 +485,8 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         super.onRestoreInstanceState(savedInstanceState);
     }
 
+    @Override
+    public void onTaskComplete(String result) {
+
+    }
 }
