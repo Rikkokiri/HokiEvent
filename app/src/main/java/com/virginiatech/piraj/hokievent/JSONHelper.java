@@ -120,6 +120,28 @@ public class JSONHelper {
     }
 
     /**
+     *
+     *
+     * @param email
+     * @param eventName
+     * @return
+     */
+    public static JSONObject eventMembership(String email, String eventName){
+
+        JSONObject json = new JSONObject();
+
+        try {
+            json.put(EMAIL_JSON, email);
+            json.put(EVENT_NAME_JSON, eventName);
+
+        } catch (JSONException exception){
+            exception.printStackTrace();
+        }
+
+        return json;
+    }
+
+    /**
      * Put the information from a HokiEvent object to a JSONObject
      *
      * @param event

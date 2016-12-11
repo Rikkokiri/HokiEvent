@@ -356,7 +356,6 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
                 } else {
                     activityLaunched = true;
                 }
-                
                 break;
 
             case R.id.action_create_event:
