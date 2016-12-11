@@ -22,6 +22,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -53,6 +55,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
     private GoogleMap map;
 
     private HokiEvent event = null;
+    private String email;
 
     // --- Bottom bar ---
     BottomBar bottomBar;
@@ -93,6 +96,20 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         // Use getMapAsync() to set the callback on the fragment.
         mapFragment.getMapAsync(this);
 
+        try {
+
+            FileInputStream fin = openFileInput(User.USER_FILE);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
+
+            email = reader.readLine();
+            System.out.println("email: " + email);
+
+            reader.close();
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -119,8 +136,6 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
             FileInputStream fin = openFileInput(User.USER_FILE);
             BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
 
-            String email = reader.readLine();
-            System.out.println("email: " + email);
             if (event.getOwnerEmail().equals(email))
             {
                 owned = true;
@@ -198,6 +213,26 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
                 rightButton.setOnClickListener(joinListener);
             }
 
+        }
+    }
+
+    public void sendData(String mode)
+    {
+        //Send server new user entry
+        JSONObject json = new JSONHelper().eventMembership(event.getEventName(), email);
+
+        System.out.println(json);
+        if(json != null) {
+            APICaller api = new APICaller(this);
+            try {
+                api.APIpostJoinEvent();
+                api.APIputUser(json);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+        else {
+            //TODO Handle the case where the JSON couldn't be created ???
         }
     }
 
