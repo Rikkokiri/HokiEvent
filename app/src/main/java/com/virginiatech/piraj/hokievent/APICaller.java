@@ -248,7 +248,7 @@ public class APICaller  {
             }
             return null;
         }
-        }
+    }
 
     private class postEvent extends AsyncTask<JSONObject, Void, Void> {
         @Override
