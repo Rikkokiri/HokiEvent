@@ -50,7 +50,7 @@ public class JSONHelper {
         try {
             json.put(FIRTS_NAME_JSON, user.getFirstName());
             json.put(MIDDLE_NAME_JSON, user.getMiddleName());
-            json.put(LAST_NAME_JSON, user.getMiddleName());
+            json.put(LAST_NAME_JSON, user.getLastName());
             json.put(EMAIL_JSON, user.getUserEmail());
             json.put(PHONE_NUMBER_JSON, user.getPhoneNumber());
             json.put(INTERESTS_JSON, user.getInterests());
