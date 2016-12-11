@@ -10,8 +10,10 @@ import java.util.Locale;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.TimeZoneFormat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -250,9 +252,70 @@ public class CreateEventActivity extends AppCompatActivity {
     private View.OnClickListener cancelListener = new View.OnClickListener() {
         @Override
         public void onClick(View view){
-            finish();
+
+            //If even one of the fields has text in it, show confirmation dialog before user exits
+            if(!allFieldsEmpty()){
+                confirmExit();
+            }
+            else {
+                finish();
+            }
         }
     };
+
+    /**
+     * Check if all fields are empty
+     * @return True if all fields are empty and no tags have been entered. Else return false.
+     */
+    private boolean allFieldsEmpty(){
+
+        if(eventNameField.getText().length() == 0
+                && startTimeField.getText().length() == 0
+                && startDateField.getText().length() == 0
+                && endDateField.getText().length() == 0
+                && endTimeField.getText().length() == 0
+                && eventLocationField.getText().length() == 0
+                && eventDescriptionField.getText().length() == 0
+                && tags.length() == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    /**
+     * Show confirmation dialog when user is about to leave the
+     */
+    private void confirmExit(){
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Discard changes");
+        alert.setMessage("Are sure you want to discard your changes?");
+
+        alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        alert.setNegativeButton("No", null);
+
+        //Show the alert
+        alert.show();
+    }
+
+    /**
+     * If user has entered text to any of the fields (or has chosen tags), show confirmation
+     * dialog before letting the user navigate away from the activity with the back button.
+     */
+    @Override
+    public void onBackPressed() {
+        if(!allFieldsEmpty()){
+            confirmExit();
+        }
+    }
 
     /**
      * Listener for next -button
