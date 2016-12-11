@@ -80,6 +80,17 @@ public class APICaller  {
         new postJoinEvent().execute(jObject);
     }
 
+    public void APIpostLeaveEvent(JSONObject jObject) throws IOException {
+        new postLeaveEvent().execute(jObject);
+    }
+
+    public void APIpostSaveEvent(JSONObject jObject) throws IOException {
+        new postSaveEvent().execute(jObject);
+    }
+
+    public void APIpostUnsaveEvent(JSONObject jObject) throws IOException {
+        new postUnsaveEvent().execute(jObject);
+    }
     public void APIputUser(JSONObject jObject) throws IOException {
         new putUser().execute(jObject);
     }
@@ -325,41 +336,149 @@ public class APICaller  {
         }
     }
 
-        private class putUser extends AsyncTask<JSONObject, Void, Void> {
-            @Override
-            protected Void doInBackground(JSONObject...j) {
-                OutputStream output = null;
-                try {
-                    URL url = new URL(address + "put/user.php");
-                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                    urlConnection.setDoOutput(true);
-                    urlConnection.setConnectTimeout(15000);
-                    urlConnection.setRequestMethod("PUT");
-                    urlConnection.setRequestProperty("Content-Type", "application/json");
-                    urlConnection.connect();
+    private class postLeaveEvent extends AsyncTask<JSONObject, Void, Void> {
+        @Override
+        protected Void doInBackground(JSONObject...j) {
+            OutputStream output = null;
+            try {
+                URL url = new URL(address + "post/eventleave.php");
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setDoOutput(true);
+                urlConnection.setConnectTimeout(15000);
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.connect();
 
-                    output = urlConnection.getOutputStream();
-                    output.write(j[0].toString().getBytes());
-                    output.flush();
+                output = urlConnection.getOutputStream();
+                output.write(j[0].toString().getBytes());
+                output.flush();
 
-                    System.out.println(urlConnection.getResponseCode());
-                    BufferedReader br = new BufferedReader(new InputStreamReader(
-                            (urlConnection.getInputStream())));
+                System.out.println(urlConnection.getResponseCode());
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        (urlConnection.getInputStream())));
 
-                    String output1;
-                    System.out.println("Output from Server .... \n");
-                    while ((output1 = br.readLine()) != null) {
-                        System.out.println(output);
-                    }
-
-
-                    urlConnection.disconnect();
-                } catch (Exception e) {
-                    System.out.println("ERROR: " + e);
+                String output1;
+                System.out.println("Output from Server .... \n");
+                while ((output1 = br.readLine()) != null) {
+                    System.out.println(output);
                 }
-                return null;
+
+
+                urlConnection.disconnect();
+            } catch (Exception e) {
+                System.out.println("ERROR: " + e);
             }
+            return null;
         }
+    }
+
+    private class postSaveEvent extends AsyncTask<JSONObject, Void, Void> {
+        @Override
+        protected Void doInBackground(JSONObject...j) {
+            OutputStream output = null;
+            try {
+                URL url = new URL(address + "post/eventsave.php");
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setDoOutput(true);
+                urlConnection.setConnectTimeout(15000);
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.connect();
+
+                output = urlConnection.getOutputStream();
+                output.write(j[0].toString().getBytes());
+                output.flush();
+
+                System.out.println(urlConnection.getResponseCode());
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        (urlConnection.getInputStream())));
+
+                String output1;
+                System.out.println("Output from Server .... \n");
+                while ((output1 = br.readLine()) != null) {
+                    System.out.println(output);
+                }
+
+
+                urlConnection.disconnect();
+            } catch (Exception e) {
+                System.out.println("ERROR: " + e);
+            }
+            return null;
+        }
+    }
+
+    private class postUnsaveEvent extends AsyncTask<JSONObject, Void, Void> {
+        @Override
+        protected Void doInBackground(JSONObject...j) {
+            OutputStream output = null;
+            try {
+                URL url = new URL(address + "post/eventunsave.php");
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setDoOutput(true);
+                urlConnection.setConnectTimeout(15000);
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.connect();
+
+                output = urlConnection.getOutputStream();
+                output.write(j[0].toString().getBytes());
+                output.flush();
+
+                System.out.println(urlConnection.getResponseCode());
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        (urlConnection.getInputStream())));
+
+                String output1;
+                System.out.println("Output from Server .... \n");
+                while ((output1 = br.readLine()) != null) {
+                    System.out.println(output);
+                }
+
+
+                urlConnection.disconnect();
+            } catch (Exception e) {
+                System.out.println("ERROR: " + e);
+            }
+            return null;
+        }
+    }
+
+    private class putUser extends AsyncTask<JSONObject, Void, Void> {
+        @Override
+        protected Void doInBackground(JSONObject...j) {
+            OutputStream output = null;
+            try {
+                URL url = new URL(address + "put/user.php");
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setDoOutput(true);
+                urlConnection.setConnectTimeout(15000);
+                urlConnection.setRequestMethod("PUT");
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.connect();
+
+                output = urlConnection.getOutputStream();
+                output.write(j[0].toString().getBytes());
+                output.flush();
+
+                System.out.println(urlConnection.getResponseCode());
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        (urlConnection.getInputStream())));
+
+                String output1;
+                System.out.println("Output from Server .... \n");
+                while ((output1 = br.readLine()) != null) {
+                    System.out.println(output);
+                }
+
+
+                urlConnection.disconnect();
+            } catch (Exception e) {
+                System.out.println("ERROR: " + e);
+            }
+            return null;
+        }
+    }
 
     private class putEvent extends AsyncTask<JSONObject, Void, Void> {
         @Override
