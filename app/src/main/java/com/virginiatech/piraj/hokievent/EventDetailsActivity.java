@@ -330,7 +330,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
     /**
      * Listener for Unsave event -button
      */
-    private View.OnClickListener unSaveListener = new View.OnClickListener() {
+    private View.OnClickListener unsaveListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
 
