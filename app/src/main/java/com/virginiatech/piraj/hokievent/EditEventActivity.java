@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,7 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class EditEventActivity extends AppCompatActivity {
+public class EditEventActivity extends AppCompatActivity implements TaskCompleted {
 
     private EditText eventNameField;
 
@@ -56,6 +58,14 @@ public class EditEventActivity extends AppCompatActivity {
     private String tags;
 
     private HokiEvent event;
+
+    private static String NAME = "name";
+    private static String DESC= "desc";
+    private static String LOC = "loc";
+    private static String START_DATE = "start date";
+    private static String START_TIME = "start time";
+    private static String END_DATE = "end date";
+    private static String END_TIME = "end time";
 
 
     @Override
@@ -376,7 +386,7 @@ public class EditEventActivity extends AppCompatActivity {
                 newEvent.setEventEndTime(endTimeField.getText().toString());
             }
 
-            //TODO tell server to edit event.
+            sendData(newEvent);
 
             Intent output = new Intent();
             output.putExtra(HokiEvent.EVENT, newEvent);
@@ -388,6 +398,25 @@ public class EditEventActivity extends AppCompatActivity {
 
         }
     };
+
+    public void sendData(HokiEvent newEvent)
+    {
+        //Send server new user entry
+        JSONObject json = new JSONHelper().createEventJSON(newEvent);
+
+        System.out.println(json);
+        if(json != null) {
+            APICaller api = new APICaller(this);
+            try {
+                api.APIputEvent(json);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+        else {
+            //TODO Handle the case where the JSON couldn't be created ???
+        }
+    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
@@ -402,5 +431,41 @@ public class EditEventActivity extends AppCompatActivity {
                 tagsList.setText(tags);
             }
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        outState.putString(NAME, eventNameField.getText().toString());
+        outState.putString(DESC, eventDescriptionField.getText().toString());
+        outState.putString(LOC, eventLocationField.getText().toString());
+        outState.putString(START_DATE, startDateField.getText().toString());
+        outState.putString(START_TIME, startTimeField.getText().toString());
+        outState.putString(END_DATE, endDateField.getText().toString());
+        outState.putString(END_TIME, endTimeField.getText().toString());
+        outState.putParcelable(HokiEvent.EVENT, event);
+
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        eventDescriptionField.setText(savedInstanceState.getString(NAME));
+        eventDescriptionField.setText(savedInstanceState.getString(DESC));
+        eventLocationField.setText(savedInstanceState.getString(LOC));
+        startDateField.setText(savedInstanceState.getString(START_DATE));
+        startTimeField.setText(savedInstanceState.getString(START_TIME));
+        endDateField.setText(savedInstanceState.getString(END_DATE));
+        endTimeField.setText(savedInstanceState.getString(END_TIME));
+        event = savedInstanceState.getParcelable(HokiEvent.EVENT);
+
+        showInfo();
+        super.onRestoreInstanceState(savedInstanceState);
+
+    }
+    @Override
+    public void onTaskComplete(String result) {
+
     }
 }
