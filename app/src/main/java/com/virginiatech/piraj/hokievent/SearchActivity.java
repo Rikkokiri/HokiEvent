@@ -319,9 +319,9 @@ public class SearchActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
-    // - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o -
-    // - o - o - o - o - o - o - o - o - o NAVIGATION BAR  - o - o - o -
-    // - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o -
+    // - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o
+    // - o - o - o - o - o - o - o - o NAVIGATION BAR  - o - o - o - o - o - o - o - o
+    // - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o - o
 
     /**
      * Build navigation bar located on the bottom of the screen.
