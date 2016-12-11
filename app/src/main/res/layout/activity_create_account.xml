@@ -47,7 +47,8 @@
                     android:lines="1"
                     android:layout_weight="1"
                     style="@style/TextfieldBaseStyle"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginRight="5dp"
+                    android:nextFocusDown="@+id/middleName"/>
 
                 <EditText
                     android:id="@+id/middleName"
@@ -56,7 +57,8 @@
                     android:inputType="textPersonName"
                     android:layout_weight="1"
                     android:layout_marginLeft="5dp"
-                    style="@style/TextfieldBaseStyle" />
+                    style="@style/TextfieldBaseStyle"
+                    android:nextFocusDown="@+id/lastName"/>
 
             </TableRow>
 
@@ -70,7 +72,8 @@
                     android:inputType="textPersonName"
                     android:layout_weight="1"
                     android:layout_marginRight="5dp"
-                    style="@style/TextfieldBaseStyle"/>
+                    style="@style/TextfieldBaseStyle"
+                    android:nextFocusDown="@+id/phonenumber"/>
 
                 <EditText
                     android:id="@+id/phonenumber"
@@ -78,7 +81,8 @@
                     android:inputType="phone"
                     android:layout_weight="1"
                     android:layout_marginLeft="5dp"
-                    style="@style/TextfieldBaseStyle"/>
+                    style="@style/TextfieldBaseStyle"
+                    android:nextFocusDown="@+id/email"/>
 
             </TableRow>
 
@@ -90,7 +94,8 @@
                     android:hint="VT email"
                     android:inputType="textEmailAddress"
                     android:layout_weight="1"
-                    style="@style/TextfieldBaseStyle"/>
+                    style="@style/TextfieldBaseStyle"
+                    android:nextFocusDown="@+id/confirmEmail"/>
 
 
 
@@ -103,7 +108,8 @@
                     android:hint="Re-enter email"
                     android:inputType="textEmailAddress"
                     android:layout_weight="1"
-                    style="@style/TextfieldBaseStyle"/>
+                    style="@style/TextfieldBaseStyle"
+                    android:nextFocusDown="@+id/password"/>
 
             </TableRow>
 
@@ -115,7 +121,8 @@
                     android:hint="New password"
                     android:inputType="textPassword"
                     android:layout_weight="1"
-                    style="@style/TextfieldBaseStyle"/>
+                    style="@style/TextfieldBaseStyle"
+                    android:nextFocusDown="@+id/confirmPassword"/>
             </TableRow>
             <TableRow>
                 <EditText
@@ -123,7 +130,8 @@
                     android:hint="Confirm password"
                     android:inputType="textPassword"
                     android:layout_weight="1"
-                    style="@style/TextfieldBaseStyle"/>
+                    style="@style/TextfieldBaseStyle"
+                    android:nextFocusDown="@+id/selectInterestsButton"/>
             </TableRow>
 
         </TableLayout>
