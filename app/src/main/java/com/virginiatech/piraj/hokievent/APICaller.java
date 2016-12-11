@@ -56,7 +56,7 @@ public class APICaller  {
     }
 
     public void APIlogin(JSONObject j) throws IOException, JSONException {
-        new login().execute();
+        new login().execute(j);
     }
 
      public void APIgetUser(String email, Context context) throws IOException, JSONException{
@@ -84,18 +84,27 @@ public class APICaller  {
         new putUser().execute(jObject);
     }
 
-    private class login extends AsyncTask<Void, Void, String> {
+    private class login extends AsyncTask<JSONObject, Void, String> {
         @Override
-        protected String doInBackground(Void... avoid) {
+        protected String doInBackground(JSONObject...j) {
+            OutputStream output = null;
             InputStream input = null;
             try {
                 URL url = new URL(address + "index.php");
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-
+                urlConnection.setDoOutput(true);
                 urlConnection.setConnectTimeout(15000);
                 urlConnection.setRequestMethod("POST");
-                urlConnection.setChunkedStreamingMode(0);
+                urlConnection.setRequestProperty("Content-Type", "application/json");
                 urlConnection.connect();
+
+                output = urlConnection.getOutputStream();
+                output.write(j[0].toString().getBytes());
+                output.flush();
+
+                System.out.println(urlConnection.getResponseCode());
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        (urlConnection.getInputStream())));
 
                 input = urlConnection.getInputStream();
                 final int bufferSize = 1024;
@@ -108,6 +117,7 @@ public class APICaller  {
                         break;
                     out.append(buffer, 0, rsz);
                 }
+
                 urlConnection.disconnect();
                 return out.toString();
             } catch (Exception e) {

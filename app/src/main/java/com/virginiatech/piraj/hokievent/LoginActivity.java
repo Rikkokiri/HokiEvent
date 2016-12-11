@@ -111,8 +111,9 @@ public class LoginActivity extends Activity implements TaskCompleted {
 
     @Override
     public void onTaskComplete(String result) {
+        System.out.println(result);
 
-        if (result == null)
+        if (result.equals("false"))
         {
             System.out.println("LoginActivity: LOGIN FAILED");
             loginFailed.setText("Invalid email/password");
@@ -148,7 +149,7 @@ public class LoginActivity extends Activity implements TaskCompleted {
             writer.write(user.getLastName() + "\n");
             writer.write(user.getPhoneNumber() + "\n");
             writer.write(user.getInterests() + "\n");
-            writer.write(user.getPassword());
+            //writer.write(user.getPassword());
 
             writer.flush();
             writer.close();
