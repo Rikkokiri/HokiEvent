@@ -120,10 +120,10 @@ public class JSONHelper {
     }
 
     /**
+     * Creates a JSONObject that can be used to save, join and leave events
      *
-     *
-     * @param email
-     * @param eventName
+     * @param email User email
+     * @param eventName Event that the user is saving, joining or leaving events
      * @return
      */
     public static JSONObject eventMembership(String email, String eventName){
