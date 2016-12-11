@@ -93,7 +93,6 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         // Use getMapAsync() to set the callback on the fragment.
         mapFragment.getMapAsync(this);
 
-
     }
 
     /**
@@ -230,7 +229,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         public void onClick(View v) {
 
             Intent editEventIntent = new Intent(v.getContext(), EditEventActivity.class);
-
+            
             startActivityForResult(editEventIntent, 0);
 
         }
