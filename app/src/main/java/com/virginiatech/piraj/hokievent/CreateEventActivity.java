@@ -315,6 +315,9 @@ public class CreateEventActivity extends AppCompatActivity {
         if(!allFieldsEmpty()){
             confirmExit();
         }
+        else {
+            finish();
+        }
     }
 
     /**

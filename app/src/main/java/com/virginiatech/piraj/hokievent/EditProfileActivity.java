@@ -233,13 +233,27 @@ public class EditProfileActivity extends AppCompatActivity implements TaskComple
 
     @Override
     public void onBackPressed() {
-
-        if (!user.getFirstName().equals(firstNameField.getText().toString()) ||
-            !user.getMiddleName().equals(middleNameField.getText().toString()) ||
-            !user.getLastName().equals(lastNameField.getText().toString())   ||
-            !user.getPhoneNumber().equals(phonenumberField.getText().toString())   ||
-            !user.getInterests().equals(interests)) {
+        if(changesMade()){
             confirmExit();
+        }
+        finish();
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean changesMade(){
+
+        if (user.getFirstName().equals(firstNameField.getText().toString())
+                && user.getMiddleName().equals(middleNameField.getText().toString())
+                && user.getLastName().equals(lastNameField.getText().toString())
+                && user.getPhoneNumber().equals(phonenumberField.getText().toString())
+                && user.getInterests().equals(interests)) {
+            return false;
+        }
+        else {
+            return true;
         }
     }
 
