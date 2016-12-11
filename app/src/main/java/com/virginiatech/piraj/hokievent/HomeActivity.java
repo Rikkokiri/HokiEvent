@@ -39,6 +39,10 @@ public class HomeActivity extends AppCompatActivity implements TaskCompleted {
         //Build the bottom navigation
         buildBottomBar(this);
 
+        if(bottomBar != null) {
+            bottomBar.selectTabWithId(R.id.action_home);
+        }
+
         message = (TextView) findViewById(R.id.homeMessage);
 
         eventList = new ArrayList<HokiEvent>();
@@ -166,16 +170,19 @@ public class HomeActivity extends AppCompatActivity implements TaskCompleted {
 
             case R.id.action_create_event:
                 Intent createEventIntent = new Intent(getApplicationContext(), CreateEventActivity.class);
+                createEventIntent.setFlags(createEventIntent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY); // Adds the FLAG_ACTIVITY_NO_HISTORY flag
                 startActivity(createEventIntent);
                 break;
 
             case R.id.action_search:
                 Intent searchIntent = new Intent(getApplicationContext(), SearchActivity.class);
+                searchIntent.setFlags(searchIntent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY); // Adds the FLAG_ACTIVITY_NO_HISTORY flag
                 startActivity(searchIntent);
                 break;
 
             case R.id.action_profile:
                 Intent profileIntent = new Intent(getApplicationContext(), ProfileActivity.class);
+                profileIntent.setFlags(profileIntent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY); // Adds the FLAG_ACTIVITY_NO_HISTORY flag
                 startActivity(profileIntent);
                 break;
         }

@@ -179,6 +179,7 @@ public class ProfileActivity extends AppCompatActivity {
                 //This boolean check is here to stop the app from throwing the user back to home view from profile view
                 if(activityLaunched) {
                     Intent goHomeIntent = new Intent(getApplicationContext(), HomeActivity.class);
+                    goHomeIntent.setFlags(goHomeIntent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY); // Adds the FLAG_ACTIVITY_NO_HISTORY flag
                     startActivity(goHomeIntent);
                 } else {
                     activityLaunched = true;
@@ -187,11 +188,13 @@ public class ProfileActivity extends AppCompatActivity {
 
             case R.id.action_create_event:
                 Intent createEventIntent = new Intent(getApplicationContext(), CreateEventActivity.class);
+                createEventIntent.setFlags(createEventIntent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY); // Adds the FLAG_ACTIVITY_NO_HISTORY flag
                 startActivity(createEventIntent);
                 break;
 
             case R.id.action_search:
                 Intent searchIntent = new Intent(getApplicationContext(), SearchActivity.class);
+                searchIntent.setFlags(searchIntent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY); // Adds the FLAG_ACTIVITY_NO_HISTORY flag
                 startActivity(searchIntent);
                 break;
 
