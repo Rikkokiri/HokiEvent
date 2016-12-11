@@ -86,7 +86,7 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
             //Has end time
             eventDateTime.setText("From " + event.getEventStartTime() + " to " + event.getEventEndTime());
         } else {
-            eventDateTime.setText(event.getEventStartTime());
+            eventDateTime.setText("From " + event.getEventStartTime() + " on");
         }
 
         //Event address
@@ -128,10 +128,9 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
         public void onClick(View view){
 
             //Send server new event entry
-
+            sendData();
 
             Intent startHomeActivity = new Intent(view.getContext(), HomeActivity.class);
-
             startActivity(startHomeActivity);
 
         }
@@ -148,9 +147,10 @@ public class ConfirmEventActivity extends AppCompatActivity implements OnMapRead
         }
     };
 
-    public void sendData()
-    {
+    public void sendData() {
         JSONObject eventJSON = new JSONHelper().createEventJSON(event);
+
+        System.out.println(eventJSON);
 
         if(eventJSON != null) {
 

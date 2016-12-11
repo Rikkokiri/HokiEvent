@@ -133,11 +133,13 @@ public class JSONHelper {
             json.put(EVENT_NAME_JSON, event.getEventName());
 
             json.put(EVENT_STARTDATE_JSON, event.getEventStartDate());
+
             if(event.getEventEndDate() != null){
                 json.put(EVENT_ENDDATE_JSON, event.getEventEndDate());
             }
 
             json.put(EVENT_STARTTIME_JSON, event.getEventStartTime());
+
             if(event.getEventEndTime() != null){
                 json.put(EVENT_ENDTIME_JSON, event.getEventEndTime());
             }
