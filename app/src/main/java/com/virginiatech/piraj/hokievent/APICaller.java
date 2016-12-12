@@ -102,6 +102,10 @@ public class APICaller  {
         new apiConnection("put/event.php", "PUT", false, true).execute(jObject);
     }
 
+    public void APIdeleteEvent(JSONObject jObject) {
+        new apiConnection("delete/eventdelete.php", "DELETE", false, true).execute(jObject);
+    }
+
     private class apiConnection extends AsyncTask<JSONObject, Void, String> {
 
         String s;
