@@ -240,6 +240,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         JSONObject json = new JSONHelper().eventMembership(event.getEventName(), email);
 
         System.out.println(json);
+
         if(json != null) {
             APICaller api = new APICaller(this);
             try {
@@ -271,6 +272,7 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
     private View.OnClickListener cancelListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
             new AlertDialog.Builder(v.getContext())
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setTitle("Canceling Event")
@@ -280,9 +282,20 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            //TODO cancel teh goddamn event
+                            boolean cancelResult = sendCancel();
 
-                            finish();
+                            //If event successfully cancelled
+                            if(cancelResult){
+
+                                //TODO Show event cancelled notification?
+
+                                finish();
+                            }
+                            //Cancelling event failed
+                            else {
+
+                            }
+
                         }
 
                     })
@@ -290,6 +303,30 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
                     .show();
         }
     };
+
+
+    /**
+     * Send event cancellation to the server
+     *
+     * @return Boolean value
+     */
+    private boolean sendCancel(){
+
+        APICaller api = new APICaller(this);
+
+        JSONObject json = JSONHelper.createEventJSON(event);
+
+        if(json != null){
+
+            api.APIdeleteEvent(json);
+            return true;
+
+        }
+        else {
+            return false;
+        }
+
+    }
 
     /**
      * Listener for Edit event -button
@@ -442,7 +479,6 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
 
         switch (menuID){
             case R.id.action_home:
-                System.out.println("HEADING HOME!");
 
                 //This boolean check is here to stop the app from throwing the user back to home view from profile view
                 if(activityLaunched) {

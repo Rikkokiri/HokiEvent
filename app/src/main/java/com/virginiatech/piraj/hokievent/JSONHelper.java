@@ -173,6 +173,8 @@ public class JSONHelper {
             //Owner email
             json.put(EVENT_OWNER_EMAIL, event.getOwnerEmail());
 
+            System.out.println("EVENT JSON: " + json);
+
 
         } catch (JSONException exception){
             //TODO Handle exception
