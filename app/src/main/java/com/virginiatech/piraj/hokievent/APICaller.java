@@ -63,6 +63,14 @@ public class APICaller  {
         new apiConnection("get/eventall.php", "POST", true, false).execute();
     }
 
+    public void APIgetEventSaved(JSONObject jObject) {
+        new apiConnection("get/eventsaved.php", "POST", true, true).execute(jObject);
+    }
+
+    public void APIgetEventJoined(JSONObject jObject) {
+        new apiConnection("get/eventjoined.php", "POST", true, true).execute(jObject);
+    }
+
     public void APIpostUser(JSONObject jObject) {
         new apiConnection("post/user.php", "POST", true, true).execute(jObject);
     }
@@ -84,7 +92,7 @@ public class APICaller  {
     }
 
     public void APIpostUnsaveEvent(JSONObject jObject) {
-        new apiConnection("post/eventunsave.php", "POST", false, true).execute(jObject);
+        new apiConnection("delete/eventunsave.php", "POST", false, true).execute(jObject);
     }
     public void APIputUser(JSONObject jObject) {
         new apiConnection("put/user.php", "PUT", false, true).execute(jObject);
