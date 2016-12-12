@@ -285,7 +285,7 @@ public class CreateAccountActivity extends AppCompatActivity implements TaskComp
 
         //System.out.println("create account completed");
         if (result.equals("fail")) {
-            messageView.setText("User already exists!!");
+            messageView.setText("Email address is already in use");
             return;
         }
 
