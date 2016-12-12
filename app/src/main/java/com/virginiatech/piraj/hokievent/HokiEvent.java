@@ -141,4 +141,19 @@ public class HokiEvent implements Parcelable {
         dest.writeString(interests);
         dest.writeString(ownerEmail);
     }
+
+    @Override
+    public String toString(){
+
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("Event name: " + this.eventName + "\n");
+        builder.append("Event dates: " + this.eventStartDate + " - " + this.eventEndDate + "\n");
+        builder.append("Event time: " + this.eventStartTime + " - " + this.eventEndTime + "\n");
+        builder.append("Description: "  + this.eventDesc + "\n");
+        builder.append("Tags: " + this.interests + "\n");
+        builder.append("Event owner: " + this.ownerEmail);
+
+        return builder.toString();
+    }
 }

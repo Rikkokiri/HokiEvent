@@ -387,6 +387,8 @@ public class CreateEventActivity extends AppCompatActivity {
                 newEvent.setEventEndTime(endTimeField.getText().toString());
             }
 
+            System.out.println("CreateEventActivity: created new event: " + newEvent);
+
             Intent startConfirmEventActivity = new Intent(view.getContext(), ConfirmEventActivity.class);
 
             startConfirmEventActivity.putExtra(HokiEvent.EVENT, newEvent);

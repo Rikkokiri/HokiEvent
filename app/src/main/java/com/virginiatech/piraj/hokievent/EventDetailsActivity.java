@@ -97,6 +97,9 @@ public class EventDetailsActivity extends AppCompatActivity implements OnMapRead
         if (bundle != null)
         {
             event = bundle.getParcelable(HokiEvent.EVENT);
+
+            System.out.println("EventDetailsActivity: " + event);
+
         }
 
         if(event != null){
