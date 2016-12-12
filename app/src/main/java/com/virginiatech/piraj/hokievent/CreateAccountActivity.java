@@ -93,13 +93,6 @@ public class CreateAccountActivity extends AppCompatActivity implements TaskComp
         interests = "";
 
         interestsView.setText("Select interests");
-
-        //TODO Add functionality to button listeners
-        try {
-            APICaller api = new APICaller(this);
-            api.APIgetEventAll();
-            //System.out.println(api.APIgetEventAll().toString());
-        } catch (Exception e) { System.out.println("THE PROBLEM IS: " + e + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); }
     }
 
 
@@ -154,6 +147,7 @@ public class CreateAccountActivity extends AppCompatActivity implements TaskComp
                     passwordField.getText().toString().equals("") )
             {
                 messageView.setText("Please fill in all fields");
+                //System.out.println("Please fill in all fields");
                 return;
             }
 
@@ -161,13 +155,17 @@ public class CreateAccountActivity extends AppCompatActivity implements TaskComp
             if (!emailField.getText().toString().equals(confirmEmailField.getText().toString()))
             {
                 messageView.setText("Emails do not match");
+                //System.out.println("Emais do not match");
                 return;
             }
             if (!passwordField.getText().toString().equals(confirmPasswordField.getText().toString()))
             {
                 messageView.setText("Passwords do not match");
+                //System.out.println("Passwords do not match");
                 return;
             }
+
+            System.out.println();
 
             User user = new User(
                     firstNameField.getText().toString().trim(),
@@ -178,8 +176,6 @@ public class CreateAccountActivity extends AppCompatActivity implements TaskComp
                     interests,
                     passwordField.getText().toString()
             );
-
-
 
             try {
 
@@ -216,19 +212,12 @@ public class CreateAccountActivity extends AppCompatActivity implements TaskComp
 
                 reader.close();
 
-
-
             } catch (IOException e)
             {
                 e.printStackTrace();
             }
 
-
-
             sendData(user);
-
-
-
         }
     };
 
@@ -293,6 +282,12 @@ public class CreateAccountActivity extends AppCompatActivity implements TaskComp
 
     @Override
     public void onTaskComplete(String result) {
+
+        //System.out.println("create account completed");
+        if (result.equals("fail")) {
+            messageView.setText("User already exists!!");
+            return;
+        }
 
         Intent startHomeActivity = new Intent(this, HomeActivity.class);
 

@@ -69,18 +69,8 @@ public class LoginActivity extends Activity implements TaskCompleted {
         user = null;
 
         APICaller api = new APICaller(this);
-        try {
             api.APIlogin(JSONHelper.login(emailField.getText().toString(), passwordField.getText().toString()));
             //The result of this call is received in onTaskComplete
-        }
-        catch (JSONException e)
-        {
-            System.out.println(e.toString());
-        }
-        catch (IOException e)
-        {
-            System.out.println(e.toString());
-        }
     }
     /**
      * Listener for login button
