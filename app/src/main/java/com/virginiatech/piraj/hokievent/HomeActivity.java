@@ -170,7 +170,7 @@ public class HomeActivity extends AppCompatActivity implements TaskCompleted {
 
             case R.id.action_create_event:
                 Intent createEventIntent = new Intent(getApplicationContext(), CreateEventActivity.class);
-                createEventIntent.setFlags(createEventIntent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY); // Adds the FLAG_ACTIVITY_NO_HISTORY flag
+                //createEventIntent.setFlags(createEventIntent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY); // Adds the FLAG_ACTIVITY_NO_HISTORY flag
                 startActivity(createEventIntent);
                 break;
 

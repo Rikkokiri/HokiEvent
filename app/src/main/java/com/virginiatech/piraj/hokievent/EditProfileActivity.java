@@ -34,7 +34,6 @@ public class EditProfileActivity extends AppCompatActivity implements TaskComple
     private EditText phonenumberField;
     private TextView interestsList;
     private TextView messageView;
-
     private Button editInterestsButton;
     private Button saveChangesButton;
 
@@ -135,6 +134,7 @@ public class EditProfileActivity extends AppCompatActivity implements TaskComple
 
     }
 
+
     private View.OnClickListener editInterestsListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -148,6 +148,8 @@ public class EditProfileActivity extends AppCompatActivity implements TaskComple
 
         }
     };
+
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
             interests = data.getStringExtra(InterestsActivity.INTEREST);
@@ -205,8 +207,6 @@ public class EditProfileActivity extends AppCompatActivity implements TaskComple
                 e.printStackTrace();
             }
 
-
-
             finish();
 
         }
@@ -236,7 +236,9 @@ public class EditProfileActivity extends AppCompatActivity implements TaskComple
         if(changesMade()){
             confirmExit();
         }
-        finish();
+        else {
+            finish();
+        }
     }
 
     /**
@@ -308,7 +310,6 @@ public class EditProfileActivity extends AppCompatActivity implements TaskComple
 
     @Override
     public void onTaskComplete(String result) {
-
 
     }
 }
